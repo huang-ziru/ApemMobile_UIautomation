@@ -202,37 +202,34 @@ class Testtextfilter():
                         assert mat_text != data
                 mat_pass = testfilter(browser).test_selectAll(table_head_list[l])
 
-
-
-
-     # there is a defect here,so comment it out
-     # def test_search(self,browser):
-     #     prepare(browser).login_after()
-     #     table_head_list = MainPage(browser).get_tablehead()
-     #     for l in range(1, len(table_head_list)):
-     #         head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
-     #         if head_name not in ('Rep.', 'Ver.', 'Quantity', 'Date', 'End Date', 'Status'):
-     #             if head_name == 'PO':
-     #                 headname = head_name + " "
-     #             else:
-     #                 headname = head_name
-     #             # print(table_head_list[l])
-     #             headid = "header" + headname
-     #             target = browser.find_element_by_id(headid)
-     #             driver.execute_script("arguments[0].scrollIntoView();", target)
-     #             time.sleep(3)
-     #             target2 = table_head_list[l].find_element_by_tag_name("mat-icon")
-     #             driver.execute_script("arguments[0].click();", target2)
-     #             time.sleep(3)
-     #             select_dic = testfilter(browser).test_filtersearch(table_head_list[l], 'ac')
-     #             for selectorder in select_dic['search_list']:
-     #                 searchresult = re.findall(r'ac', selectorder, re.I)
-     #                 assert len(searchresult) != 0
-     #             for noselect in select_dic['no_search_list']:
-     #                 noresult = re.findall(r'ac', noselect, re.I)
-     #                 assert len(noresult) == 0
-     #             browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
-     #             mat_pass = testfilter(browser).test_selectAll(table_head_list[l])
+    # the search in text filter
+    def test_search(self, browser):
+        prepare(browser).login_after()
+        table_head_list = MainPage(browser).get_tablehead()
+        for l in range(1, len(table_head_list)):
+            head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
+            if head_name not in ('Rep.', 'Ver.', 'Quantity', 'Date', 'End Date', 'Status'):
+                if head_name == 'PO':
+                    headname = head_name + " "
+                else:
+                    headname = head_name
+                # print(table_head_list[l])
+                headid = "header" + headname
+                target = browser.find_element_by_id(headid)
+                browser.execute_script("arguments[0].scrollIntoView();", target)
+                time.sleep(3)
+                target2 = table_head_list[l].find_element_by_tag_name("mat-icon")
+                browser.execute_script("arguments[0].click();", target2)
+                time.sleep(3)
+                select_dic = testfilter(browser).test_filtersearch(table_head_list[l], 'ac')
+                for selectorder in select_dic['search_list']:
+                    searchresult = re.findall(r'ac', selectorder, re.I)
+                    assert len(searchresult) != 0
+                for noselect in select_dic['no_search_list']:
+                    noresult = re.findall(r'ac', noselect, re.I)
+                    assert len(noresult) == 0
+                browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+                mat_pass = testfilter(browser).test_selectAll(table_head_list[l])
 
 
 if __name__ == '__main__':
