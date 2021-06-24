@@ -15,12 +15,15 @@ def test_warning(browser):
         browser.find_element_by_css_selector("mat-icon[svgicon='warning']").click()
         #get the number of total text about warnings
         messages = browser.find_elements_by_xpath(("//div[@class='cdk-overlay-pane']/div/mat-list"))
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\warning.png")
         assert num == str(len(messages))
     else:
         browser.find_element_by_css_selector("mat-icon[svgicon='warning']").click()
         message = browser.find_element_by_xpath("//*[@id='cdk-overlay-1']/div/div").text
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\warning.png")
         assert "There is no message." in message
 
 if __name__ == '__main__':
     pytest.main(["-s", "test_VS580364.py"])
+    pytest.main(["--lf", "test_VS580364.py"])
 

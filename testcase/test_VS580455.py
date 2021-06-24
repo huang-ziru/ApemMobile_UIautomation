@@ -2,7 +2,7 @@
 import datetime
 import time
 import pytest
-import random
+import re, random
 from framework.basefunc import MainPage
 from framework.columsfunc import testfilter
 from framework.constant import prepare
@@ -27,6 +27,7 @@ class Test_filter():
                 browser.find_element_by_xpath("//input[@placeholder='End date']").click()
                 browser.find_element_by_xpath("//input[@placeholder='End date']").send_keys('4/12/2020')
                 browser.find_element_by_xpath("/html/body/div[2]").click()
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+ head_name +".png")
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
                 # get the date datas of table
@@ -66,6 +67,7 @@ class Test_filter():
                 browser.execute_script("arguments[0].click();", target2)
                 browser.find_element_by_xpath("//input[@formindex='2']").send_keys('2')
                 browser.find_element_by_xpath("/html/body/div[2]").click()
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + ".png")
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
                 td_data = MainPage(browser).td_data(td_list)
@@ -75,7 +77,7 @@ class Test_filter():
                             assert num_p >= '1' and num_p <= '2'
                 finally:
                     MainPage(browser).clear_input(table_head_list[l], "//input[@formindex='1']", "//input[@formindex='2']")
-#test the filter which it's type is text
+# #test the filter which it's type is text
 class Testtextfilter():
     def test_selectall(self, browser):
         prepare(browser).login_after()
@@ -96,6 +98,7 @@ class Testtextfilter():
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
                 td_data = MainPage(browser).td_data(td_list)
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_all.png")
                 #the column's data is null
                 for data in td_data:
                     if data == '':
@@ -119,12 +122,12 @@ class Testtextfilter():
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(3)
                 mat_text = testfilter(browser).test_selectclear(table_head_list[l])
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_clear.png")
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
                 td_data = MainPage(browser).td_data(td_list)
                 assert td_data == ['']
                 mat_text = testfilter(browser).test_selectAll(table_head_list[l])
-
 
     def test_filterrandom(self, browser):
         prepare(browser).login_after()
@@ -146,6 +149,7 @@ class Testtextfilter():
                 browser.execute_script("arguments[0].click();", check_data)
                 browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
                 time.sleep(2)
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_selectone.png")
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
                 td_data = MainPage(browser).td_data(td_list)
@@ -190,6 +194,8 @@ class Testtextfilter():
                     break
                 time.sleep(2)
                 browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+                time.sleep(2)
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_cancel.png")
                 time.sleep(3)
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
@@ -202,15 +208,15 @@ class Testtextfilter():
                         assert mat_text != data
                 mat_pass = testfilter(browser).test_selectAll(table_head_list[l])
 
-    # the search in text filter
-    def test_search(self, browser):
+     # there is a defect here,so comment it out
+    def test_search(self,browser):
         prepare(browser).login_after()
         table_head_list = MainPage(browser).get_tablehead()
         for l in range(1, len(table_head_list)):
             head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
             if head_name not in ('Rep.', 'Ver.', 'Quantity', 'Date', 'End Date', 'Status'):
                 if head_name == 'PO':
-                    headname = head_name + " "
+                     headname = head_name + " "
                 else:
                     headname = head_name
                 # print(table_head_list[l])
@@ -222,6 +228,8 @@ class Testtextfilter():
                 browser.execute_script("arguments[0].click();", target2)
                 time.sleep(3)
                 select_dic = testfilter(browser).test_filtersearch(table_head_list[l], 'ac')
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_search.png")
+                time.sleep(2)
                 for selectorder in select_dic['search_list']:
                     searchresult = re.findall(r'ac', selectorder, re.I)
                     assert len(searchresult) != 0
@@ -230,7 +238,6 @@ class Testtextfilter():
                     assert len(noresult) == 0
                 browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
                 mat_pass = testfilter(browser).test_selectAll(table_head_list[l])
-
-
 if __name__ == '__main__':
     pytest.main(["test_VS580455.py"])
+    pytest.main(["--lf", "test_VS580455.py"])

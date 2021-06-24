@@ -21,6 +21,8 @@ def test_help(browser):
                 help_handle = handle
         # switch to help page
         browser.switch_to.window(help_handle)
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\help.png")
+        time.sleep(2)
         try:
             assert 'Help/mobile.htm' in browser.current_url
         except:
@@ -34,3 +36,4 @@ def test_help(browser):
             time.sleep(5)
 if __name__ == '__main__':
     pytest.main(["-s", "test_VS580362.py"])
+    pytest.main(["--lf", "test_VS580362.py"])

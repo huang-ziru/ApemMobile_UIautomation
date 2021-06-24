@@ -22,6 +22,7 @@ class Testvisiblecols():
             #Scroll to the location where the specified element appears
             target2 = browser.find_element_by_id(headerid)
             browser.execute_script("arguments[0].scrollIntoView();", target2)
+            browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + id + ".png")
             assert id[5::].rstrip() == browser.find_element_by_id(headerid).text.rstrip()
     # cancle selecting columns and are not showed
     def test_cancelcols(self, browser):
@@ -29,6 +30,7 @@ class Testvisiblecols():
         Func(browser).visiblecols(cancelcols)
         for id in cancelcols:
             headerid = "header" + id[5::]
+            browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + id + ".png")
             time.sleep(2)
             assert MainPage(browser).is_element_showed("#" + headerid) is False
 

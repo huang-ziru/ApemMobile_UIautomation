@@ -17,6 +17,7 @@ def test_defstatus(browser):
     table_tr_list = browser.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for tr in table_tr_list:
         table_td_list = tr.find_elements_by_tag_name("td")[1::]
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\default_status.png")
         assert table_td_list[4].text in ("Planned", "Active", "Initiated", "Executing", "Cancelled by phase")
 # select all status "Planned", "Active / Initiated", "Executing", "Cancelled by phase", "Cancelled", "Finished", "Archived", "Archived cancel", "Ext.Archived", "Ext.Archived cancel"
 def test_Allstatus(browser):
@@ -26,6 +27,7 @@ def test_Allstatus(browser):
     #click selectAll
     browser.find_element_by_id("mat-checkbox-1").click()
     browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\selectall_status.png")
     time.sleep(2)
     table_tr_list = browser.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for tr in table_tr_list:
@@ -35,6 +37,7 @@ def test_Allstatus(browser):
 #Odd lines white, even lines gray
 def test_color(browser):
     Func(browser).clear_Status()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\color.png")
     table_tr_list = browser.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for i in range(len(table_tr_list)):
         backcolor = table_tr_list[i].value_of_css_property('background-color')
@@ -64,6 +67,8 @@ def test_tr_height(browser):
         assert height_before[1] != height_after[1]
         assert height_after[0] == '500px'
         assert height_after[1] == '500px'
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\tr_height.png")
+
 # Circle function
 def test_Circle(browser):
     Func(browser).clear_Status()
@@ -93,22 +98,26 @@ def test_hovertrack(browser):
         mouse = td.find_element_by_css_selector("mat-icon[data-mat-icon-name='double_arrow']")
         ActionChains(browser).move_to_element(mouse).perform()
         hover_text = browser.find_element_by_xpath("/html/body/div[2]").text
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\hovertrack.png")
         assert 'Go to tracking' == hover_text
+
 #filter show all orders name
 def test_All(browser):
     Func(browser).clear_Status()
-    target = browser.find_element_by_xpath("//app-filter-box[@id='filterCODE']")
+    target = browser.find_element_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[2]")
     mat_option = testfilter(browser).test_selectAll(target)
     table_data = MainPage(browser).get_table()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_selectall.png")
     assert len(mat_option) == len(table_data)
 
 
 #filter cancel selectAll
 def test_clear(browser):
     Func(browser).clear_Status()
-    target = browser.find_element_by_xpath("//app-filter-box[@id='filterCODE']")
+    target = browser.find_element_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[2]")
     mat_option = testfilter(browser).test_selectclear(target)
     table_data = MainPage(browser).get_table()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_clear.png")
     assert len(table_data) == 0
     assert len(mat_option) == 0
 
@@ -127,6 +136,7 @@ def test_randomselect(browser):
     td = browser.find_elements_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = MainPage(browser).td_data(td)
     order_list_name = MainPage(browser).table_ordername(order_td)
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_selectone.png")
     assert len(order_td) == 1
     #assert the table shows the selected data
     assert order_name == order_list_name[0]
@@ -155,6 +165,7 @@ def test_add(browser):
             break
     time.sleep(3)
     browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_add.png")
     time.sleep(2)
     td = browser.find_elements_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = MainPage(browser).td_data(td)
@@ -178,6 +189,7 @@ def test_cancel(browser):
         break
     time.sleep(2)
     browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_cancel.png")
     time.sleep(3)
     td = browser.find_elements_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = MainPage(browser).td_data(td)
@@ -189,6 +201,7 @@ def test_search(browser):
     target = browser.find_element_by_xpath("//app-filter-box[@id='filterCODE']")
     #search with key word 'order'
     select_dic = testfilter(browser).test_filtersearch(target, 'order')
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_searchdata.png")
     #There is matching data and case insensitive
     for selectorder in select_dic['search_list']:
         searchresult = re.findall(r'order', selectorder, re.I)
@@ -205,6 +218,7 @@ def test_search_none(browser):
     target1 = browser.find_element_by_xpath("//app-filter-box[@id='filterCODE']")
     target = browser.find_element_by_xpath("//app-filter-box[@id='filterCODE']")
     select_dic = testfilter(browser).test_filtersearch(target, '456')
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_searchnone.png")
     for selectorder in select_dic['search_list']:
         searchresult = re.findall(r'456', selectorder, re.I)
         assert len(searchresult) == 0
@@ -233,6 +247,7 @@ def test_checkadd(browser):
     browser.find_element_by_xpath("//*[@id='filcheck']/section[2]/mat-checkbox/label").click()
     time.sleep(3)
     browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_checkadd.png")
     td = browser.find_elements_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = MainPage(browser).td_data(td)
     order_list_name = MainPage(browser).table_ordername(order_td)
@@ -258,6 +273,7 @@ def test_checknull(browser):
     visual[num].click()
     time.sleep(3)
     browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_checknull.png")
     td = browser.find_elements_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = MainPage(browser).td_data(td)
     order_list_name = MainPage(browser).table_ordername(order_td)

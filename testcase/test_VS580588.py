@@ -5,12 +5,13 @@ import re, pytest
 class Testsearch():
     def test_search(self, browser):
         #search with key_words 'er'
-        browser.find_element_by_id("ordersearch").send_keys('er')
+        browser.find_element_by_id("ordersearch").send_keys('order')
         time.sleep(2)
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\search.png")
         table_list = []
         table_tr_list = browser.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/tbody/tr")
         # match 'er' and case insensitive
-        pattern = re.compile(r'er', re.I)
+        pattern = re.compile(r'order', re.I)
         count1 = 0
         for tr in table_tr_list:
             table_td_list = tr.find_elements_by_tag_name("td")[1::]

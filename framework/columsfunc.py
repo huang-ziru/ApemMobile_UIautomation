@@ -80,7 +80,7 @@ class testfilter(BasePage): # columns filter function
         self.driver.find_element_by_xpath("//*[@id='filterSearch']").click()
         self.driver.find_element_by_xpath("//*[@id='filterSearch']").send_keys(keywords)
         #defect
-        # self.driver.find_element_by_xpath("//*[@id='filterSearch']").send_keys(Keys.CONTROL)
+        self.driver.find_element_by_xpath("//*[@id='filterSearch']").send_keys(Keys.CONTROL)
         mat_list = self.driver.find_elements_by_xpath("//*[@id='filcheck']/div/div/mat-list-option")
         visual_list = []
         search_list = []

@@ -27,8 +27,12 @@ class TestSort():
                 table_data_asc = sorted(table_data_sort, key=lambda x: x[l], reverse=False)
                 #assert the datas showed in table equal the datas which the script sorted
                 if revers_data == 'ascending':
+                    browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_asc.png")
+                    time.sleep(3)
                     assert table_data_sort == table_data_asc
                 elif revers_data == 'descending':
+                    browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_desc.png")
+                    time.sleep(3)
                     assert table_data_sort == table_data_desc
         time.sleep(5)
 

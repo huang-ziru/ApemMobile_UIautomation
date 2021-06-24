@@ -21,8 +21,10 @@ def test_scroll(browser):
         browser.execute_script(js)
         time.sleep(5)
         # scroll into view the designated data
-        element = browser.find_element_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[18]")
+        element = browser.find_element_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[21]")
         browser.execute_script("arguments[0].scrollIntoView();", element)
+        time.sleep(3)
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\scoll.png")
         time.sleep(5)
 
 
