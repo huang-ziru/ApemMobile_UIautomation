@@ -4,7 +4,7 @@ import time, pytest
 from framework.basefunc import MainPage
 import configparser
 config = configparser.ConfigParser()
-path = r'E:\PycharmProjects\ApemMobile\framework\config.ini'
+path = r'..\framework\config.ini'
 config.read(path)
 workstation = config.get('login', 'workstation')
 username = config.get('login', 'username')

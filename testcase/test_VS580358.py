@@ -1,8 +1,6 @@
 # coding = utf-8
 import pytest
 from framework.basefunc import MainPage
-import configparser
-import time
 class Testtitle_bar():
     def test_loading(self, browser):
         assert MainPage(browser).is_element_showed(css="app-loading.loading") is True

@@ -20,7 +20,11 @@ class TestSort():
                 if head_name in ('Date', 'End Date'):
                     for h in range(len(table_data_sort)):
                         str_p = table_data_sort[h][l]
-                        dateTime_p = datetime.datetime.strptime(str_p, '%m/%d/%y, %I:%M:%S %p')
+                        # if str_p == '':
+                        #     dateTime_p = datetime.datetime.strptime('01/01/1000, 01:01:01 am', '%m/%d/%Y, %I:%M:%S %p')
+                        # else:
+                        #     dateTime_p = datetime.datetime.strptime(str_p, '%m/%d/%y, %I:%M:%S %p')
+                        dateTime_p = MainPage(browser).dateSort(str_p)
                         table_data_sort[h][l] = str(dateTime_p)
                 #Sort each data according to the corresponding column
                 table_data_desc = sorted(table_data_sort, key=lambda x: x[l], reverse=True)

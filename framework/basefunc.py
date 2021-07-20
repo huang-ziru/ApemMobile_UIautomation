@@ -78,7 +78,11 @@ class MainPage(BasePage):
         elif str_time == '':
             dateTime_p = datetime.datetime.strptime('01/01/1000', '%m/%d/%Y')
         else:
-            dateTime_p = datetime.datetime.strptime(str_time, '%m/%d/%Y')
+            date_str=re.split(r'/', str_time)
+            if len(date_str[2]) == 2:
+                dateTime_p = datetime.datetime.strptime(str_time, '%m/%d/%y')
+            else:
+                dateTime_p = datetime.datetime.strptime(str_time, '%m/%d/%Y')
         return dateTime_p
     # get the sorting rule,ascend or descend
     def get_revers(self, head_ele):
@@ -104,15 +108,36 @@ class MainPage(BasePage):
         time.sleep(1)
         self.driver.find_element_by_xpath(inputpath2).send_keys(Keys.DELETE)
         time.sleep(1)
-        self.driver.find_element_by_xpath("/html/body/div[2]").click()
+        target = self.driver.find_element_by_xpath("/html/body/div[2]/div[1]")
+        self.driver.execute_script("arguments[0].click();", target)
     # get the table head element
     def get_tablehead(self):
         #except circle and tracking
         table_head_list = self.driver.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/thead/tr/th")[1:-1:]
         return table_head_list
     def navigate(self, ele_path):
-        mouse = self.driver.find_element_by_xpath(ele_path)
+        elementObj = self.driver.find_element_by_xpath("/html/body/app-root/div/app-sidenav")
+        mouse = elementObj.find_element_by_xpath(ele_path)
         ActionChains(self.driver).move_to_element(mouse).perform()
-        hover_text = self.driver.find_element_by_xpath("/html/body/div[2]").text
-        self.driver.quit()
-        return hover_text
+        nav_text = self.driver.find_element_by_css_selector("div.cdk-overlay-container>div>div>mat-tooltip-component>div").text
+        return nav_text
+    def dateSort(self,str_time):
+        if 'M' in str_time:
+            dateTime_p = datetime.datetime.strptime(str_time, '%m/%d/%y, %I:%M:%S %p')
+            # date is null
+        elif str_time == '':
+            dateTime_p = datetime.datetime.strptime('01/01/1000, 01:01:01 am', '%m/%d/%Y, %I:%M:%S %p')
+        else:
+            str_time = str_time + ", 01:01:00 am"
+            date_str = re.split(r',', str_time)
+            date_s = re.split(r'/', date_str[0])
+            if len(date_s[2]) == 2:
+                dateTime_p = datetime.datetime.strptime(str_time, '%m/%d/%y, %I:%M:%S %p')
+            else:
+                dateTime_p = datetime.datetime.strptime(str_time, '%m/%d/%Y, %I:%M:%S %p')
+        return dateTime_p
+    def eleclick(self,ele):
+        try:
+            ele.click()
+        except:
+            self.driver.execute_script("arguments[0].click();", ele)

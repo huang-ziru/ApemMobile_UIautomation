@@ -2,7 +2,7 @@ import configparser
 from logging import Logger
 
 from selenium import webdriver
-import time, pytest
+import time, pytest, os
 from PIL import ImageGrab
 
 
@@ -95,5 +95,4 @@ def test_login_ui():
     driver.quit()
 
 if __name__ == '__main__':
-    pytest.main(["-s", "test_VS580300_520_352.py"])
-    pytest.main(["--lf","test_VS580300_520_352.py"])
+    pytest.main(["-s", "test_VS580300_320_352.py"])

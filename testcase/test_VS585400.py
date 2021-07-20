@@ -63,10 +63,9 @@ def test_tr_height(browser):
         for divv2 in div_list:
             height_after.append(divv2.value_of_css_property('max-height'))
         # print("after", height_after)
-        assert height_before[0] != height_after[0]
-        assert height_before[1] != height_after[1]
-        assert height_after[0] == '500px'
-        assert height_after[1] == '500px'
+        if 'none' not in height_after:
+            assert height_after[0] == '500px'
+            assert height_after[1] == '500px'
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\tr_height.png")
 
 # Circle function
@@ -111,13 +110,15 @@ def test_All(browser):
     assert len(mat_option) == len(table_data)
 
 
-#filter cancel selectAll
+# filter cancel selectAll
 def test_clear(browser):
     Func(browser).clear_Status()
     target = browser.find_element_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[2]")
     mat_option = testfilter(browser).test_selectclear(target)
-    table_data = MainPage(browser).get_table()
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_clear.png")
+    back = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", back)
+    table_data = MainPage(browser).get_table()
     assert len(table_data) == 0
     assert len(mat_option) == 0
 
@@ -140,7 +141,7 @@ def test_randomselect(browser):
     assert len(order_td) == 1
     #assert the table shows the selected data
     assert order_name == order_list_name[0]
-#add select a data and show it
+# add select a data and show it
 def test_add(browser):
     Func(browser).clear_Status()
     order_name = []
@@ -171,8 +172,8 @@ def test_add(browser):
     order_td = MainPage(browser).td_data(td)
     order_list_name = MainPage(browser).table_ordername(order_td)
     #assert table data equal selected data
-    for i in range(len(order_list_name)):
-        assert order_name[i] == order_list_name[i]
+    for name in order_name:
+        assert name in order_list_name
 
 # cancle select a data and verify the data is not in table
 def test_cancel(browser):
@@ -236,10 +237,13 @@ def test_checkadd(browser):
     if select_all.find_element_by_tag_name("input").get_attribute('aria-checked') == 'true':
         select_all.click()
         #selct one data that name is 'FROME_R1'
-    browser.find_element_by_xpath("//div[text()=' FROME_R1 ']/../..").click()
+    target = browser.find_element_by_xpath("//div[text()=' FROM_RPL ']/../..")
+    browser.execute_script("arguments[0].click();", target)
     time.sleep(3)
     browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
     time.sleep(3)
+    target = browser.find_element_by_xpath("//app-filter-box[@id='filterCODE']")
+    browser.execute_script("arguments[0].click();", target.find_element_by_tag_name("mat-icon"))
     select_dic = testfilter(browser).test_filtersearch(target, 'order')
     visual = select_dic['visual_list']
     num = random.choice(range(len(visual)))
@@ -251,8 +255,8 @@ def test_checkadd(browser):
     td = browser.find_elements_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = MainPage(browser).td_data(td)
     order_list_name = MainPage(browser).table_ordername(order_td)
-    assert "FROME_R1" == order_list_name[0]
-    assert "order".upper() in order_list_name[1]
+    assert "FROM_RPL" == order_list_name[0]
+    assert "order".upper() in order_list_name[1].upper()
     assert len(order_td) == 2
 
 #search data and selct one data,but do not check the box'Add current selection to filter'
@@ -263,10 +267,13 @@ def test_checknull(browser):
     select_all = browser.find_element_by_xpath("//*[@id='filcheck']/section[1]/mat-checkbox")
     if select_all.find_element_by_tag_name("input").get_attribute('aria-checked') == 'true':
         select_all.click()
-    browser.find_element_by_xpath("//div[text()=' FROME_R1 ']/../..").click()
+    target = browser.find_element_by_xpath("//div[text()=' FROM_RPL ']/../..")
+    browser.execute_script("arguments[0].click();", target)
     time.sleep(3)
     browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
     time.sleep(3)
+    target = browser.find_element_by_xpath("//app-filter-box[@id='filterCODE']")
+    browser.execute_script("arguments[0].click();", target.find_element_by_tag_name("mat-icon"))
     select_dic = testfilter(browser).test_filtersearch(target, 'order')
     visual = select_dic['visual_list']
     num = random.choice(range(len(visual)))
@@ -278,7 +285,7 @@ def test_checknull(browser):
     order_td = MainPage(browser).td_data(td)
     order_list_name = MainPage(browser).table_ordername(order_td)
     assert len(order_td) == 1
-    assert "order".upper() in order_list_name[0]
+    assert "order".upper() in order_list_name[0].upper()
 
 if __name__ == '__main__':
     pytest.main(["-s", "test_VS585400.py"])

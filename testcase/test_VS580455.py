@@ -20,26 +20,26 @@ class Test_filter():
                 td_data_bef = MainPage(browser).td_data(td_list)
                 target = table_head_list[l].find_element_by_tag_name("mat-icon")
                 browser.execute_script("arguments[0].click();", target)
-                #input a valid date range ('3/12/2020'and '4/12/2020' can be modified )
+                # input a valid date range ('3/12/2020'and '4/12/2020' can be modified )
                 browser.find_element_by_xpath("//input[@placeholder='Start date']").click()
                 browser.find_element_by_xpath("//input[@placeholder='Start date']").send_keys('3/12/2020')
                 time.sleep(2)
                 browser.find_element_by_xpath("//input[@placeholder='End date']").click()
                 browser.find_element_by_xpath("//input[@placeholder='End date']").send_keys('4/12/2020')
                 browser.find_element_by_xpath("/html/body/div[2]").click()
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+ head_name +".png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + ".png")
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
                 # get the date datas of table
                 td_data = MainPage(browser).td_data(td_list)
                 try:
-                    #There is data in the date range
+                    # There is data in the date range
                     if td_data != ['']:
                         for str_p in td_data:
                             dateTime_p = MainPage(browser).datetime_str(str_p)
                             assert dateTime_p >= MainPage(browser).datetime_str('3/12/2020') and dateTime_p <= MainPage(browser).datetime_str('4/12/2020')
                     else:
-                        #There is not data in the date range
+                        # There is not data in the date range
                         for date in td_data_bef:
                             if date != '':
                                 dateTime_p = MainPage(browser).datetime_str(date)
@@ -93,8 +93,9 @@ class Testtextfilter():
                     headid = "header" + head_name
                 target = browser.find_element_by_id(headid)
                 browser.execute_script("arguments[0].scrollIntoView();", target)
-                time.sleep(10)
+                time.sleep(5)
                 mat_text = testfilter(browser).test_selectAll(table_head_list[l])
+                # browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
                 td_data = MainPage(browser).td_data(td_list)
@@ -106,7 +107,6 @@ class Testtextfilter():
                     else:
                         assert data in mat_text
                 time.sleep(2)
-
 
     def test_filterclear(self,browser):
         prepare(browser).login_after()
@@ -121,14 +121,22 @@ class Testtextfilter():
                 target = browser.find_element_by_id(headid)
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(3)
-                mat_text = testfilter(browser).test_selectclear(table_head_list[l])
+                # print(head_name)
+                mat_list = testfilter(browser).test_selectclear(table_head_list[l])
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_clear.png")
+                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                browser.execute_script("arguments[0].click();", target)
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements_by_xpath(td_path)
                 td_data = MainPage(browser).td_data(td_list)
                 assert td_data == ['']
-                mat_text = testfilter(browser).test_selectAll(table_head_list[l])
+                table_head_list[l].find_element_by_tag_name("mat-icon").click()
+                browser.find_element_by_xpath("//*[@id='filcheck']/section[1]/mat-checkbox").click()
+                time.sleep(2)
+                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                browser.execute_script("arguments[0].click();", target)
 
+#
     def test_filterrandom(self, browser):
         prepare(browser).login_after()
         table_head_list = MainPage(browser).get_tablehead()
@@ -147,7 +155,8 @@ class Testtextfilter():
                 check_data = mat_list[num]
                 mat_text = check_data.find_elements_by_tag_name("div")[2].text
                 browser.execute_script("arguments[0].click();", check_data)
-                browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                browser.execute_script("arguments[0].click();", target)
                 time.sleep(2)
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_selectone.png")
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
@@ -164,7 +173,7 @@ class Testtextfilter():
                             assert mat_text == data
                 mat_pass = testfilter(browser).test_selectAll(table_head_list[l])
 
-# cancle selected data
+ # cancle selected data
     def test_cancel(self, browser):
         prepare(browser).login_after()
         global mat_text
@@ -193,7 +202,8 @@ class Testtextfilter():
                         ele.click()
                     break
                 time.sleep(2)
-                browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                browser.execute_script("arguments[0].click();", target)
                 time.sleep(2)
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_cancel.png")
                 time.sleep(3)
@@ -207,8 +217,8 @@ class Testtextfilter():
                     for data in td_data:
                         assert mat_text != data
                 mat_pass = testfilter(browser).test_selectAll(table_head_list[l])
-
-     # there is a defect here,so comment it out
+ #
+ #     # there is a defect here,so comment it out
     def test_search(self,browser):
         prepare(browser).login_after()
         table_head_list = MainPage(browser).get_tablehead()
@@ -236,8 +246,9 @@ class Testtextfilter():
                 for noselect in select_dic['no_search_list']:
                     noresult = re.findall(r'ac', noselect, re.I)
                     assert len(noresult) == 0
-                browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                browser.execute_script("arguments[0].click();", target)
                 mat_pass = testfilter(browser).test_selectAll(table_head_list[l])
 if __name__ == '__main__':
     pytest.main(["test_VS580455.py"])
-    pytest.main(["--lf", "test_VS580455.py"])
+    # pytest.main(["--lf", "test_VS580455.py"])

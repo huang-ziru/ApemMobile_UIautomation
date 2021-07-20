@@ -7,8 +7,8 @@ import pytest
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 @pytest.fixture()
 def browser():
+    '''Define global driver parameters'''
     global driver
-    '''定义全局driver参数'''
     config = configparser.ConfigParser()
     path = r'..\framework\config.ini'
     # open the config.ini and get the data
