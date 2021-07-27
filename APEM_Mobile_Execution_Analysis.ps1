@@ -1,10 +1,13 @@
 <#-------------------This script is uesed to execute pytest and analysis test result---------------------------#>
 <#---------------------------------Automation Engineer: Will.You-----------------------------------------------#>
-<#--------------------------------------------Jul.21 2021------------------------------------------------------#>
-$RootPath ="E:\Will\For Ziru"
-$ResultFile = Join-Path -Path $RootPath -ChildPath "test.xml"
+<#-----------------\---------------------------Jul.21 2021------------------------------------------------------#>
+$RootPath ="C:\P4\ApemMobile_UIautomation"
+$ReportPath = Join-Path -Path $RootPath -ChildPath "report"
+$ResultFile = Join-Path -Path $ReportPath -ChildPath "test.xml"
 $starttime = Get-Date
+$Version = "V12.2"
 $blueprint = "APEM"
+$EmailSubject = "QE - Cloud - $Version - $blueprint Automated Test report for MVT"
 function Convert-Timespan($timespan)
 {
     $temp=$timespan.Split(":")
@@ -404,6 +407,6 @@ $rex |Select-Object -Property Id, casename,result,Detail|Export-Csv -Delimiter "
 #$testcases = $res.testsuites.testsuite.testresult.testcase
 $html=[string](generateHTMLfromCSV -media null -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path $RootPath -ChildPath "APEM.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
  $attachmentPath=Join-Path -Path $RootPath -ChildPath "APEM.csv" 
- Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com" -Subject "Automated Testcase Execution Report for $blueprint" -Body $html -SmtpServer hqsmtp01.corp.aspentech.com -BodyAsHtml
+ Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer hqsmtp01.corp.aspentech.com -BodyAsHtml
 
 
