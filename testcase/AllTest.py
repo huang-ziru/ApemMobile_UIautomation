@@ -2,7 +2,9 @@ import os
 from xml.dom.minidom import parse
 from xml.dom.minidom import Document
 from framework.conf import conf_xml
+from framework.conf import modifyConf
 conf_xml()
+modifyConf()
 # Process the current script running address
 path1 = os.path.dirname(os.path.abspath(__file__))
 command = "pytest " + path1 + " --junit-xml=../report/report1.xml"
