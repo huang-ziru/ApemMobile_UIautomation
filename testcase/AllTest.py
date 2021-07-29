@@ -1,4 +1,8 @@
 import os
+import sys
+curPath = os.path.abspath(os.path.dirname(__file__))
+rootPath = curPath[:curPath.find("ApemMobile_UIautomation\\")+len("ApemMobile_UIautomation\\")]
+sys.path.extend([rootPath, rootPath])
 from xml.dom.minidom import parse
 from xml.dom.minidom import Document
 from framework.conf import conf_xml
