@@ -1,5 +1,6 @@
 $user = $env:USERNAME
-$root = "C:\Users\$user\AppData\Local\Programs\Python\Python39"
+#$root = "C:\Users\$user\AppData\Local\Programs\Python\Python39"
+$root = "C:\Python39"
 $pip = Join-Path -Path $root -ChildPath "Scripts\pip.exe"
 $Plugins = @("pytest","selenium")
 

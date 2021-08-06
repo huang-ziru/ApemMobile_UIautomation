@@ -2,6 +2,7 @@
 <#---------------------------------Automation Engineer: Will.You-----------------------------------------------#>
 <#-----------------\---------------------------Jul.21 2021------------------------------------------------------#>
 $RootPath ="C:\P4\ApemMobile_UIautomation"
+$executonfile = Join-Path -Path $RootPath -ChildPath "Executed_pytest.ps1"
 $ReportPath = Join-Path -Path $RootPath -ChildPath "report"
 $ResultFile = Join-Path -Path $ReportPath -ChildPath "test.xml"
 $starttime = Get-Date
@@ -395,6 +396,9 @@ Function Run-MSTestResultAnalysis($sResult,$node)
 
 }
 Set-Location -Path $RootPath
+Write-Host "Start to execute APEM mobile test cases"
+&$executonfile
+Write-Host "Start to analyze the APEM mobile test result"
 $res = [xml](Get-Content -Path $ResultFile)
 for($i = 1; $i -le $res.testsuites.testsuite.testresult.testcase.Count;$i++ )
 {
