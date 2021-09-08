@@ -3,9 +3,6 @@ from logging import Logger
 
 from selenium import webdriver
 import time, pytest, os
-from PIL import ImageGrab
-
-
 def login(name, password1, caseID):
     global driver
     config = configparser.ConfigParser()
@@ -55,7 +52,7 @@ def test_Invalid():
     assert "Invalid username or password. Please re-enter domain\\username and password." in login('jhh\\hahahha', 'hdhdhhdhd','580320')
 #login with username and password without access
 def test_Denied():
-    assert "You do not have permission to login." in login('corp\\qaone', 'Aspen111','580352')
+    assert "You do not have permission to login." in login('corp\\huangzi', 'Hzrlove1213','580352')
 
 def test_login_ui():
     global driver

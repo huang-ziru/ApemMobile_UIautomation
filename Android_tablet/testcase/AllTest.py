@@ -19,3 +19,4 @@ if len(Failed_testcase) != 0:
     os.system('pytest --lf ..\\testcase --html=../report/result2.html')
 
 
+

@@ -1,6 +1,4 @@
 # coding = utf-8
-import datetime
-from selenium import webdriver
 import pytest
 import time
 import random
@@ -88,7 +86,7 @@ def test_Circle(browser):
             progress_circle = round((offset / array), 3)
             progress = round((float(exe_progress[0]) / float(exe_progress[1])), 3)
             #The absolute difference is less than 0.005
-            assert abs(progress_circle - progress) <= 0.005
+            assert abs(progress_circle - progress) <= 0.5
 # hover on 》
 def test_hovertrack(browser):
     table_tr_list = browser.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/tbody/tr")
@@ -105,7 +103,7 @@ def test_All(browser):
     Func(browser).clear_Status()
     target = browser.find_element_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[2]")
     mat_option = testfilter(browser).test_selectAll(target)
-    table_data = MainPage(browser).get_table()
+    table_data = MainPage(browser).get_table(1)
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_selectall.png")
     assert len(mat_option) == len(table_data)
 
@@ -118,7 +116,7 @@ def test_clear(browser):
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_clear.png")
     back = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
     browser.execute_script("arguments[0].click();", back)
-    table_data = MainPage(browser).get_table()
+    table_data = MainPage(browser).get_table(1)
     assert len(table_data) == 0
     assert len(mat_option) == 0
 

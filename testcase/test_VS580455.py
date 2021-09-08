@@ -163,8 +163,8 @@ class Testtextfilter():
                 td_list = browser.find_elements_by_xpath(td_path)
                 td_data = MainPage(browser).td_data(td_list)
                 if len(mat_list) == 1 and mat_text == '(Blank)':
-                    # 4 is the total number of table data
-                    assert len(td_data) == 4
+                    # 7 is the total number of table data
+                    assert len(td_data) == 6
                 else:
                     for data in td_data:
                         if data == '':

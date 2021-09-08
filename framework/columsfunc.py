@@ -20,11 +20,12 @@ class Func(BasePage):
         self.driver.find_element_by_xpath("//*[@id='selectmenu']").click()
         for id in visiblecols:
             path = "//*[@id=\'" + id + "\']/div/mat-pseudo-checkbox"
-            # print(path)
+            time.sleep(2)
             target = self.driver.find_element_by_id(id)
             self.driver.execute_script("arguments[0].scrollIntoView();", target)
             time.sleep(1)
-            self.driver.find_element_by_xpath(path).click()
+            if self.driver.find_element_by_id(id).get_attribute('aria-selected') == 'false':
+                self.driver.find_element_by_xpath(path).click()
             time.sleep(1)
         self.driver.find_element_by_xpath("/html/body/div[2]/div[1]").click()
         time.sleep(5)

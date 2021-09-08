@@ -39,13 +39,13 @@ class MainPage(BasePage):
         logout_button = self.driver.find_element_by_xpath('//*[@id="logoutpanel"]/button[2]')
         logout_button.click()
     # get the table element except table head
-    def get_table(self):
+    def get_table(self, x):
         #get the row elements
         table_tr_list = self.driver.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/tbody/tr")
         table_list = []
         for tr in table_tr_list:
             #except circle column
-            table_td_list = tr.find_elements_by_tag_name("td")[1::]
+            table_td_list = tr.find_elements_by_tag_name("td")[x::]
             row_list = []
             for td in table_td_list:
                 row_list.append(td.text)
@@ -59,14 +59,19 @@ class MainPage(BasePage):
         else:
             for i in range(len(td_list)):
                 td_text = td_list[i].text
-                td_data_list.append(td_text)
+                if 'PHASE' in td_text:
+                    text_list = td_text.split('\n')
+                    td_data_list.append(text_list[0])
+                else:
+                    td_data_list.append(td_text)
         return td_data_list
     #handle order data to get ordername
     def table_ordername(self, td_list):
         order_namelist = []
         for i in range(len(td_list)):
             #Match extraction ordername
-            name = re.split(r'/', td_list[i])[0]
+            name_batch = re.split(r'/', td_list[i])[0]
+            name = re.split(r'\n', name_batch)[0]
             order_namelist.append(name)
         return order_namelist
     #handle date columns,type from string to date
@@ -141,3 +146,8 @@ class MainPage(BasePage):
             ele.click()
         except:
             self.driver.execute_script("arguments[0].click();", ele)
+    def get_text(self,xpath):
+        ele = self.driver.find_element_by_xpath(xpath)
+        self.driver.execute_script("arguments[0].click();", ele)
+        text = ele.get_attribute('textContent')
+        return text

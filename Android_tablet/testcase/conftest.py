@@ -18,7 +18,7 @@ def browser():
         "chromedriverExecutable": r"F:\Python\Lib\site-packages\appium\webdriver\chromedriver.exe",
     }
     driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", desire_cap)
-    driver.implicitly_wait(10)
+    time.sleep(5)
     config = configparser.ConfigParser()
     path = r'..\framework\config.ini'
     # open the config.ini and get the data
