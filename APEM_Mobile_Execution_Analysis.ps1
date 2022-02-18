@@ -1,7 +1,7 @@
 <#-------------------This script is uesed to execute pytest and analysis test result---------------------------#>
 <#---------------------------------Automation Engineer: Will.You-----------------------------------------------#>
 <#-----------------\---------------------------Jul.21 2021------------------------------------------------------#>
-$RootPath ="C:\P4\ApemMobile_UIautomation"
+$RootPath ="C:\P4\ApemMobile_UIautomation\DesktopApem"
 $executonfile = Join-Path -Path $RootPath -ChildPath "Executed_pytest.ps1"
 $ReportPath = Join-Path -Path $RootPath -ChildPath "report"
 $ResultFile = Join-Path -Path $ReportPath -ChildPath "test.xml"
@@ -411,6 +411,6 @@ $rex |Select-Object -Property Id, casename,result,Detail|Export-Csv -Delimiter "
 #$testcases = $res.testsuites.testsuite.testresult.testcase
 $html=[string](generateHTMLfromCSV -media null -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path $RootPath -ChildPath "APEM.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
  $attachmentPath=Join-Path -Path $RootPath -ChildPath "APEM.csv" 
- Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer hqsmtp01.corp.aspentech.com -BodyAsHtml
-
+ Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer hqsmtp01.corp.aspentech.com -BodyAsHtml
+ Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml
 
