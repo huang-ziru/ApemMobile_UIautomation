@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+	<testsuite errors="0" failed="5" skipped="0" passed="75" total="80" time="4487.729">
+		<testresult>
+			<testcase result="failed" case_id="test_VS580300_320_352" case_name="test_loginok" message="AssertionError: assert 'process-order' in ''
+ +  where '' = login('corp\\qapart', 'QQQaaa000', '580300')" VSTS_id="VSTS580300320352"/>
+			<testcase result="failed" case_id="test_VS580300_320_352" case_name="test_Invalid" message="AssertionError: assert 'Invalid username or password. Please re-enter domain\\username and password.' in ''
+ +  where '' = login('jhh\\hahahha', 'hdhdhhdhd', '580320')" VSTS_id="VSTS580300320352"/>
+			<testcase result="failed" case_id="test_VS580455" case_name="test_filterrandom" message="selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//app-filter-box[@id='filterLOGIC_STATUS']/mat-icon&quot;}
+  (Session info: chrome=98.0.4758.102)
+Stacktrace:
+Backtrace:
+	Ordinal0 [0x00CA69A3+2582947]
+	Ordinal0 [0x00C3A6D1+2139857]
+	Ordinal0 [0x00B33A98+1063576]
+	Ordinal0 [0x00B5FF3E+1244990]
+	Ordinal0 [0x00B6013B+1245499]
+	Ordinal0 [0x00B89F52+1417042]
+	Ordinal0 [0x00B78594+1344916]
+	Ordinal0 [0x00B8834A+1409866]
+	Ordinal0 [0x00B78366+1344358]
+	Ordinal0 [0x00B55176+1200502]
+	Ordinal0 [0x00B56066+1204326]
+	GetHandleVerifier [0x00E4BE02+1675858]
+	GetHandleVerifier [0x00F0036C+2414524]
+	GetHandleVerifier [0x00D3BB01+560977]
+	GetHandleVerifier [0x00D3A8D3+556323]
+	Ordinal0 [0x00C4020E+2163214]
+	Ordinal0 [0x00C45078+2183288]
+	Ordinal0 [0x00C451C0+2183616]
+	Ordinal0 [0x00C4EE1C+2223644]
+	BaseThreadInitThunk [0x74B50419+25]
+	RtlGetAppContainerNamedObjectPath [0x770972FD+237]
+	RtlGetAppContainerNamedObjectPath [0x770972CD+189]" VSTS_id="VSTS580455"/>
+			<testcase result="failed" case_id="test_VS626781" case_name="test_bing" message="selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[12]/div/div/a/mat-icon&quot;}
+  (Session info: chrome=98.0.4758.102)
+Stacktrace:
+Backtrace:
+	Ordinal0 [0x00CA69A3+2582947]
+	Ordinal0 [0x00C3A6D1+2139857]
+	Ordinal0 [0x00B33A98+1063576]
+	Ordinal0 [0x00B5FF3E+1244990]
+	Ordinal0 [0x00B6013B+1245499]
+	Ordinal0 [0x00B89F52+1417042]
+	Ordinal0 [0x00B78594+1344916]
+	Ordinal0 [0x00B8834A+1409866]
+	Ordinal0 [0x00B78366+1344358]
+	Ordinal0 [0x00B55176+1200502]
+	Ordinal0 [0x00B56066+1204326]
+	GetHandleVerifier [0x00E4BE02+1675858]
+	GetHandleVerifier [0x00F0036C+2414524]
+	GetHandleVerifier [0x00D3BB01+560977]
+	GetHandleVerifier [0x00D3A8D3+556323]
+	Ordinal0 [0x00C4020E+2163214]
+	Ordinal0 [0x00C45078+2183288]
+	Ordinal0 [0x00C451C0+2183616]
+	Ordinal0 [0x00C4EE1C+2223644]
+	BaseThreadInitThunk [0x74B50419+25]
+	RtlGetAppContainerNamedObjectPath [0x770972FD+237]
+	RtlGetAppContainerNamedObjectPath [0x770972CD+189]" VSTS_id="VSTS626781"/>
+			<testcase result="failed" case_id="test_VS628365" case_name="test_Queue" message="selenium.common.exceptions.ElementClickInterceptedException: Message: element click intercepted: Element &lt;mat-icon _ngcontent-ofb-c248=&quot;&quot; role=&quot;img&quot; svgicon=&quot;account&quot; class=&quot;mat-icon notranslate mat-tooltip-trigger mat-icon-no-color&quot; aria-hidden=&quot;true&quot; data-mat-icon-type=&quot;svg&quot; data-mat-icon-name=&quot;account&quot;&gt;...&lt;/mat-icon&gt; is not clickable at point (1874, 25). Other element would receive the click: &lt;div _ngcontent-ofb-c155=&quot;&quot; fxlayoutalign=&quot;center center&quot; fxflex=&quot;50%&quot; fxflex.lt-md=&quot;40%&quot; class=&quot;background&quot; style=&quot;place-content: center; align-items: center; flex-direction: row; box-sizing: border-box; display: flex; flex: 1 1 100%; max-width: 50%;&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=98.0.4758.102)
+Stacktrace:
+Backtrace:
+	Ordinal0 [0x00CA69A3+2582947]
+	Ordinal0 [0x00C3A6D1+2139857]
+	Ordinal0 [0x00B33A98+1063576]
+	Ordinal0 [0x00B6636F+1270639]
+	Ordinal0 [0x00B645B7+1263031]
+	Ordinal0 [0x00B6220B+1253899]
+	Ordinal0 [0x00B60FF9+1249273]
+	Ordinal0 [0x00B56B53+1207123]
+	Ordinal0 [0x00B7854C+1344844]
+	Ordinal0 [0x00B56524+1205540]
+	Ordinal0 [0x00B786A4+1345188]
+	Ordinal0 [0x00B8834A+1409866]
+	Ordinal0 [0x00B78366+1344358]
+	Ordinal0 [0x00B55176+1200502]
+	Ordinal0 [0x00B56066+1204326]
+	GetHandleVerifier [0x00E4BE02+1675858]
+	GetHandleVerifier [0x00F0036C+2414524]
+	GetHandleVerifier [0x00D3BB01+560977]
+	GetHandleVerifier [0x00D3A8D3+556323]
+	Ordinal0 [0x00C4020E+2163214]
+	Ordinal0 [0x00C45078+2183288]
+	Ordinal0 [0x00C451C0+2183616]
+	Ordinal0 [0x00C4EE1C+2223644]
+	BaseThreadInitThunk [0x74B50419+25]
+	RtlGetAppContainerNamedObjectPath [0x770972FD+237]
+	RtlGetAppContainerNamedObjectPath [0x770972CD+189]" VSTS_id="VSTS628365"/>
+			<testcase result="passed" case_id="test_VS580300_320_352" case_name="test_nodomain" VSTS_id="VSTS580300320352"/>
+			<testcase result="passed" case_id="test_VS580300_320_352" case_name="test_Denied" VSTS_id="VSTS580300320352"/>
+			<testcase result="passed" case_id="test_VS580300_320_352" case_name="test_login_ui" VSTS_id="VSTS580300320352"/>
+			<testcase result="passed" case_id="test_VS580358" case_name="test_loading" VSTS_id="VSTS580358"/>
+			<testcase result="passed" case_id="test_VS580358" case_name="test_userinfo" VSTS_id="VSTS580358"/>
+			<testcase result="passed" case_id="test_VS580358" case_name="test_help" VSTS_id="VSTS580358"/>
+			<testcase result="passed" case_id="test_VS580358" case_name="test_fullscreen" VSTS_id="VSTS580358"/>
+			<testcase result="passed" case_id="test_VS580358" case_name="test_desktop_switch" VSTS_id="VSTS580358"/>
+			<testcase result="passed" case_id="test_VS580358" case_name="test_warning" VSTS_id="VSTS580358"/>
+			<testcase result="passed" case_id="test_VS580360" case_name="test_loginuser" VSTS_id="VSTS580360"/>
+			<testcase result="passed" case_id="test_VS580360" case_name="test_logout" VSTS_id="VSTS580360"/>
+			<testcase result="passed" case_id="test_VS580362" case_name="test_help" VSTS_id="VSTS580362"/>
+			<testcase result="passed" case_id="test_VS580364" case_name="test_warning" VSTS_id="VSTS580364"/>
+			<testcase result="passed" case_id="test_VS580365" case_name="test_layout" VSTS_id="VSTS580365"/>
+			<testcase result="passed" case_id="test_VS580369" case_name="test_fullscreen" VSTS_id="VSTS580369"/>
+			<testcase result="passed" case_id="test_VS580450" case_name="test_navigate" VSTS_id="VSTS580450"/>
+			<testcase result="passed" case_id="test_VS580455" case_name="test_datefilter" VSTS_id="VSTS580455"/>
+			<testcase result="passed" case_id="test_VS580455" case_name="test_numberfilter" VSTS_id="VSTS580455"/>
+			<testcase result="passed" case_id="test_VS580455" case_name="test_selectall" VSTS_id="VSTS580455"/>
+			<testcase result="passed" case_id="test_VS580455" case_name="test_filterclear" VSTS_id="VSTS580455"/>
+			<testcase result="passed" case_id="test_VS580455" case_name="test_cancel" VSTS_id="VSTS580455"/>
+			<testcase result="passed" case_id="test_VS580455" case_name="test_search" VSTS_id="VSTS580455"/>
+			<testcase result="passed" case_id="test_VS580519" case_name="test_sort" VSTS_id="VSTS580519"/>
+			<testcase result="passed" case_id="test_VS580550" case_name="test_defaultcols" VSTS_id="VSTS580550"/>
+			<testcase result="passed" case_id="test_VS580550" case_name="test_visiblecols" VSTS_id="VSTS580550"/>
+			<testcase result="passed" case_id="test_VS580550" case_name="test_cancelcols" VSTS_id="VSTS580550"/>
+			<testcase result="passed" case_id="test_VS580580" case_name="test_scroll" VSTS_id="VSTS580580"/>
+			<testcase result="passed" case_id="test_VS580588" case_name="test_search" VSTS_id="VSTS580588"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_defstatus" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_Allstatus" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_color" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_tr_height" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_Circle" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_hovertrack" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_All" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_clear" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_randomselect" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_add" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_cancel" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_search" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_search_none" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_checkadd" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS585400" case_name="test_checknull" VSTS_id="VSTS585400"/>
+			<testcase result="passed" case_id="test_VS591770" case_name="test_AuditReason" VSTS_id="VSTS591770"/>
+			<testcase result="passed" case_id="test_VS591770" case_name="test_select" VSTS_id="VSTS591770"/>
+			<testcase result="passed" case_id="test_VS591770" case_name="test_no_select" VSTS_id="VSTS591770"/>
+			<testcase result="passed" case_id="test_VS591819" case_name="test_DarkMode" VSTS_id="VSTS591819"/>
+			<testcase result="passed" case_id="test_VS591819" case_name="test_diffuser" VSTS_id="VSTS591819"/>
+			<testcase result="passed" case_id="test_VS591819" case_name="test_offDarkMode" VSTS_id="VSTS591819"/>
+			<testcase result="passed" case_id="test_VS591822" case_name="test_gotoTrack" VSTS_id="VSTS591822"/>
+			<testcase result="passed" case_id="test_VS591825" case_name="test_checkdefaultview" VSTS_id="VSTS591825"/>
+			<testcase result="passed" case_id="test_VS591827" case_name="test_GatherOn" VSTS_id="VSTS591827"/>
+			<testcase result="passed" case_id="test_VS591827" case_name="test_GatherOff" VSTS_id="VSTS591827"/>
+			<testcase result="passed" case_id="test_VS591862" case_name="test_columns" VSTS_id="VSTS591862"/>
+			<testcase result="passed" case_id="test_VS591862" case_name="test_colums_Con" VSTS_id="VSTS591862"/>
+			<testcase result="passed" case_id="test_VS591865" case_name="test_sorttrack" VSTS_id="VSTS591865"/>
+			<testcase result="passed" case_id="test_VS591875" case_name="test_filtertrack_number" VSTS_id="VSTS591875"/>
+			<testcase result="passed" case_id="test_VS591875" case_name="test_selectall" VSTS_id="VSTS591875"/>
+			<testcase result="passed" case_id="test_VS591875" case_name="test_filterclear" VSTS_id="VSTS591875"/>
+			<testcase result="passed" case_id="test_VS591875" case_name="test_cancel" VSTS_id="VSTS591875"/>
+			<testcase result="passed" case_id="test_VS591875" case_name="test_search" VSTS_id="VSTS591875"/>
+			<testcase result="passed" case_id="test_VS591876" case_name="test_trackscroll" VSTS_id="VSTS591876"/>
+			<testcase result="passed" case_id="test_VS591893" case_name="test_changeorder" VSTS_id="VSTS591893"/>
+			<testcase result="passed" case_id="test_VS626810" case_name="test_IconStatus" VSTS_id="VSTS626810"/>
+			<testcase result="passed" case_id="test_VS627824" case_name="test_goto_param" VSTS_id="VSTS627824"/>
+			<testcase result="passed" case_id="test_VS627837" case_name="test_ParaPage" VSTS_id="VSTS627837"/>
+			<testcase result="passed" case_id="test_VS627866" case_name="test_CheckdiffMode" VSTS_id="VSTS627866"/>
+			<testcase result="passed" case_id="test_VS627898" case_name="test_Check_structure" VSTS_id="VSTS627898"/>
+			<testcase result="passed" case_id="test_VS627904" case_name="test_CheckDetails" VSTS_id="VSTS627904"/>
+			<testcase result="passed" case_id="test_VS627922" case_name="test_ParaPage" VSTS_id="VSTS627922"/>
+			<testcase result="passed" case_id="test_VS628336" case_name="test_Breadcrumb" VSTS_id="VSTS628336"/>
+			<testcase result="passed" case_id="test_VS628342" case_name="test_Toolbar" VSTS_id="VSTS628342"/>
+			<testcase result="passed" case_id="test_VS629854" case_name="test_Phase_excute" VSTS_id="VSTS629854"/>
+			<testcase result="passed" case_id="test_VS629860" case_name="test_change_excute" VSTS_id="VSTS629860"/>
+		</testresult>
+	</testsuite>
+</testsuites>
