@@ -1,14 +1,16 @@
 <#-------------------This script is uesed to execute pytest and analysis test result---------------------------#>
 <#---------------------------------Automation Engineer: Will.You-----------------------------------------------#>
 <#-----------------\---------------------------Jul.21 2021------------------------------------------------------#>
-$RootPath ="C:\P4\ApemMobile_UIautomation\DesktopApem"
+$RootPath ="C:\P4\ApemMobile_UIautomation\"
+$Newpath = Join-Path -Path $Newpath -ChildPath "DesktopApem"
 $executonfile = Join-Path -Path $RootPath -ChildPath "Executed_pytest.ps1"
-$ReportPath = Join-Path -Path $RootPath -ChildPath "report"
+$ReportPath = Join-Path -Path $Newpath -ChildPath "report"
 $ResultFile = Join-Path -Path $ReportPath -ChildPath "test.xml"
 $starttime = Get-Date
-$Version = "V12.2"
+$Version = "V12.2.1"
 $blueprint = "APEM"
 $EmailSubject = "QE - Cloud - $Version - $blueprint Automated Test report for MVT"
+
 function Convert-Timespan($timespan)
 {
     $temp=$timespan.Split(":")
@@ -51,7 +53,9 @@ Function Run-MSTestResultAnalysis($sResult,$node)
  }
 
  Function generateHTMLfromCSV{
+    
     Param(
+
       [string]$media = "Unspecified",
       [string]$clientConfig = "Unspecified",
       [DateTime]$startTime = [DateTime]"1/1/0001",
@@ -399,6 +403,9 @@ Set-Location -Path $RootPath
 Write-Host "Start to execute APEM mobile test cases"
 &$executonfile
 Write-Host "Start to analyze the APEM mobile test result"
+
+# $global::medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
+
 $res = [xml](Get-Content -Path $ResultFile)
 for($i = 1; $i -le $res.testsuites.testsuite.testresult.testcase.Count;$i++ )
 {
@@ -409,8 +416,8 @@ $rex |Select-Object -Property Id, casename,result,Detail|Export-Csv -Delimiter "
 
 #$rex =  $res.SelectNodes("testsuites/testsuite/testresult/testcase[1]").case_name
 #$testcases = $res.testsuites.testsuite.testresult.testcase
+
 $html=[string](generateHTMLfromCSV -media null -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path $RootPath -ChildPath "APEM.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
  $attachmentPath=Join-Path -Path $RootPath -ChildPath "APEM.csv" 
  Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer hqsmtp01.corp.aspentech.com -BodyAsHtml
- Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml
-
+ Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com"  -Subject $EmailSubject -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml
