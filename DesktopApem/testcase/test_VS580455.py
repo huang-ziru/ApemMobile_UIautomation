@@ -163,7 +163,7 @@ class Testtextfilter():
                 td_data = Common(browser).td_data(td_list)
                 if len(mat_list) == 1 and mat_text == '(Blank)':
                     # 7 is the total number of table data
-                    assert len(td_data) == 6
+                    assert len(td_data) == 5
                 else:
                     for data in td_data:
                         if data == '':
