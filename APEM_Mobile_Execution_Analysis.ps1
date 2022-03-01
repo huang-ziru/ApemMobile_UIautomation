@@ -400,8 +400,8 @@ Function Run-MSTestResultAnalysis($sResult,$node)
 
 }
 Set-Location -Path $RootPath
-Write-Host "Start to execute APEM mobile test cases"
-&$executonfile
+#Write-Host "Start to execute APEM mobile test cases"
+#&$executonfile
 Write-Host "Start to analyze the APEM mobile test result"
 
 # $global::medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
