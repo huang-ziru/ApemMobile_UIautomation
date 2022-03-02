@@ -2,15 +2,15 @@
 <#---------------------------------Automation Engineer: Will.You-----------------------------------------------#>
 <#-----------------\---------------------------Jul.21 2021------------------------------------------------------#>
 $RootPath ="C:\P4\ApemMobile_UIautomation\"
-$Newpath = Join-Path -Path $Newpath -ChildPath "DesktopApem"
+#$Newpath = Join-Path -Path $Newpath -ChildPath "DesktopApem"
 $executonfile = Join-Path -Path $RootPath -ChildPath "Executed_pytest.ps1"
-$ReportPath = Join-Path -Path $Newpath -ChildPath "report"
+$ReportPath = Join-Path -Path $RootPath -ChildPath "DesktopApem\report"
 $ResultFile = Join-Path -Path $ReportPath -ChildPath "test.xml"
 $starttime = Get-Date
 $Version = "V12.2.1"
 $blueprint = "APEM"
-$EmailSubject = "QE - Cloud - $Version - $blueprint Automated Test report for MVT"
-
+$EmailSubject = "QE - Cloud - $Version - $blueprint Automated Test report for $vision"
+ 
 function Convert-Timespan($timespan)
 {
     $temp=$timespan.Split(":")
@@ -89,7 +89,20 @@ Function Run-MSTestResultAnalysis($sResult,$node)
 
     Write-host "$($startTime.ToString())"
     write-host "$($endTime.ToString())"
+    $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
 
+    if($medias.Count -gt 0)
+    {
+     $media = $medias[0]
+   
+       }else
+       {
+       $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.iso")
+       if($medias.Count -lt 0)
+       {
+        $media = $medias[0]
+       }else{$media = ""}
+       }
     $strStart = "$($startTime.ToString())"
     $strEnd = "$($endTime.ToString())"
 
@@ -400,8 +413,8 @@ Function Run-MSTestResultAnalysis($sResult,$node)
 
 }
 Set-Location -Path $RootPath
-#Write-Host "Start to execute APEM mobile test cases"
-#&$executonfile
+Write-Host "Start to execute APEM mobile test cases"
+&$executonfile
 Write-Host "Start to analyze the APEM mobile test result"
 
 # $global::medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
@@ -416,6 +429,7 @@ $rex |Select-Object -Property Id, casename,result,Detail|Export-Csv -Delimiter "
 
 #$rex =  $res.SelectNodes("testsuites/testsuite/testresult/testcase[1]").case_name
 #$testcases = $res.testsuites.testsuite.testresult.testcase
+$medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
 
 $html=[string](generateHTMLfromCSV -media null -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path $RootPath -ChildPath "APEM.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
  $attachmentPath=Join-Path -Path $RootPath -ChildPath "APEM.csv" 
