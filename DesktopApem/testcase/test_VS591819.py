@@ -6,20 +6,21 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.support.color import Color
 from framework.common import Common
+from selenium.webdriver.common.by import By
 class Testtitle_bar():
     def test_DarkMode(self, browser):
-        browser.find_element_by_xpath("//mat-icon[@data-mat-icon-name='settings']").click()
-        switch = browser.find_element_by_xpath("//div[@class='show-navigation'][4]/div/div[2]/mat-slide-toggle")
-        if switch.find_element_by_tag_name('input').get_attribute('aria-checked') == 'false':
+        browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='settings']").click()
+        switch = browser.find_element(By.XPATH, "//div[@class='show-navigation'][4]/div/div[2]/mat-slide-toggle")
+        if switch.find_element(By.TAG_NAME, 'input').get_attribute('aria-checked') == 'false':
             Common(browser).eleclick(switch)
         time.sleep(5)
-        backcolor = browser.find_element_by_xpath("//body").value_of_css_property('background-color')
+        backcolor = browser.find_element(By.XPATH, "//body").value_of_css_property('background-color')
         assert Color.from_string(backcolor) == Color.from_string('#2a2a2a')
-        textcolor = browser.find_element_by_xpath("//body").value_of_css_property('color')
+        textcolor = browser.find_element(By.XPATH, "//body").value_of_css_property('color')
         assert Color.from_string(textcolor) == Color.from_string('#fff')
-        browser.find_element_by_xpath("//mat-icon[@data-mat-icon-name='settings']").click()
-        switch = browser.find_element_by_xpath("//div[@class='show-navigation'][4]/div/div[2]/mat-slide-toggle")
-        if switch.find_element_by_tag_name('input').get_attribute('aria-checked') == 'true':
+        browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='settings']").click()
+        switch = browser.find_element(By.XPATH, "//div[@class='show-navigation'][4]/div/div[2]/mat-slide-toggle")
+        if switch.find_element(By.TAG_NAME, 'input').get_attribute('aria-checked') == 'true':
             Common(browser).eleclick(switch)
         time.sleep(5)
 
@@ -40,22 +41,22 @@ class Testtitle_bar():
         servername = config.get('login', 'servername')
         url = "http://qapart:QQQaaa000@" + servername + "/ApemMobile/#/login"
         self.driver.get(url)
-        self.driver.find_element_by_xpath('//*[@id="username"]').send_keys("corp\\qapart")
-        self.driver.find_element_by_xpath('//*[@id="mat-input-1"]').send_keys("QQQaaa000")
-        self.driver.find_element_by_id('signInBtn').click()
-        backcolor = self.driver.find_element_by_xpath("//body").value_of_css_property('background-color')
+        self.driver.find_element(By.XPATH, '//*[@id="username"]').send_keys("corp\\qapart")
+        self.driver.find_element(By.XPATH, '//*[@id="mat-input-1"]').send_keys("QQQaaa000")
+        self.driver.find_element(By.ID, 'signInBtn').click()
+        backcolor = self.driver.find_element(By.XPATH, "//body").value_of_css_property('background-color')
         try:
             assert Color.from_string(backcolor) != Color.from_string('#2a2a2a')
-            assert "theme-light" in self.driver.find_element_by_xpath("//body").get_attribute("class")
+            assert "theme-light" in self.driver.find_element(By.XPATH, "//body").get_attribute("class")
         finally:
             self.driver.quit()
     def test_offDarkMode(self, browser):
-        browser.find_element_by_xpath("//mat-icon[@data-mat-icon-name='settings']").click()
-        switch = browser.find_element_by_xpath("//div[@class='show-navigation'][4]/div/div[2]/mat-slide-toggle")
-        if switch.find_element_by_tag_name('input').get_attribute('aria-checked') == 'true':
+        browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='settings']").click()
+        switch = browser.find_element(By.XPATH, "//div[@class='show-navigation'][4]/div/div[2]/mat-slide-toggle")
+        if switch.find_element(By.TAG_NAME, 'input').get_attribute('aria-checked') == 'true':
             Common(browser).eleclick(switch)
         time.sleep(5)
-        assert "theme-light" in browser.find_element_by_xpath("//body").get_attribute("class")
+        assert "theme-light" in browser.find_element(By.XPATH, "//body").get_attribute("class")
 
 
 

@@ -2,13 +2,15 @@
 import configparser
 import time, pytest
 from framework.basefunc import MainPage
+from selenium.webdriver.common.by import By
+
 def test_fullscreen(browser):
     try:
         MainPage(browser).is_login_successed()
     except:
         print('Fail:', browser.current_url)
     else:
-        browser.find_element_by_css_selector("mat-icon[svgicon='fullscreen']").click()
+        browser.find_element(By.CSS_SELECTOR, "mat-icon[svgicon='fullscreen']").click()
         time.sleep(1)
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\fullscreen.png")
         time.sleep(2)
@@ -24,10 +26,10 @@ def test_fullscreen(browser):
         assert size["width"] == width
         assert size["height"] == height
 
-        elementObj = browser.find_element_by_xpath("/html/body/app-root/app-header")
+        elementObj = browser.find_element(By.XPATH, "/html/body/app-root/app-header")
         browser.execute_script("arguments[0].className='show-header'", elementObj)
         time.sleep(3)
-        browser.find_element_by_xpath("/html/body/app-root/app-header/mat-toolbar/div/div[3]/mat-icon[2]").click()
+        browser.find_element(By.XPATH, "/html/body/app-root/app-header/mat-toolbar/div/div[3]/mat-icon[2]").click()
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\exit_fullscreen.png")
         assert browser.get_window_size()["width"] != width
         assert browser.get_window_size()["height"] != height

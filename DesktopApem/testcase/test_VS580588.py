@@ -1,26 +1,27 @@
 # coding = utf-8
 import time
 import re, pytest
+from selenium.webdriver.common.by import By
 
 class Testsearch():
     def test_search(self, browser):
         #search with key_words 'er'
-        browser.find_element_by_id("ordersearch").send_keys('order')
+        browser.find_element(By.ID, "ordersearch").send_keys('order')
         time.sleep(2)
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\search.png")
         table_list = []
-        table_tr_list = browser.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/tbody/tr")
+        table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
         # match 'er' and case insensitive
         pattern = re.compile(r'order', re.I)
         count1 = 0
         for tr in table_tr_list:
-            table_td_list = tr.find_elements_by_tag_name("td")[1::]
+            table_td_list = tr.find_elements(By.TAG_NAME, "td")[1::]
             for td in table_td_list:
                 row_list = []
                 row_list.append(td.text)
                 table_list.append(row_list)
                 #Verify bold matches
-                strong_list = td.find_elements_by_tag_name("strong")
+                strong_list = td.find_elements(By.TAG_NAME, "strong")
                 for st in strong_list:
                     count1 = count1 + 1
                     result1 = re.sub(pattern, '', st.text)

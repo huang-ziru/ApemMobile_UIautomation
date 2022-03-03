@@ -5,32 +5,33 @@ import re
 from logging import Logger
 from selenium import webdriver
 from framework.basefunc import BasePage
+from selenium.webdriver.common.by import By
 '''Data processing '''
 class prepare(BasePage):
     #process columns data before the testcase about columns
     def login_after(self):
         # cancle the default status filter
-        target = self.driver.find_element_by_xpath("//app-filter-box[@id='filterLOGIC_STATUS']/mat-icon")
+        target = self.driver.find_element(By.XPATH, "//app-filter-box[@id='filterLOGIC_STATUS']/mat-icon")
         self.driver.execute_script("arguments[0].click();", target)
         time.sleep(2)
-        self.driver.find_element_by_id("mat-checkbox-1").click()
-        self.driver.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+        self.driver.find_element(By.ID, "mat-checkbox-1").click()
+        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
         time.sleep(2)
         # show all columns
         box = ['checkProcess Area', 'checkRep.', 'checkArticle', 'checkPO ', 'checkPO Step', 'checkEnd Date',
                'checkProcess Type', 'checkOrigin', 'checkUser Status', 'checkBatch Area', 'checkCR Modified',
                'checkRUDO (edit planned)', 'checkRUDO (edit active)', 'checkVer.', 'checkFrom', 'checkSite']
         assert 'Order / Batch Code' not in box
-        self.driver.find_element_by_xpath("//*[@id='selectmenu']").click()
+        self.driver.find_element(By.XPATH, "//*[@id='selectmenu']").click()
         for id in box:
             path = "//*[@id=\'" + id + "\']/div/mat-pseudo-checkbox"
             # print(path)
-            target = self.driver.find_element_by_id(id)
+            target = self.driver.find_element(By.ID, id)
             self.driver.execute_script("arguments[0].scrollIntoView();", target)
             time.sleep(1)
-            self.driver.find_element_by_xpath(path).click()
+            self.driver.find_element(By.XPATH, path).click()
             time.sleep(1)
-        self.driver.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
         time.sleep(5)
 def login():
     global driver
@@ -54,10 +55,10 @@ def login():
     login_alter = loginname + ":" + password + "@"
     url = "http://" + login_alter + servername + "/ApemMobile/#/login"
     driver.get(url)
-    driver.find_element_by_xpath('//*[@id="username"]').send_keys(username)
-    driver.find_element_by_xpath('//*[@id="mat-input-1"]').send_keys(password)
+    driver.find_element(By.XPATH, '//*[@id="username"]').send_keys(username)
+    driver.find_element(By.XPATH, '//*[@id="mat-input-1"]').send_keys(password)
     time.sleep(6)
-    driver.find_element_by_id('signInBtn').click()
+    driver.find_element(By.ID, 'signInBtn').click()
     time.sleep(10)
     return driver
 

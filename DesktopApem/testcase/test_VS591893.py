@@ -2,28 +2,29 @@
 import time
 import random
 from framework.common import Common
+from selenium.webdriver.common.by import By
 import pytest
 def test_changeorder(browser):
-    target = browser.find_element_by_xpath("//app-filter-box[@id='filterLOGIC_STATUS']/mat-icon")
+    target = browser.find_element(By.XPATH, "//app-filter-box[@id='filterLOGIC_STATUS']/mat-icon")
     browser.execute_script("arguments[0].click();", target)
     time.sleep(2)
     # click selectAll
-    browser.find_element_by_id("mat-checkbox-1").click()
-    browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+    browser.find_element(By.ID, "mat-checkbox-1").click()
+    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
     time.sleep(3)
-    order_list = browser.find_elements_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]/div[1]")
+    order_list = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]/div[1]")
     order_datalist = []
     for order in order_list:
         order_data = order.get_attribute('textContent')
         order_datalist.append(order_data.strip('/').replace(" ", ""))
     # All the available orders will be displayed in the dropdown list
     time.sleep(3)
-    track = browser.find_elements_by_css_selector("mat-icon[data-mat-icon-name='double_arrow']")
+    track = browser.find_elements(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='double_arrow']")
     Common(browser).eleclick(track[0])
     time.sleep(3)
-    browser.find_element_by_xpath("//input[@aria-label='OrderName']").click()
+    browser.find_element(By.XPATH, "//input[@aria-label='OrderName']").click()
     time.sleep(3)
-    select_list = browser.find_elements_by_css_selector("span.mat-option-text")
+    select_list = browser.find_elements(By.CSS_SELECTOR, "span.mat-option-text")
     select_datalist = []
     for select in select_list:
         select_data = select.get_attribute('textContent')
@@ -32,14 +33,14 @@ def test_changeorder(browser):
     # Click the order in the dropdown list to change the chosen order
     num = random.choice(range(len(select_datalist)))
     Common(browser).eleclick(select_list[num])
-    browser.find_element_by_xpath("//*[@id='tracking-content']/app-tracking-list/div/div[2]").click()
-    name = browser.find_element_by_xpath("//input[@aria-label='OrderName']").get_attribute('value')
+    browser.find_element(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]").click()
+    name = browser.find_element(By.XPATH, "//input[@aria-label='OrderName']").get_attribute('value')
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\test_VS591893.png")
     assert name == select_datalist[num]
     # Scroll on the dropdown list
-    browser.find_element_by_xpath("//input[@aria-label='OrderName']").click()
+    browser.find_element(By.XPATH, "//input[@aria-label='OrderName']").click()
     time.sleep(3)
-    targetElem = browser.find_element_by_xpath("//*[contains(text(),'FROM_RPL')]")
+    targetElem = browser.find_element(By.XPATH, "//*[contains(text(),'FROM_RPL')]")
     browser.execute_script("arguments[0].scrollIntoView();", targetElem)
     time.sleep(3)
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\focus.png")

@@ -2,6 +2,8 @@
 import time
 from framework.common import Common
 import pytest
+from selenium.webdriver.common.by import By
+
 class TestSort():
     def test_sort(self, browser):
         table_head_list = Common(browser).get_tablehead()
@@ -10,7 +12,7 @@ class TestSort():
                 # asc, desc and restore data
                 revers_data = Common(browser).get_revers(table_head_list[l])
                 table_data_sort = Common(browser).get_table(1)
-                head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
+                head_name = table_head_list[l].find_elements(By.TAG_NAME, 'div')[2].text
                 # processing the string to date of Date and End Date
                 if head_name in ('Date', 'End Date'):
                     for h in range(len(table_data_sort)):

@@ -3,17 +3,17 @@ import datetime
 import re
 from selenium.webdriver import ActionChains
 from framework.basefunc import BasePage
-
+from selenium.webdriver.common.by import By
 
 class Common(BasePage):
     # get the table element except table head
     def get_table(self, x):
         #get the row elements
-        table_tr_list = self.driver.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/tbody/tr")
+        table_tr_list = self.driver.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
         table_list = []
         for tr in table_tr_list:
             #except circle column
-            table_td_list = tr.find_elements_by_tag_name("td")[x::]
+            table_td_list = tr.find_elements(By.TAG_NAME, "td")[x::]
             row_list = []
             for td in table_td_list:
                 row_list.append(td.text)
@@ -59,7 +59,7 @@ class Common(BasePage):
         return dateTime_p
     # get the sorting rule,ascend or descend
     def get_revers(self, head_ele):
-        target = head_ele.find_elements_by_tag_name("div")[2]
+        target = head_ele.find_elements(By.TAG_NAME, "div")[2]
         self.driver.execute_script("arguments[0].click();", target)
         revers = head_ele.get_attribute('aria-sort')
         return revers
@@ -67,13 +67,13 @@ class Common(BasePage):
     # get the table head element
     def get_tablehead(self):
         #except circle and tracking
-        table_head_list = self.driver.find_elements_by_xpath("//div[@class='full show-navigation']/div[2]/table/thead/tr/th")[1:-1:]
+        table_head_list = self.driver.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/thead/tr/th")[1:-1:]
         return table_head_list
     def navigate(self, ele_path):
-        elementObj = self.driver.find_element_by_xpath("/html/body/app-root/div/app-sidenav")
-        mouse = elementObj.find_element_by_xpath(ele_path)
+        elementObj = self.driver.find_element(By.XPATH, "/html/body/app-root/div/app-sidenav")
+        mouse = elementObj.find_element(By.XPATH, ele_path)
         ActionChains(self.driver).move_to_element(mouse).perform()
-        nav_text = self.driver.find_element_by_css_selector("div.cdk-overlay-container>div>div>mat-tooltip-component>div").text
+        nav_text = self.driver.find_element(By.CSS_SELECTOR, "div.cdk-overlay-container>div>div>mat-tooltip-component>div").text
         return nav_text
     def dateSort(self,str_time):
         if 'M' in str_time:
@@ -96,7 +96,7 @@ class Common(BasePage):
         except:
             self.driver.execute_script("arguments[0].click();", ele)
     def get_text(self,xpath):
-        ele = self.driver.find_element_by_xpath(xpath)
+        ele = self.driver.find_element(By.XPATH, xpath)
         self.driver.execute_script("arguments[0].click();", ele)
         text = ele.get_attribute('textContent')
         return text

@@ -2,6 +2,7 @@
 import time, pytest
 from framework.basefunc import MainPage
 from framework.columsfunc import Func
+from selenium.webdriver.common.by import By
 def test_scroll(browser):
     try:
         MainPage(browser).is_login_successed()
@@ -19,7 +20,7 @@ def test_scroll(browser):
         browser.execute_script(js)
         time.sleep(5)
         # scroll into view the designated data
-        element = browser.find_element_by_xpath("/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[21]")
+        element = browser.find_element(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[21]")
         browser.execute_script("arguments[0].scrollIntoView();", element)
         time.sleep(3)
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\scoll.png")

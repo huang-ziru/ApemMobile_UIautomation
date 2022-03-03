@@ -1,6 +1,7 @@
 # coding = utf-8
 from framework.basefunc import MainPage
 import time, pytest
+from selenium.webdriver.common.by import By
 def test_help(browser):
     try:
         MainPage(browser).is_login_successed()
@@ -9,7 +10,7 @@ def test_help(browser):
     else:
         # current windows handle
         mainWindow = browser.current_window_handle
-        browser.find_element_by_css_selector("mat-icon[svgicon='help']").click()
+        browser.find_element(By.CSS_SELECTOR, "mat-icon[svgicon='help']").click()
         # all windows handles
         handles = browser.window_handles
         help_handle = None

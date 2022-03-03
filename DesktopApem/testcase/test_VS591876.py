@@ -6,7 +6,7 @@ def test_trackscroll(browser):
     try:
         time.sleep(3)
         columns_list = ['checkAuto.', 'checkAssigned WkSt.', 'checkUser Status', 'checkExecuting WkSt.', 'checkExecuting User', 'checkRepetition Count', 'checkUser RUDO', 'checkWkSt. RUDO']
-        track = browser.find_elements_by_css_selector("mat-icon[data-mat-icon-name='double_arrow']")
+        track = browser.find_elements(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='double_arrow']")
         Common(browser).eleclick(track[0])
         time.sleep(3)
         Func(browser).visiblecols(columns_list)
@@ -22,7 +22,7 @@ def test_trackscroll(browser):
         browser.execute_script(js)
         time.sleep(5)
         # scroll into view the designated data
-        element = browser.find_element_by_xpath("//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/thead/tr/th[11]")
+        element = browser.find_element(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/thead/tr/th[11]")
         browser.execute_script("arguments[0].scrollIntoView();", element)
         time.sleep(3)
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\trackscroll.png")

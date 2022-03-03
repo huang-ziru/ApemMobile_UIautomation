@@ -7,7 +7,7 @@ from framework.baseFunc_table import func_for_table
 import pytest
 class TesttrackFilter():
     def prepare(self, browser):
-        track = browser.find_elements_by_css_selector("mat-icon[data-mat-icon-name='double_arrow']")
+        track = browser.find_elements(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='double_arrow']")
         Common(browser).eleclick(track[3])
         time.sleep(3)
         columns_list = ['checkAuto.', 'checkAssigned WkSt.', 'checkUser Status', 'checkExecuting WkSt.','checkExecuting User', 'checkRepetition Count', 'checkUser RUDO', 'checkWkSt. RUDO']
@@ -16,24 +16,24 @@ class TesttrackFilter():
         TesttrackFilter.prepare(self, browser)
         table_head_list = Common(browser).get_tablehead()
         for l in range(len(table_head_list)):
-            head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
+            head_name = table_head_list[l].find_elements(By.TAG_NAME, 'div')[2].text
             if head_name in ('No.', 'Repetition Count'):
                 headid = "header" + head_name
-                target1 = browser.find_element_by_id(headid)
+                target1 = browser.find_element(By.ID, headid)
                 browser.execute_script("arguments[0].scrollIntoView();", target1)
-                target = table_head_list[l].find_element_by_tag_name("mat-icon")
+                target = table_head_list[l].find_element(By.TAG_NAME, "mat-icon")
                 browser.execute_script("arguments[0].click();", target)
                 time.sleep(2)
                 # input the min number and max number,also '1'and '2' can be modified
-                browser.find_element_by_xpath("//input[@formindex='1']").send_keys('2')
+                browser.find_element(By.XPATH, "//input[@formindex='1']").send_keys('2')
                 time.sleep(3)
-                target2 = browser.find_element_by_xpath("//input[@formindex='2']")
+                target2 = browser.find_element(By.XPATH, "//input[@formindex='2']")
                 browser.execute_script("arguments[0].click();", target2)
-                browser.find_element_by_xpath("//input[@formindex='2']").send_keys('4')
-                browser.find_element_by_xpath("/html/body/div[2]").click()
+                browser.find_element(By.XPATH, "//input[@formindex='2']").send_keys('4')
+                browser.find_element(By.XPATH, "/html/body/div[2]").click()
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + ".png")
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
-                td_list = browser.find_elements_by_xpath(td_path)
+                td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
                 try:
                     if td_data != ['']:
@@ -45,17 +45,17 @@ class TesttrackFilter():
         TesttrackFilter.prepare(self, browser)
         table_head_list = Common(browser).get_tablehead()
         for l in range(len(table_head_list)):
-            head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
+            head_name = table_head_list[l].find_elements(By.TAG_NAME, 'div')[2].text
             #except the status column and the columns which type is date or number
             if head_name not in ('No.', 'Repetition Count'):
                 headid = "header" + head_name
-                target = browser.find_element_by_id(headid)
+                target = browser.find_element(By.ID, headid)
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(5)
                 mat_text = func_for_table(browser).test_selectAll(table_head_list[l])
-                # browser.find_element_by_xpath("/html/body/div[2]/div[1]").click()
+                # browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
-                td_list = browser.find_elements_by_xpath(td_path)
+                td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_all.png")
                 #the column's data is null
@@ -70,25 +70,25 @@ class TesttrackFilter():
         TesttrackFilter.prepare(self, browser)
         table_head_list = Common(browser).get_tablehead()
         for l in range(len(table_head_list)):
-            head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
+            head_name = table_head_list[l].find_elements(By.TAG_NAME, 'div')[2].text
             if head_name not in ('No.', 'Repetition Count'):
                 headid = "header" + head_name
-                target = browser.find_element_by_id(headid)
+                target = browser.find_element(By.ID, headid)
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(3)
                 # print(head_name)
                 mat_list = func_for_table(browser).test_selectclear(table_head_list[l])
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_clear.png")
-                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
                 browser.execute_script("arguments[0].click();", target)
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
-                td_list = browser.find_elements_by_xpath(td_path)
+                td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
                 assert td_data == ['']
-                table_head_list[l].find_element_by_tag_name("mat-icon").click()
-                browser.find_element_by_xpath("//*[@id='filcheck']/section[1]/mat-checkbox").click()
+                table_head_list[l].find_element(By.TAG_NAME, "mat-icon").click()
+                browser.find_element(By.XPATH, "//*[@id='filcheck']/section[1]/mat-checkbox").click()
                 time.sleep(2)
-                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
                 browser.execute_script("arguments[0].click();", target)
 
 
@@ -96,23 +96,23 @@ class TesttrackFilter():
         TesttrackFilter.prepare(self, browser)
         table_head_list = Common(browser).get_tablehead()
         for l in range(len(table_head_list)):
-            head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
+            head_name = table_head_list[l].find_elements(By.TAG_NAME, 'div')[2].text
             if head_name not in ('No.', 'Repetition Count'):
                 headid = "header" + head_name
-                target = browser.find_element_by_id(headid)
+                target = browser.find_element(By.ID, headid)
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(3)
                 mat_list = func_for_table(browser).test_selectone(table_head_list[l])
                 num = random.choice(range(len(mat_list)))
                 check_data = mat_list[num]
-                mat_text = check_data.find_elements_by_tag_name("div")[2].text
+                mat_text = check_data.find_elements(By.TAG_NAME, "div")[2].text
                 browser.execute_script("arguments[0].click();", check_data)
-                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
                 browser.execute_script("arguments[0].click();", target)
                 time.sleep(2)
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_selectone.png")
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
-                td_list = browser.find_elements_by_xpath(td_path)
+                td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
                 if len(mat_list) == 1 and mat_text == '(Blank)':
                     # 7 is the total number of table data
@@ -131,32 +131,32 @@ class TesttrackFilter():
         TesttrackFilter.prepare(self, browser)
         table_head_list = Common(browser).get_tablehead()
         for l in range(len(table_head_list)):
-            head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
+            head_name = table_head_list[l].find_elements(By.TAG_NAME, 'div')[2].text
             if head_name not in ('No.', 'Repetition Count'):
                 headid = "header" + head_name
-                target = browser.find_element_by_id(headid)
+                target = browser.find_element(By.ID, headid)
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(3)
-                target2 = table_head_list[l].find_element_by_tag_name("mat-icon")
+                target2 = table_head_list[l].find_element(By.TAG_NAME, "mat-icon")
                 browser.execute_script("arguments[0].click();", target2)
                 time.sleep(3)
                 #get the text showed in filter
-                select_list = browser.find_elements_by_xpath("//div[@class='ng-star-inserted']/mat-list-option")
-                select_text = select_list[0].find_elements_by_tag_name("div")[2].text
+                select_list = browser.find_elements(By.XPATH, "//div[@class='ng-star-inserted']/mat-list-option")
+                select_text = select_list[0].find_elements(By.TAG_NAME, "div")[2].text
                 #cancel a data that is selected
                 for ele in select_list:
                     if ele.get_attribute('aria-selected') == 'true':
-                        mat_text = ele.find_elements_by_tag_name("div")[2].text
+                        mat_text = ele.find_elements(By.TAG_NAME, "div")[2].text
                         ele.click()
                     break
                 time.sleep(2)
-                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
                 browser.execute_script("arguments[0].click();", target)
                 time.sleep(2)
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_cancel.png")
                 time.sleep(3)
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
-                td_list = browser.find_elements_by_xpath(td_path)
+                td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
                 # if the column data is null
                 if len(select_list) == 1 and select_text == '(Blank)':
@@ -170,13 +170,13 @@ class TesttrackFilter():
         TesttrackFilter.prepare(self, browser)
         table_head_list = Common(browser).get_tablehead()
         for l in range(len(table_head_list)):
-            head_name = table_head_list[l].find_elements_by_tag_name('div')[2].text
+            head_name = table_head_list[l].find_elements(By.TAG_NAME, 'div')[2].text
             if head_name not in ('No.', 'Repetition Count'):
                 headid = "header" + head_name
-                target = browser.find_element_by_id(headid)
+                target = browser.find_element(By.ID, headid)
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(3)
-                target2 = table_head_list[l].find_element_by_tag_name("mat-icon")
+                target2 = table_head_list[l].find_element(By.TAG_NAME, "mat-icon")
                 browser.execute_script("arguments[0].click();", target2)
                 time.sleep(3)
                 select_dic = func_for_table(browser).test_filtersearch(table_head_list[l], 'ac')
@@ -188,7 +188,7 @@ class TesttrackFilter():
                 for noselect in select_dic['no_search_list']:
                     noresult = re.findall(r'ac', noselect, re.I)
                     assert len(noresult) == 0
-                target = browser.find_element_by_xpath("/html/body/div[2]/div[1]")
+                target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
                 browser.execute_script("arguments[0].click();", target)
                 mat_pass = func_for_table(browser).test_selectAll(table_head_list[l])
 
