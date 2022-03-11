@@ -73,7 +73,7 @@ class Common(BasePage):
         elementObj = self.driver.find_element(By.XPATH, "/html/body/app-root/div/app-sidenav")
         mouse = elementObj.find_element(By.XPATH, ele_path)
         ActionChains(self.driver).move_to_element(mouse).perform()
-        nav_text = self.driver.find_element(By.CSS_SELECTOR, "div.cdk-overlay-container>div>div>mat-tooltip-component>div").text
+        nav_text = self.driver.find_element(By.CSS_SELECTOR, value="div.cdk-overlay-container>div>div>mat-tooltip-component>div").text
         return nav_text
     def dateSort(self,str_time):
         if 'M' in str_time:

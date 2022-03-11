@@ -4,6 +4,8 @@ import time
 import re
 from logging import Logger
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+
 from framework.basefunc import BasePage
 from selenium.webdriver.common.by import By
 '''Data processing '''
@@ -15,7 +17,8 @@ class prepare(BasePage):
         self.driver.execute_script("arguments[0].click();", target)
         time.sleep(2)
         self.driver.find_element(By.ID, "mat-checkbox-1").click()
-        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+        element = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+        self.driver.execute_script("arguments[0].click();", element)
         time.sleep(2)
         # show all columns
         box = ['checkProcess Area', 'checkRep.', 'checkArticle', 'checkPO ', 'checkPO Step', 'checkEnd Date',
@@ -29,9 +32,11 @@ class prepare(BasePage):
             target = self.driver.find_element(By.ID, id)
             self.driver.execute_script("arguments[0].scrollIntoView();", target)
             time.sleep(1)
-            self.driver.find_element(By.XPATH, path).click()
+            target = self.driver.find_element(By.XPATH, path)
+            self.driver.execute_script("arguments[0].click();", target)
             time.sleep(1)
-        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+        element = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+        self.driver.execute_script("arguments[0].click();", element)
         time.sleep(5)
 def login():
     global driver
@@ -41,8 +46,9 @@ def login():
     config.read(path)
     browser_name = config.get('Browser', 'browser')
     if browser_name == 'Chrome':
-            driver = webdriver.Chrome(r'..\framework\chromedriver.exe')
-            driver.maximize_window()
+        s = Service(r'..\framework\chromedriver.exe')
+        driver = webdriver.Chrome(service=s)
+        driver.maximize_window()
     elif browser_name == 'Edge':
         driver = webdriver.Edge(r'..\framework\msedgedriver.exe')
         driver.maximize_window()
@@ -55,10 +61,11 @@ def login():
     login_alter = loginname + ":" + password + "@"
     url = "http://" + login_alter + servername + "/ApemMobile/#/login"
     driver.get(url)
+    time.sleep(30)
     driver.find_element(By.XPATH, '//*[@id="username"]').send_keys(username)
     driver.find_element(By.XPATH, '//*[@id="mat-input-1"]').send_keys(password)
     time.sleep(6)
     driver.find_element(By.ID, 'signInBtn').click()
-    time.sleep(10)
+    time.sleep(30)
     return driver
 

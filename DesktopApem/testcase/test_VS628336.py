@@ -33,7 +33,7 @@ def test_Breadcrumb(browser):
     for phase in phase_list:
         if phase.get_attribute('textContent') == phasename:
             state_xpath = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr[" + str(count) + "]"
-            phase_ele = browser.find_element(By.XPATH, state_xpath).find_element(By.CSS_SELECTOR, "td[class ~= 'cdk-column-STATUS']")
+            phase_ele = browser.find_element(By.XPATH, state_xpath).find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-STATUS']")
             phase_state = phase_ele.get_attribute('textContent')
             assert phase_state == 'Executing'
         else:

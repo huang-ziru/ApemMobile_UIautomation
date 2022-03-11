@@ -12,7 +12,8 @@ class Func(BasePage):
         time.sleep(2)
         select_all = self.driver.find_element(By.XPATH, "//mat-selection-list/section[1]/mat-checkbox/label/div/input")
         self.driver.execute_script("arguments[0].click();", select_all)
-        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+        element = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+        self.driver.execute_script("arguments[0].click();", element)
         time.sleep(2)
     # visible columns select
     def visiblecols(self, visiblecols):
@@ -26,7 +27,8 @@ class Func(BasePage):
             if self.driver.find_element(By.ID, id).get_attribute('aria-selected') == 'false':
                 self.driver.find_element(By.XPATH, path).click()
             time.sleep(1)
-        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+        element = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+        self.driver.execute_script("arguments[0].click();", element)
         time.sleep(5)
     # mouse hover to get text
     def hover_text(self, xpath):
@@ -45,7 +47,8 @@ class Func(BasePage):
             if self.driver.find_element(By.ID, id).get_attribute('aria-selected') == 'true':
                 self.driver.find_element(By.XPATH, path).click()
             time.sleep(1)
-        self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+        element = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+        self.driver.execute_script("arguments[0].click();", element)
         time.sleep(5)
 
 

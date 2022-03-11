@@ -1,13 +1,16 @@
 # coding = utf-8
 import time
 import random, re
+
+from selenium.webdriver.common.by import By
+
 from framework.common import Common
 from framework.columsfunc import Func
 from framework.baseFunc_table import func_for_table
 import pytest
 class TesttrackFilter():
     def prepare(self, browser):
-        track = browser.find_elements(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='double_arrow']")
+        track = browser.find_elements(by=By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='double_arrow']")
         Common(browser).eleclick(track[3])
         time.sleep(3)
         columns_list = ['checkAuto.', 'checkAssigned WkSt.', 'checkUser Status', 'checkExecuting WkSt.','checkExecuting User', 'checkRepetition Count', 'checkUser RUDO', 'checkWkSt. RUDO']
@@ -53,7 +56,8 @@ class TesttrackFilter():
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(5)
                 mat_text = func_for_table(browser).test_selectAll(table_head_list[l])
-                # browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+                # t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+                # browser.execute_script("arguments[0].click();", t_element)
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)

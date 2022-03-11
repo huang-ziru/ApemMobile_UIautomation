@@ -28,7 +28,9 @@ class Test_filter():
                 time.sleep(2)
                 browser.find_element(By.XPATH, "//input[@placeholder='End date']").click()
                 browser.find_element(By.XPATH, "//input[@placeholder='End date']").send_keys('4/12/2020')
-                browser.find_element(By.XPATH, "/html/body/div[2]").click()
+                body_element=browser.find_element(By.XPATH, "/html/body/div[2]")
+                browser.execute_script("arguments[0].click();", body_element)
+                # browser.find_element(By.XPATH, "/html/body/div[2]").click()
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + ".png")
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
@@ -68,7 +70,9 @@ class Test_filter():
                 target2 = browser.find_element(By.XPATH, "//input[@formindex='2']")
                 browser.execute_script("arguments[0].click();", target2)
                 browser.find_element(By.XPATH, "//input[@formindex='2']").send_keys('2')
-                browser.find_element(By.XPATH, "/html/body/div[2]").click()
+                # browser.find_element(By.XPATH, "/html/body/div[2]").click()
+                body_element = browser.find_element(By.XPATH, "/html/body/div[2]")
+                browser.execute_script("arguments[0].click();", body_element)
                 browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + ".png")
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
@@ -97,7 +101,6 @@ class Testtextfilter():
                 browser.execute_script("arguments[0].scrollIntoView();", target)
                 time.sleep(5)
                 mat_text = func_for_table(browser).test_selectAll(table_head_list[l])
-                # browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
@@ -135,8 +138,8 @@ class Testtextfilter():
                 table_head_list[l].find_element(By.TAG_NAME, "mat-icon").click()
                 browser.find_element(By.XPATH, "//*[@id='filcheck']/section[1]/mat-checkbox").click()
                 time.sleep(2)
-                target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
-                browser.execute_script("arguments[0].click();", target)
+                target2 = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+                browser.execute_script("arguments[0].click();", target2)
 
 #
     def test_filterrandom(self, browser):
@@ -248,9 +251,8 @@ class Testtextfilter():
                 for noselect in select_dic['no_search_list']:
                     noresult = re.findall(r'ac', noselect, re.I)
                     assert len(noresult) == 0
-                target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
-                browser.execute_script("arguments[0].click();", target)
+                target3 = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+                browser.execute_script("arguments[0].click();", target3)
                 mat_pass = func_for_table(browser).test_selectAll(table_head_list[l])
 if __name__ == '__main__':
     pytest.main(["test_VS580455.py"])
-    # pytest.main(["--lf", "test_VS580455.py"])

@@ -6,10 +6,10 @@ import pytest
 from selenium.webdriver.common.by import By
 def test_checkdefaultview(browser):
     time.sleep(3)
-    track = browser.find_elements(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='double_arrow']")
+    track = browser.find_elements(by=By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='double_arrow']")
     Common(browser).eleclick(track[0])
     time.sleep(3)
-    group = browser.find_elements(By.CSS_SELECTOR, "mat-button-toggle-group[name='trackingPanel']>mat-button-toggle")
+    group = browser.find_elements(by=By.CSS_SELECTOR, value="mat-button-toggle-group[name='trackingPanel']>mat-button-toggle")
     # high lighted means shows table mode
     backcolor1 = group[0].value_of_css_property('background-color')
     assert Color.from_string(backcolor1) == Color.from_string('#0078c9')

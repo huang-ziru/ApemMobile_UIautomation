@@ -16,7 +16,7 @@ def test_defstatus(browser):
     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for tr in table_tr_list:
         # table_td_list = tr.find_elements(By.TAG_NAME, "td")[1::]
-        status = tr.find_element(By.CSS_SELECTOR, "td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
+        status = tr.find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\default_status.png")
         assert status in ("Planned", "Active", "Initiated", "Executing", "Cancelled by phase")
 
@@ -27,15 +27,16 @@ def test_Allstatus(browser):
     time.sleep(2)
     #click selectAll
     browser.find_element(By.ID, "mat-checkbox-1").click()
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", element)
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\selectall_status.png")
     time.sleep(2)
     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for tr in table_tr_list:
-        status = tr.find_element(By.CSS_SELECTOR, "td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
+        status = tr.find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
         # print(table_td_list[4])
         assert status in ("Planned", "Active", "Initiated", "Executing", "Cancelled by phase", "Cancelled", "Finished", "Archived", "Archived cancel", "Ext.Archived", "Ext.Archived cancel")
-#Odd lines white, even lines gray
+# Odd lines white, even lines gray
 def test_color(browser):
     Func(browser).clear_Status()
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\color.png")
@@ -53,7 +54,7 @@ def test_tr_height(browser):
     for i in range(len(table_tr_list)):
         count = i + 1
         td = table_tr_list[i]
-        div_list = td.find_element(By.CSS_SELECTOR, "td[class ~= 'order-column']").find_elements(By.TAG_NAME, "div")
+        div_list = td.find_element(By.CSS_SELECTOR, value="td[class ~= 'order-column']").find_elements(By.TAG_NAME, "div")
         tr_path = "//tbody/tr[" + str(count) + "]"
         height_before = []
         for divv1 in div_list:
@@ -75,8 +76,8 @@ def test_Circle(browser):
     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for i in range(len(table_tr_list)):
         td = table_tr_list[i]
-        circle_ele = td.find_element(By.CSS_SELECTOR, "circle[class='ng-star-inserted']")
-        p_text = td.find_element(By.CSS_SELECTOR, "div[class='back-circle']>p").text
+        circle_ele = td.find_element(By.CSS_SELECTOR, value="circle[class='ng-star-inserted']")
+        p_text = td.find_element(By.CSS_SELECTOR, value="div[class='back-circle']>p").text
         #Percentage of the display on the circle
         offset = float(circle_ele.value_of_css_property('stroke-dashoffset')[:-2])
         array = float(circle_ele.value_of_css_property('stroke-dasharray')[:-2])
@@ -95,9 +96,10 @@ def test_hovertrack(browser):
     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for i in range(len(table_tr_list)):
         td = table_tr_list[i]
-        mouse = td.find_element(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='double_arrow']")
+        mouse = td.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='double_arrow']")
         ActionChains(browser).move_to_element(mouse).perform()
-        hover_text = browser.find_element(By.XPATH, "/html/body/div[2]").text
+        element = browser.find_element(By.XPATH, "//*[@class='cdk-overlay-container']/div/div/mat-tooltip-component/div")
+        hover_text = element.text
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\hovertrack.png")
         assert 'Go to tracking' == hover_text
 
@@ -133,7 +135,8 @@ def test_randomselect(browser):
     #get the order name which is selected
     order_name = check_data.find_elements(By.TAG_NAME, "div")[2].text
     browser.execute_script("arguments[0].click();", check_data)
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element)
     time.sleep(2)
     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = Common(browser).td_data(td)
@@ -153,7 +156,8 @@ def test_add(browser):
     order_name.append(check_data1.find_elements(By.TAG_NAME, "div")[2].text)
     browser.execute_script("arguments[0].click();", check_data1)
     time.sleep(2)
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element)
     time.sleep(2)
     #add select another data which is not be selected and get the text
     target2 = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']/mat-icon")
@@ -166,7 +170,8 @@ def test_add(browser):
             select.click()
             break
     time.sleep(3)
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element)
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_add.png")
     time.sleep(2)
     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
@@ -190,7 +195,8 @@ def test_cancel(browser):
             ele.click()
         break
     time.sleep(2)
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element)
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_cancel.png")
     time.sleep(3)
     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
@@ -212,12 +218,13 @@ def test_search(browser):
     for noselect in select_dic['no_search_list']:
         noresult =  re.findall(r'order', noselect, re.I)
         assert len(noresult) == 0
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element)
 
 #search for none matching data
 def test_search_none(browser):
     Func(browser).clear_Status()
-    target1 = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']")
+   # target1 = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']")
     target = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']")
     select_dic = func_for_table(browser).test_filtersearch(target, '456')
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_searchnone.png")
@@ -227,7 +234,8 @@ def test_search_none(browser):
     for noselect in select_dic['no_search_list']:
         noresult = re.findall(r'456', noselect, re.I)
         assert len(noresult) == 0
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element)
 
 #search data and selct one data,then check the box'Add current selection to filter'
 def test_checkadd(browser):
@@ -241,7 +249,8 @@ def test_checkadd(browser):
     target = browser.find_element(By.XPATH, "//div[text()=' FROM_RPL ']/../..")
     browser.execute_script("arguments[0].click();", target)
     time.sleep(3)
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element)
     time.sleep(3)
     target = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']")
     browser.execute_script("arguments[0].click();", target.find_element(By.TAG_NAME, "mat-icon"))
@@ -251,7 +260,8 @@ def test_checkadd(browser):
     visual[num].click()
     browser.find_element(By.XPATH, "//*[@id='filcheck']/section[2]/mat-checkbox/label").click()
     time.sleep(3)
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element2 = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element2)
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_checkadd.png")
     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = Common(browser).td_data(td)
@@ -271,7 +281,8 @@ def test_checknull(browser):
     target = browser.find_element(By.XPATH, "//div[text()=' FROM_RPL ']/../..")
     browser.execute_script("arguments[0].click();", target)
     time.sleep(3)
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element)
     time.sleep(3)
     target = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']")
     browser.execute_script("arguments[0].click();", target.find_element(By.TAG_NAME, "mat-icon"))
@@ -280,7 +291,8 @@ def test_checknull(browser):
     num = random.choice(range(len(visual)))
     visual[num].click()
     time.sleep(3)
-    browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+    t_element2 = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", t_element2)
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_checknull.png")
     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
     order_td = Common(browser).td_data(td)

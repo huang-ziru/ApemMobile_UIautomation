@@ -63,11 +63,11 @@ class func_for_table(BasePage): # columns filter function
         for mat_option in mat_list:
             # search with data
             if mat_option.value_of_css_property('display') == 'block':
-                search_list.append(mat_option.find_element(By.CSS_SELECTOR, ".mat-list-text").get_attribute('textContent').strip())
+                search_list.append(mat_option.find_element(By.CSS_SELECTOR, value=".mat-list-text").get_attribute('textContent').strip())
                 visual_list.append(mat_option)
             else:
             #do not contains keywords
-                text = mat_option.find_element(By.CSS_SELECTOR, ".mat-list-text").get_attribute('innerText').strip()
+                text = mat_option.find_element(By.CSS_SELECTOR, value=".mat-list-text").get_attribute('innerText').strip()
                 no_search_list.append(text)
                 hide_list.append(mat_option)
         mat_dict = {"search_list": search_list, "visual_list": visual_list, "no_search_list": no_search_list, "hide_list": hide_list}

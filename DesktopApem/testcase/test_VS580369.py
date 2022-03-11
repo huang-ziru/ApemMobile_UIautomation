@@ -10,7 +10,7 @@ def test_fullscreen(browser):
     except:
         print('Fail:', browser.current_url)
     else:
-        browser.find_element(By.CSS_SELECTOR, "mat-icon[svgicon='fullscreen']").click()
+        browser.find_element(By.CSS_SELECTOR, value="mat-icon[svgicon='fullscreen']").click()
         time.sleep(1)
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\fullscreen.png")
         time.sleep(2)

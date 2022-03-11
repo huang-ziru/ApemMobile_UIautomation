@@ -8,8 +8,8 @@ def test_IconStatus(browser):
     order_ele = browser.find_element(By.XPATH, "//div[contains(text(),'FROM_RPL')]/../..")
     order_ele.find_elements(By.TAG_NAME, "td")[-1].click()
     time.sleep(2)
-    Status = browser.find_elements(By.CSS_SELECTOR, "td[class ~= 'cdk-column-STATUS']")
-    Exe_icon = browser.find_elements(By.CSS_SELECTOR, "td[class ~= 'cdk-column-EXECUTION']")
+    Status = browser.find_elements(by=By.CSS_SELECTOR, value="td[class ~= 'cdk-column-STATUS']")
+    Exe_icon = browser.find_elements(by=By.CSS_SELECTOR, value="td[class ~= 'cdk-column-EXECUTION']")
     for i in range(len(Status)):
         phase_status = Status[i].get_attribute('textContent')
         icon_name = Exe_icon[i].find_element(By.TAG_NAME, "mat-icon").get_attribute('data-mat-icon-name')
@@ -27,8 +27,8 @@ def test_IconStatus(browser):
         Common(browser).eleclick(switch)
     time.sleep(5)
     browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='consolidated']").click()
-    Con_Status = browser.find_elements(By.CSS_SELECTOR, "td[class ~= 'cdk-column-STATUS']")
-    Con_Exe_icon = browser.find_elements(By.CSS_SELECTOR, "td[class ~= 'cdk-column-EXECUTION']")
+    Con_Status = browser.find_elements(by=By.CSS_SELECTOR, value="td[class ~= 'cdk-column-STATUS']")
+    Con_Exe_icon = browser.find_elements(by=By.CSS_SELECTOR, value="td[class ~= 'cdk-column-EXECUTION']")
     for j in range(len(Con_Status)):
         phase_status = Status[j].get_attribute('textContent')
         icon_name = Con_Exe_icon[j].find_element(By.TAG_NAME, "mat-icon").get_attribute('data-mat-icon-name')

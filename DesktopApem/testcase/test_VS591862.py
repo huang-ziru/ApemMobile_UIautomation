@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 import pytest
 def test_columns(browser):
     time.sleep(3)
-    track = browser.find_elements(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='double_arrow']")
+    track = browser.find_elements(by=By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='double_arrow']")
     Common(browser).eleclick(track[0])
     time.sleep(3)
     # hover on and show 'Visible Columns'
@@ -18,14 +18,14 @@ def test_columns(browser):
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\visible_column(track).png")
     assert 'Visible Columns' == hover_text
     # check the visible columns list
-    browser.find_element(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='visible_column']").click()
+    browser.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='visible_column']").click()
     all_list_option = browser.find_elements(By.XPATH, "//*[@id='colselectpanel']/mat-list-option")
-    hide_list_option = browser.find_elements(By.CSS_SELECTOR, "mat-list-option[class ~= 'hide']")
+    hide_list_option = browser.find_elements(by=By.CSS_SELECTOR, value="mat-list-option[class ~= 'hide']")
     for hide_option in hide_list_option:
         all_list_option.remove(hide_option)
     columns_list = []
     for list_option in all_list_option:
-        option_text = list_option.find_element(By.CSS_SELECTOR, "div.mat-list-text").get_attribute('textContent')
+        option_text = list_option.find_element(By.CSS_SELECTOR, value="div.mat-list-text").get_attribute('textContent')
         columns_list.append("check" + option_text.strip())
         # Check default columns are not allowed to hide and are not in this list
         assert option_text not in ("No.", "Phase", "Status")
@@ -62,15 +62,15 @@ def test_colums_Con(browser):
            Common(browser).eleclick(switch)
     time.sleep(5)
     browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='consolidated']").click()
-    browser.find_element(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='visible_column']").click()
+    browser.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='visible_column']").click()
     time.sleep(5)
     all_list_option = browser.find_elements(By.XPATH, "//*[@id='colselectpanel']/mat-list-option")
-    hide_list_option = browser.find_elements(By.CSS_SELECTOR, "mat-list-option[class ~= 'hide']")
+    hide_list_option = browser.find_elements(by=By.CSS_SELECTOR, value="mat-list-option[class ~= 'hide']")
     for hide_option in hide_list_option:
         all_list_option.remove(hide_option)
     columns_list = []
     for list_option in all_list_option:
-        option_text = list_option.find_element(By.CSS_SELECTOR, "div.mat-list-text").get_attribute('textContent')
+        option_text = list_option.find_element(By.CSS_SELECTOR, value="div.mat-list-text").get_attribute('textContent')
         columns_list.append("check" + option_text.strip())
     time.sleep(3)
     back = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")

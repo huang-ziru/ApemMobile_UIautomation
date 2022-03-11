@@ -32,7 +32,7 @@ def test_change_excute():
     time.sleep(2)
     phase_list = new_driver.find_elements(By.XPATH, "//div/a")
     phase_path = "//div[@class='phase-name-text' and text()=\'" + phase_name + "\']/../../.."
-    phase_ele = new_driver.find_element(By.XPATH, phase_path).find_element(By.CSS_SELECTOR, "td[class ~= 'cdk-column-STATUS']")
+    phase_ele = new_driver.find_element(By.XPATH, phase_path).find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-STATUS']")
     phase_state = phase_ele.get_attribute('textContent')
     Common(new_driver).eleclick(phase_list[1].find_element(By.TAG_NAME, "mat-icon"))
     time.sleep(5)

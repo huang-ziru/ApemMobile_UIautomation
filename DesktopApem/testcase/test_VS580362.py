@@ -10,7 +10,7 @@ def test_help(browser):
     else:
         # current windows handle
         mainWindow = browser.current_window_handle
-        browser.find_element(By.CSS_SELECTOR, "mat-icon[svgicon='help']").click()
+        browser.find_element(By.CSS_SELECTOR, value="mat-icon[svgicon='help']").click()
         # all windows handles
         handles = browser.window_handles
         help_handle = None

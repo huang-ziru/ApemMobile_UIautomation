@@ -16,7 +16,8 @@ class MainPage(BasePage):
             return False
         # the existence of an element is judged by its length
     def is_element_showed(self, css):
-        lenth = self.driver.find_elements(By.CSS_SELECTOR, css_selector=css)
+        # lenth = self.driver.find_elements_by_css_selector(css)
+        lenth = self.driver.find_elements(by=By.CSS_SELECTOR, value=css)
         if len(lenth) == 0:
             return False
         else:

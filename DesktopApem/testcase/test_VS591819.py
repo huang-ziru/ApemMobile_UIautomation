@@ -4,6 +4,7 @@ import time
 from logging import Logger
 import pytest
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.color import Color
 from framework.common import Common
 from selenium.webdriver.common.by import By
@@ -31,7 +32,8 @@ class Testtitle_bar():
         config.read(path)
         browser_name = config.get('Browser', 'browser')
         if browser_name == 'Chrome':
-            self.driver = webdriver.Chrome(r'..\framework\chromedriver.exe')
+            s = Service(r'..\framework\chromedriver.exe')
+            self.driver = webdriver.Chrome(service=s)
             self.driver.maximize_window()
         elif browser_name == 'Edge':
             self.driver = webdriver.Edge(r'..\framework\msedgedriver.exe')

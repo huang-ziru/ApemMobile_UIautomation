@@ -9,7 +9,7 @@ def test_layout(browser):
     except:
         print('Fail:', browser.current_url)
     else:
-        browser.find_element(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='desktop_switch']").click()
+        browser.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='desktop_switch']").click()
         time.sleep(3)
         browser.find_element(By.XPATH, "//button[@role='menuitem'][1]").click()
         time.sleep(1)
@@ -22,7 +22,7 @@ def test_layout(browser):
         except:
             print('Switch failed:', browser.find_element(By.XPATH, "//div[@class='icon'][2]/mat-icon").get_attribute('data-mat-icon-name'))
         else:
-            browser.find_element(By.CSS_SELECTOR, "mat-icon[data-mat-icon-name='tablet_switch']").click()
+            browser.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='tablet_switch']").click()
             time.sleep(3)
             browser.find_element(By.XPATH, "//button[@role='menuitem'][2]").click()
             time.sleep(1)

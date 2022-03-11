@@ -38,7 +38,8 @@ class Testvisiblecols():
             if browser.find_element(By.ID, id).get_attribute('aria-selected') == 'true':
                 browser.find_element(By.XPATH, path).click()
             time.sleep(1)
-        browser.find_element(By.XPATH, "/html/body/div[2]/div[1]").click()
+        t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+        browser.execute_script("arguments[0].click();", t_element)
         time.sleep(5)
         for id in cancelcols:
             headerid = "header" + id[5::]

@@ -2,9 +2,6 @@
 import pytest
 from framework.basefunc import MainPage
 class Testtitle_bar():
-    def test_loading(self, browser):
-        assert MainPage(browser).is_element_showed(css="app-loading.loading") is True
-
     def test_userinfo(self, browser):
         assert MainPage(browser).is_element_showed(css="mat-icon[svgicon='account']") is True
 
