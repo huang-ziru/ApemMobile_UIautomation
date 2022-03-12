@@ -72,15 +72,7 @@ for testcase in testcases:
         casepoint.setAttribute('result', 'passed')
         casepoint.setAttribute('case_id', case_id)
         casepoint.setAttribute('case_name', casename)
-        if case_id != 'test_VS580300_520_352':
-            vsts_id = 'VSTS' + re.sub(r'\D', "", case_id)
-        else:
-            if casename == 'test_loginok' or casename == 'test_login_ui':
-                vsts_id = 'VSTS580300'
-            elif casename == 'test_Denied':
-                vsts_id = 'VSTS580352'
-            else:
-                vsts_id = 'VSTS580320'
+        vsts_id = 'VSTS' + re.sub(r'\D', "", case_id)
         casepoint.setAttribute('VSTS_id', vsts_id)
         testresult.appendChild(casepoint)
         testsuite.appendChild(testresult)
