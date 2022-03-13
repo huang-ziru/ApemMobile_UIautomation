@@ -53,12 +53,6 @@ def test_loginok():
 # login with username and password without domain name
 def test_nodomain():
     assert "WinNTUserNoDomain" in login('hahahha', 'hdhdhhdhd', 'nodomain')
-# login with invalid username and password
-def test_Invalid():
-    assert "Invalid username or password. Please re-enter domain\\username and password." in login('jhh\\hahahha', 'hdhdhhdhd','580320')
-# login with username and password without access
-def test_Denied():
-    assert "You do not have permission to login." in login('corp\\qaone', 'Aspen111','580352')
 
 def test_login_ui():
     global driver
