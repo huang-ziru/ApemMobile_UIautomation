@@ -25,6 +25,7 @@ def test_ParaPage(browser):
     browser.find_element(By.XPATH, "//span[text()=' OK ']/..").click()
     assert MainPage(browser).is_element_showed("#audit-dialog") is True
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\changePara1.png")
+    browser.find_element(By.XPATH, "//*[@id='audit-dialog']/div/div[2]/mat-form-field/div/div/div/textarea").clear()
     browser.find_element(By.XPATH, "//*[@id='audit-dialog']/div/div[2]/mat-form-field/div/div/div/textarea").send_keys('for test')
     browser.find_element(By.XPATH, "//span[text()='OK']/..").click()
     time.sleep(2)
@@ -43,7 +44,10 @@ def test_ParaPage(browser):
     # Will go back to the current Parameters Page and continue editing.
     assert 'parameters' in browser.current_url
     # click 'OK' and check the check box,then click 'ok'
+    time.sleep(3)
     browser.find_element(By.XPATH, "//span[text()=' OK ']/..").click()
+    time.sleep(5)
+    browser.find_element(By.XPATH, "//*[@id='audit-dialog']/div/div[2]/mat-form-field/div/div/div/textarea").clear()
     browser.find_element(By.XPATH, "//*[@id='audit-dialog']/div/div[2]/mat-form-field/div/div/div/textarea").send_keys('for test')
     time.sleep(2)
     check_box = browser.find_element(By.XPATH, "//*[@id='audit-dialog']/div/div[2]/mat-checkbox/label/div/input")

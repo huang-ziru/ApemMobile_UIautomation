@@ -8,13 +8,13 @@ def test_Phase_excute(browser):
     time.sleep(5)
     order_ele = browser.find_element(By.XPATH, "//div[contains(text(),'START')]/../..")
     order_ele.find_elements(By.TAG_NAME, "td")[-1].click()
-    time.sleep(2)
+    time.sleep(6)
     # phase_list = browser.find_elements(By.XPATH, "//div/a")
     # phase_name = phase_list[1].find_element(By.XPATH, "./../../../../../td[2]/div/div").get_attribute('textContent')
     phase_list = browser.find_element(By.XPATH, "//div/a")
     phase_name = phase_list.find_element(By.XPATH, "./../../../../../td[2]/div/div").get_attribute('textContent')
     Common(browser).eleclick(phase_list.find_element(By.TAG_NAME, "mat-icon"))
-    time.sleep(5)
+    time.sleep(75)
     # cancel = browser.find_element(By.XPATH, "//*[@id='screen']/app-aebrs-button[2]/button")
     cancel = browser.find_element(By.XPATH, "// *[ @ id = 'Main.CancelButton0']")
     # click "Cancel" button
@@ -28,21 +28,23 @@ def test_Phase_excute(browser):
     assert 'execution' in browser.current_url
     # Click 'Yes' then the page goes to phase list or PFC which you click in.
     Common(browser).eleclick(cancel)
-    time.sleep(2)
+    time.sleep(10)
     browser.find_element(By.XPATH, "//*[@id='dialog']/div/div[3]/button[1]").click()
-    time.sleep(5)
+    time.sleep(30)
+    browser.refresh()
     assert 'tracking' in browser.current_url
     # Click "OK" button
     # phase_list1 = browser.find_elements(By.XPATH, "//div/a")
     # Common(browser).eleclick(phase_list1[1].find_element(By.TAG_NAME, "mat-icon"))
     phase_list = browser.find_element(By.XPATH, "//div/a")
     phase_name = phase_list.find_element(By.XPATH, "./../../../../../td[2]/div/div").get_attribute('textContent')
-    time.sleep(5)
+    time.sleep(30)
     Common(browser).eleclick(phase_list.find_element(By.TAG_NAME, "mat-icon"))
-    time.sleep(5)
+    time.sleep(70)
     ok = browser.find_element(By.XPATH, "//*[@id='Main.OkButton0']")
     Common(browser).eleclick(ok)
-    time.sleep(5)
+    time.sleep(30)
+    browser.refresh()
     # The page goes to phase list or PFC which you click in, and the phase state is "Finished".
     assert 'tracking' in browser.current_url
     phase_name_list = browser.find_elements(By.XPATH, "//div[@class='phase-name-text']")

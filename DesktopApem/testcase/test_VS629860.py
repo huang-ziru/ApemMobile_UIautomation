@@ -14,16 +14,16 @@ def test_change_excute():
     phase_name = phase_list[1].find_element(By.XPATH, "./../../../../../td[2]/div/div").get_attribute('textContent')
     Common(browser).eleclick(phase_list[1].find_element(By.TAG_NAME, "mat-icon"))
     time.sleep(5)
-    change_ele = browser.find_element(By.XPATH, "//*[@id='MAIN.Table00_2']")
+    change_ele = browser.find_element(By.XPATH, "//*[@id='MAIN.Table10_2']")
     before_value = change_ele.get_attribute('value')
     Common(browser).eleclick(change_ele)
     time.sleep(1)
-    Common(browser).eleclick(browser.find_element(By.XPATH, "//*[@id='MAIN.Table00_2']"))
+    Common(browser).eleclick(browser.find_element(By.XPATH, "//*[@id='MAIN.Table10_2']"))
     time.sleep(2)
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\test_changing.png")
     browser.find_element(By.XPATH, "//div[@class='cdk-overlay-pane']/div/mat-option[1]").click()
     time.sleep(1)
-    after_value = browser.find_element(By.XPATH, "//*[@id='MAIN.Table00_2']").get_attribute('value')
+    after_value = browser.find_element(By.XPATH, "//*[@id='MAIN.Table10_2']").get_attribute('value')
     browser.close()
     new_driver = login()
     time.sleep(2)
@@ -37,7 +37,7 @@ def test_change_excute():
     Common(new_driver).eleclick(phase_list[1].find_element(By.TAG_NAME, "mat-icon"))
     time.sleep(5)
     new_driver.get_screenshot_as_file(r"..\\report\\result_picture\\test_changAfter.png")
-    current_value = new_driver.find_element(By.XPATH, "//*[@id='MAIN.Table00_2']").get_attribute('value')
+    current_value = new_driver.find_element(By.XPATH, "//*[@id='MAIN.Table10_2']").get_attribute('value')
     # Check the changes are shown up.
     assert current_value != before_value
     assert current_value == after_value

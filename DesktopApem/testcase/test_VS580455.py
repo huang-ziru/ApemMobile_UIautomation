@@ -3,6 +3,8 @@ import time
 import pytest
 import re, random
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
 from framework.common import Common
 from framework.baseFunc_table import func_for_table
 from framework.Login import prepare
@@ -28,6 +30,7 @@ class Test_filter():
                 time.sleep(2)
                 browser.find_element(By.XPATH, "//input[@placeholder='End date']").click()
                 browser.find_element(By.XPATH, "//input[@placeholder='End date']").send_keys('4/12/2020')
+                browser.find_element(By.XPATH, "//input[@placeholder='End date']").send_keys(Keys.ENTER)
                 body_element=browser.find_element(By.XPATH, "/html/body/div[2]")
                 browser.execute_script("arguments[0].click();", body_element)
                 # browser.find_element(By.XPATH, "/html/body/div[2]").click()
