@@ -16,7 +16,7 @@ def dialog_text(browser,state):
     browser.find_element(By.XPATH, "//*[@id='dialog']/div/div[1]/form/mat-form-field[3]/div/div[1]/div[1]/input").send_keys(password)
     button = "//span[contains(text(),\'"+state+"\')]/.."
     browser.find_element(By.XPATH, button).click()
-    time.sleep(10)
+    time.sleep(60)
     return browser.current_url
 def test_Toolbar(browser):
     time.sleep(4)
