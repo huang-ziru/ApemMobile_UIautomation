@@ -38,7 +38,7 @@ def test_Check_structure(browser):
     No_color = browser.find_element(By.XPATH, "//input[@aria-checked='false']/..").value_of_css_property('background-color')
     # Check the grey stands for No, the blue stands for Yes
     assert Yes_color == 'rgba(38, 152, 251, 0.54)'
-    assert No_color == 'rgba(0, 0, 0, 0.38)'
+    assert No_color == 'rgba(0, 0, 0, 0)'
     Valuelist = browser.find_elements(By.XPATH, "//div[@class='mat-slide-toggle-thumb']/../../../../../../span")
     browser.find_element(By.XPATH, "//span/mat-icon[text()='add']").click()
     time.sleep(3)

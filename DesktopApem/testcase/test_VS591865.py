@@ -6,7 +6,7 @@ import pytest
 from selenium.webdriver.common.by import By
 def test_sorttrack(browser):
     time.sleep(3)
-    columns_list = ['checkAuto.', 'checkAssigned WkSt.', 'checkUser Status', 'checkExecuting WkSt.', 'checkExecuting User', 'checkRepetition Count', 'checkUser RUDO', 'checkWkSt. RUDO']
+    columns_list = ['checkAuto.', 'checkAssigned WkSt.', 'checkExecuting WkSt.', 'checkExecuting User', 'checkRepetition Count', 'checkUser RUDO', 'checkWkSt. RUDO']
     track = browser.find_elements(by=By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='double_arrow']")
     Common(browser).eleclick(track[0])
     time.sleep(3)

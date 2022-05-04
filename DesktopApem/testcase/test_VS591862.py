@@ -45,7 +45,7 @@ def test_columns(browser):
     Func(browser).cancelecols(columns_list)
     # it displays default setting(No., Phase, Status ,icon)
     default_head = browser.find_elements(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/thead/tr/th")
-    assert len(default_head) == 4
+    assert len(default_head) == 3
     for i in range(len(default_head)):
         if MainPage(default_head[i]).is_element_showed("div") is False:
             assert "".join(default_head[i].get_attribute('textContent').split()) == ""
@@ -59,7 +59,7 @@ def test_colums_Con(browser):
     browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='settings']").click()
     switch = browser.find_element(By.XPATH, "//div[@class='show-navigation'][5]/div/div[2]/mat-slide-toggle")
     if switch.find_element(By.TAG_NAME, 'input').get_attribute('aria-checked') == 'false':
-           Common(browser).eleclick(switch)
+        Common(browser).eleclick(switch)
     time.sleep(5)
     browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='consolidated']").click()
     browser.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='visible_column']").click()

@@ -10,6 +10,8 @@ def test_Breadcrumb(browser):
     order_name = browser.find_element(By.XPATH, "//div[contains(text(),'START')]").text
     order_ele.find_elements(By.TAG_NAME, "td")[-1].click()
     time.sleep(5)
+    colums_list = Common(browser).get_tablehead()
+    print(colums_list)
     phase_list = browser.find_elements(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[12]/div/div/div/a/mat-icon")
     select_phase = phase_list[0].find_element(By.XPATH, "./../../../../../../td[2]/div[1]/div").text
     Common(browser).eleclick(phase_list[0])

@@ -10,7 +10,7 @@ def test_Queue(browser):
     order_ele = browser.find_element(By.XPATH, "//div[contains(text(),'2BPLS')]/../..")
     order_ele.find_elements(By.TAG_NAME, "td")[-1].click()
     time.sleep(5)
-    phase_list = browser.find_elements(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[12]/div/div/div/a/mat-icon")
+    phase_list = browser.find_elements(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[11]/div/div/div/a/mat-icon")
     Common(browser).eleclick(phase_list[0])
     time.sleep(5)
     # Check the queue on execution page is 0 on the right of top page

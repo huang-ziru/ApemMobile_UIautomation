@@ -30,10 +30,18 @@ def test_ParaPage(browser):
     # go to paramter page from tracking page
     browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='tracking']").click()
     time.sleep(2)
+    browser.find_element(By.XPATH, "//*[@id='selectmenu']").click()
+    time.sleep(2)
+    if browser.find_element(By.ID, 'checkPhase').get_attribute('aria-selected') == 'false':
+        browser.find_element(By.XPATH, "//*[@id='checkPhase']/div/mat-pseudo-checkbox").click()
+    # browser.find_element(By.XPATH, "//*[@id='checkPhase']/div/mat-pseudo-checkbox").click()
+        element1 = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+        browser.execute_script("arguments[0].click();", element1)
     browser.find_element(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr[1]/td[2]/div[1]/div").click()
     time.sleep(2)
     browser.find_element(By.XPATH, "//span[contains(text(),'TEMP')]/../mat-form-field/div/div/div/input").send_keys('66')
     time.sleep(2)
+
     # click the order name
     browser.find_element(By.XPATH, "//a[@class='order-link']").click()
     # A dialog pops up to indicate whether stay this page or not
