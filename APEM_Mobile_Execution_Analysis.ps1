@@ -1,13 +1,13 @@
 <#-------------------This script is uesed to execute pytest and analysis test result---------------------------#>
 <#---------------------------------Automation Engineer: Will.You-----------------------------------------------#>
 <#-----------------\---------------------------Jul.21 2021------------------------------------------------------#>
-$RootPath ="C:\P4\ApemMobile_UIautomation\"
+$RootPath ="C:\P4\UIautomation\"
 #$Newpath = Join-Path -Path $Newpath -ChildPath "DesktopApem"
 $executonfile = Join-Path -Path $RootPath -ChildPath "Executed_pytest.ps1"
 $ReportPath = Join-Path -Path $RootPath -ChildPath "DesktopApem\report"
 $ResultFile = Join-Path -Path $ReportPath -ChildPath "test.xml"
 $starttime = Get-Date
-$Version = "V12.2.1"
+$Version = "V14.0"
 $blueprint = "APEM"
 $EmailSubject = "QE - Cloud - $Version - $blueprint Automated Test report for $vision"
  
