@@ -19,7 +19,7 @@ def test_ParaPage(browser):
     param_input1 = open_paramPage(browser)
     before_change = param_input1.get_attribute("value")
     param_input1.clear()
-    param_input1.send_keys('111')
+    param_input1.send_keys('999')
     time.sleep(2)
     # click 'OK' and Uncheck the check box,then click 'ok'
     browser.find_element(By.XPATH, "//span[text()=' OK ']/..").click()
@@ -33,7 +33,7 @@ def test_ParaPage(browser):
     after_change = param_input2.get_attribute("value")
     browser.get_screenshot_as_file(r"..\\report\\result_picture\\changePara2.png")
     assert after_change != before_change
-    assert after_change == '111'
+    assert after_change == '999'
     param_input2.clear()
     param_input2.send_keys('222')
     time.sleep(2)

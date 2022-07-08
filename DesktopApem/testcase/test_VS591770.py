@@ -15,7 +15,7 @@ class Testtitle_bar():
     def test_select(self, browser):
         setting = browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='settings']")
         Common(browser).eleclick(setting)
-        browser.find_element(By.XPATH, "/html/body/app-root/div/app-settings/div/div[2]/mat-form-field/div/div[1]/div/input").send_keys("test")
+        browser.find_element(By.XPATH, "/html/body/app-root/div/app-settings/div/div[3]/mat-form-field/div/div[1]/div[1]/input").send_keys("test")
         checkbox = browser.find_element(By.XPATH, "//input[@type='checkbox']")
         if checkbox.get_attribute('aria-checked') == 'false':
             Common(browser).eleclick(checkbox)
@@ -33,7 +33,7 @@ class Testtitle_bar():
         # restore data
         setting = browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='settings']")
         Common(browser).eleclick(setting)
-        browser.find_element(By.XPATH, "/html/body/app-root/div/app-settings/div/div[2]/mat-form-field/div/div[1]/div/input").send_keys("test")
+        browser.find_element(By.XPATH, "/html/body/app-root/div/app-settings/div/div[3]/mat-form-field/div/div[1]/div[1]/input").send_keys("test")
         checkbox = browser.find_element(By.XPATH, "//input[@type='checkbox']")
         if checkbox.get_attribute('aria-checked') == 'true':
             Common(browser).eleclick(checkbox)
@@ -41,7 +41,7 @@ class Testtitle_bar():
     def test_no_select(self, browser):
         setting = browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='settings']")
         Common(browser).eleclick(setting)
-        browser.find_element(By.XPATH, "/html/body/app-root/div/app-settings/div/div[2]/mat-form-field/div/div[1]/div/input").send_keys("test")
+        browser.find_element(By.XPATH, "/html/body/app-root/div/app-settings/div/div[3]/mat-form-field/div/div[1]/div[1]/input").send_keys("test")
         checkbox = browser.find_element(By.XPATH, "//input[@type='checkbox']")
         if checkbox.get_attribute('aria-checked') == 'true':
             Common(browser).eleclick(checkbox)

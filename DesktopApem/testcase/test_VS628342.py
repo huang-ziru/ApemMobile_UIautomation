@@ -24,7 +24,7 @@ def test_Toolbar(browser):
     order_ele.find_elements(By.TAG_NAME, "td")[-1].click()
     time.sleep(5)
     phase_ele = browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='phase_state_executing']")
-    phase_name = phase_ele.find_element(By.XPATH, "./../../../../../td[2]/div[1]/div").text
+    phase_name = browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='phase_state_executing']/../../../../../td[2]/div[1]/div").text
     Common(browser).eleclick(phase_ele)
     time.sleep(5)
     # Check the initial position is in the top center
