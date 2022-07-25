@@ -38,6 +38,15 @@ def test_Breadcrumb(browser):
             phase_ele = browser.find_element(By.XPATH, state_xpath).find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-STATUS']")
             phase_state = phase_ele.get_attribute('textContent')
             assert phase_state == 'Executing'
+            # restore data
+            browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='phase_state_executing']").click()
+            time.sleep(6)
+            browser.find_element(By.XPATH, "//button[@id='Main.CancelButton0']").click()
+            time.sleep(2)
+            browser.find_element(By.XPATH, "//span[text()=' Yes ']/..").click()
+            time.sleep(10)
+            now_phase_state = browser.find_element(By.XPATH, state_xpath).text
+            assert now_phase_state == 'Ready'
         else:
             count = count + 1
 

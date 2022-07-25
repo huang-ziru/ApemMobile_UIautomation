@@ -22,8 +22,8 @@ class prepare(BasePage):
         time.sleep(2)
         # show all columns
         box = ['checkProcess Area', 'checkRep.', 'checkArticle', 'checkPO ', 'checkPO Step', 'checkEnd Date',
-               'checkProcess Type', 'checkOrigin', 'checkUser Status', 'checkBatch Area', 'checkCR Modified',
-               'checkRUDO (edit planned)', 'checkRUDO (edit active)', 'checkVer.', 'checkFrom', 'checkSite']
+               'checkProcess Type', 'checkOrigin', 'checkBatch Area', 'checkCR Modified', 'checkRUDO (edit planned)',
+               'checkRUDO (edit active)', 'checkVer.', 'checkFrom', 'checkSite']
         assert 'Order / Batch Code' not in box
         self.driver.find_element(By.XPATH, "//*[@id='selectmenu']").click()
         for id in box:
@@ -41,16 +41,16 @@ class prepare(BasePage):
 def login():
     global driver
     config = configparser.ConfigParser()
-    path = r'..\framework\config.ini'
+    path = r'C:\\p4\\UIautomation\\DesktopApem\\framework\\config.ini'
     # open the config.ini and get the data
     config.read(path)
     browser_name = config.get('Browser', 'browser')
     if browser_name == 'Chrome':
-        s = Service(r'..\framework\chromedriver.exe')
+        s = Service(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\chromedriver.exe')
         driver = webdriver.Chrome(service=s)
         driver.maximize_window()
     elif browser_name == 'Edge':
-        driver = webdriver.Edge(r'..\framework\msedgedriver.exe')
+        driver = webdriver.Edge(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\msedgedriver.exe')
         driver.maximize_window()
     else:
         Logger.error('Do not support the Browser')

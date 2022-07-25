@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 def dialog_text(browser,state):
     config = configparser.ConfigParser()
     dirname = os.path.dirname(os.path.abspath(__file__))
-    path = dirname + '/../framework/config.ini'
+    path = 'C:\\p4\\UIautomation\\DesktopApem\\framework\\config.ini'
     # open the config.ini and get the data
     config.read(path)
     password = config.get('login', 'password')
@@ -23,9 +23,9 @@ def test_Toolbar(browser):
     order_ele = browser.find_element(By.XPATH, "//div[contains(text(),'START')]/../..")
     order_ele.find_elements(By.TAG_NAME, "td")[-1].click()
     time.sleep(5)
-    phase_ele = browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='phase_state_executing']")
-    phase_name = browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='phase_state_executing']/../../../../../td[2]/div[1]/div").text
-    Common(browser).eleclick(phase_ele)
+    phase_list = browser.find_elements(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[11]/div/div/div/a/mat-icon")
+    phase_name = phase_list[0].find_element(By.XPATH, "./../../../../../../td[2]/div[1]/div").text
+    phase_list[0].click()
     time.sleep(5)
     # Check the initial position is in the top center
     toolbar = browser.find_element(By.XPATH, "//*[@id='toolbar']/div")

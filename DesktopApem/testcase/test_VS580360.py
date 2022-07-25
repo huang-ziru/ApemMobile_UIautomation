@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 
 config = configparser.ConfigParser()
 dirname = os.path.dirname(os.path.abspath(__file__))
-path = dirname + '/../framework/config.ini'
+path = 'C:\\p4\\UIautomation\\DesktopApem\\framework\\config.ini'
 config.read(path)
 workstation = config.get('login', 'workstation')
 username = config.get('login', 'username')

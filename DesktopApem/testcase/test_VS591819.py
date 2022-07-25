@@ -28,15 +28,15 @@ class Testtitle_bar():
     def test_diffuser(self):
         config = configparser.ConfigParser()
         dirname = os.path.dirname(os.path.abspath(__file__))
-        path = dirname + '/../framework/config.ini'
+        path = 'C:\\p4\\UIautomation\\DesktopApem\\framework\\config.ini'
         config.read(path)
         browser_name = config.get('Browser', 'browser')
         if browser_name == 'Chrome':
-            s = Service(r'..\framework\chromedriver.exe')
+            s = Service(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\chromedriver.exe')
             self.driver = webdriver.Chrome(service=s)
             self.driver.maximize_window()
         elif browser_name == 'Edge':
-            self.driver = webdriver.Edge(r'..\framework\msedgedriver.exe')
+            self.driver = webdriver.Edge(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\msedgedriver.exe')
             self.driver.maximize_window()
         else:
             Logger.error('Do not support the Browser')

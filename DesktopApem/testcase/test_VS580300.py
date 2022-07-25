@@ -9,16 +9,16 @@ def login(name, password1, caseID):
     global driver
     config = configparser.ConfigParser()
     dirname = os.path.dirname(os.path.abspath(__file__))
-    path = dirname + '/../framework/config.ini'
+    path = 'C:\\p4\\UIautomation\\DesktopApem\\framework\\config.ini'
     # open the config.ini and get the data
     config.read(path)
     browser_name = config.get('Browser', 'browser')
     if browser_name == 'Chrome':
-        s = Service(r'..\framework\chromedriver.exe')
+        s = Service(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\chromedriver.exe')
         driver = webdriver.Chrome(service=s)
         driver.maximize_window()
     elif browser_name == 'Edge':
-        driver = webdriver.Edge(r'..\framework\msedgedriver.exe')
+        driver = webdriver.Edge(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\msedgedriver.exe')
         driver.maximize_window()
     else:
         Logger.error('Do not support the Browser')
@@ -57,17 +57,17 @@ def test_nodomain():
 def test_login_ui():
     global driver
     config = configparser.ConfigParser()
-    dirname = os.path.dirname(os.path.abspath(__file__))
-    path = dirname + '/../framework/config.ini'
+    # dirname = os.path.dirname(os.path.abspath(__file__))
+    # path = 'C:\\p4\\UIautomation\\DesktopApem\\framework\\config.ini'
     # open the config.ini and get the data
-    config.read(path)
+    config.read('C:\\p4\\UIautomation\\DesktopApem\\framework\\config.ini', 'utf-8')
     browser_name = config.get('Browser', 'browser')
     if browser_name == 'Chrome':
-        s = Service(r'..\framework\chromedriver.exe')
+        s = Service(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\chromedriver.exe')
         driver = webdriver.Chrome(service=s)
         driver.maximize_window()
     elif browser_name == 'Edge':
-        driver = webdriver.Edge(r'..\framework\msedgedriver.exe')
+        driver = webdriver.Edge(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\msedgedriver.exe')
         driver.maximize_window()
     else:
         Logger.error('Do not support the Browser')

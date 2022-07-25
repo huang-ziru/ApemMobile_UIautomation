@@ -16,6 +16,7 @@ def test_fullscreen(browser):
         time.sleep(2)
         #get the windows size
         size = browser.get_window_size()
+        print(size)
         # get the resolution of the machine that set in the config.ini
         config = configparser.ConfigParser()
         path = r'../framework/config.ini'
