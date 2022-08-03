@@ -12,7 +12,7 @@ def conf_xml():
     for init in root.findall('servlet'):
         for value in init.findall('init-param'):
             count = count + 1
-            if count == 4:
+            if count == 5:
                 value[1].text = 'false'
             conf.append(value[1].text)
     tree.write(xml, encoding='utf-8')
