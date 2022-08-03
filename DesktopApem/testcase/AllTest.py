@@ -52,7 +52,7 @@ if os.path.exists(filename) is True:
         if failure != []:
             message = failure[0].getAttribute('message')
             casepoint = doc.createElement('testcase')
-            casepoint.setAttribute('result', 'failed')
+            casepoint.setAttribute('result', 'Failed')
             if case_id not in failed_caseid:
                 # print(case_id)
                 failed_caseid.append(case_id)
@@ -81,7 +81,7 @@ for testcase in testcases:
                 casename = caseDict['caseName']
                 if casename not in CaseNames_fail:
                     casepoint = doc.createElement('testcase')
-                    casepoint.setAttribute('result', 'passed')
+                    casepoint.setAttribute('result', 'Passed')
                     casepoint.setAttribute('case_id', case_id)
                     casepoint.setAttribute('case_name', casename)
                     vsts_id = 'VSTS' + re.sub(r'\D', "", case_id)
@@ -98,9 +98,9 @@ num_passed = len(passed_caseid)
 num_failed = len(failed_caseid)
 total_test = num_passed + num_failed
 testsuite.setAttribute('errors', error)
-testsuite.setAttribute('failed', str(num_failed))
+testsuite.setAttribute('Failed', str(num_failed))
 testsuite.setAttribute('skipped', skipped)
-testsuite.setAttribute('passed', str(num_passed))
+testsuite.setAttribute('Passed', str(num_passed))
 testsuite.setAttribute('total', str(total_test))
 testsuite.setAttribute('time', time)
 
