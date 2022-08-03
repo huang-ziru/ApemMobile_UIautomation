@@ -9,7 +9,7 @@ $ResultFile = Join-Path -Path $ReportPath -ChildPath "test.xml"
 $starttime = Get-Date
 $Version = "V14.0"
 $blueprint = "APEM"
-$EmailSubject = "QE - Cloud - $Version - $blueprint Automated Test report for $vision"
+$EmailSubject = "QE - Cloud - $Version - $blueprint Automated Test report for MVT"
  
 function Convert-Timespan($timespan)
 {
@@ -26,20 +26,20 @@ function Convert-Timespan($timespan)
 }
 Function Run-MSTestResultAnalysis($sResult,$node)
 {
-    function newResultObj($Id,$casename,$Result,$Detail)
+    function newResultObj($Id,$Description,$Result,$Detail)
     {
         $obj=New-Object PSObject
-        $Obj|Add-Member -MemberType NoteProperty -Name "Id" -Value $Id
-        $Obj|Add-Member -MemberType NoteProperty -Name "casename" -Value $casename
+        $Obj|Add-Member -MemberType NoteProperty -Name "id" -Value $id
+        $Obj|Add-Member -MemberType NoteProperty -Name "Description" -Value $Description
         $Obj|Add-Member -MemberType NoteProperty -Name "Result" -Value $Result
         $Obj|Add-Member -MemberType NoteProperty -Name "Detail" -Value $Detail
         
         return $Obj
     }
-   $Id= $sResult.SelectNodes($node).VSTS_id
-   $casename=$sResult.SelectNodes($node).case_name
+   $id= $sResult.SelectNodes($node).VSTS_id
+   $Description=$sResult.SelectNodes($node).case_name
    $result = $sResult.SelectNodes($node).result
-   if($result -eq "passed")
+   if($result -eq "Passed")
     {
     $Detail = ""
     }
@@ -48,7 +48,7 @@ Function Run-MSTestResultAnalysis($sResult,$node)
     $Detail = $sResult.SelectNodes($node).message
      }
  
-    $obj=newResultObj -Id $Id -casename $casename -Result $result -Detail $Detail
+    $obj=newResultObj -id $id -Description $Description -Result $result -Detail $Detail
     return $obj
  }
 
@@ -89,20 +89,7 @@ Function Run-MSTestResultAnalysis($sResult,$node)
 
     Write-host "$($startTime.ToString())"
     write-host "$($endTime.ToString())"
-    $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
-
-    if($medias.Count -gt 0)
-    {
-     $media = $medias[0]
-   
-       }else
-       {
-       $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.iso")
-       if($medias.Count -lt 0)
-       {
-        $media = $medias[0]
-       }else{$media = ""}
-       }
+    
     $strStart = "$($startTime.ToString())"
     $strEnd = "$($endTime.ToString())"
 
@@ -424,14 +411,28 @@ for($i = 1; $i -le $res.testsuites.testsuite.testresult.testcase.Count;$i++ )
 {
 $singlenode = "testsuites/testsuite/testresult/testcase[$i]"
 $rex= Run-MSTestResultAnalysis -sResult $res -node $singlenode
-$rex |Select-Object -Property Id, casename,result,Detail|Export-Csv -Delimiter ","  -Path (Join-Path -Path $RootPath -ChildPath "APEM.csv" ) -Append
+$rex |Select-Object -Property id, Description,result,Detail|Export-Csv -Delimiter ","  -Path (Join-Path -Path "C:\mvt2\mvt" -ChildPath "ExecutionResult.csv" ) -Append
 }
 
 #$rex =  $res.SelectNodes("testsuites/testsuite/testresult/testcase[1]").case_name
 #$testcases = $res.testsuites.testsuite.testresult.testcase
 $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
 
-$html=[string](generateHTMLfromCSV -media null -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path $RootPath -ChildPath "APEM.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
- $attachmentPath=Join-Path -Path $RootPath -ChildPath "APEM.csv" 
+ if($medias.Count -gt 0)
+  {
+    $media = $medias[0]
+   
+       }else
+       {
+       $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.iso")
+       if($medias.Count -lt 0)
+       {
+        $media = $medias[0]
+       }else{$media = ""}
+       }
+
+
+$html=[string](generateHTMLfromCSV -media $media -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path "C:\mvt2\mvt" -ChildPath "ExecutionResult.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
+ $attachmentPath=Join-Path -Path "C:\mvt2\mvt" -ChildPath "ExecutionResult.csv" 
  Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer hqsmtp01.corp.aspentech.com -BodyAsHtml
  Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com"  -Subject $EmailSubject -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml
