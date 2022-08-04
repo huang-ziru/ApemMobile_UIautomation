@@ -39,7 +39,7 @@ Function Run-MSTestResultAnalysis($sResult,$node)
    $id= $sResult.SelectNodes($node).VSTS_id
    $Description=$sResult.SelectNodes($node).case_name
    $result = $sResult.SelectNodes($node).result
-   if($result -eq "Passed")
+   if($result -eq "PASS")
     {
     $Detail = ""
     }
@@ -411,7 +411,7 @@ for($i = 1; $i -le $res.testsuites.testsuite.testresult.testcase.Count;$i++ )
 {
 $singlenode = "testsuites/testsuite/testresult/testcase[$i]"
 $rex= Run-MSTestResultAnalysis -sResult $res -node $singlenode
-$rex |Select-Object -Property id, Description,result,Detail|Export-Csv -Delimiter ","  -Path (Join-Path -Path "C:\mvt2\mvt" -ChildPath "ExecutionResult.csv" ) -Append
+$rex |Select-Object -Property id, Description,result,Detail|Export-Csv -Delimiter ","  -Path (Join-Path -Path "C:\mvt2\mvt" -ChildPath "APEMExecutionResult.csv" ) -Append
 }
 
 #$rex =  $res.SelectNodes("testsuites/testsuite/testresult/testcase[1]").case_name
@@ -425,14 +425,10 @@ $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
        }else
        {
        $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.iso")
-       if($medias.Count -lt 0)
-       {
-        $media = $medias[0]
-       }else{$media = ""}
        }
-
-
-$html=[string](generateHTMLfromCSV -media $media -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path "C:\mvt2\mvt" -ChildPath "ExecutionResult.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
- $attachmentPath=Join-Path -Path "C:\mvt2\mvt" -ChildPath "ExecutionResult.csv" 
+ 
+ 
+$html=[string](generateHTMLfromCSV -media $medias[0] -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path "C:\mvt2\mvt" -ChildPath "APEMExecutionResult.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
+ $attachmentPath=Join-Path -Path "C:\mvt2\mvt" -ChildPath "APEMExecutionResult.csv" 
  Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer hqsmtp01.corp.aspentech.com -BodyAsHtml
  Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com"  -Subject $EmailSubject -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml

@@ -81,7 +81,7 @@ for testcase in testcases:
                 casename = caseDict['caseName']
                 if casename not in CaseNames_fail:
                     casepoint = doc.createElement('testcase')
-                    casepoint.setAttribute('result', 'Passed')
+                    casepoint.setAttribute('result', 'PASS')
                     casepoint.setAttribute('case_id', case_id)
                     casepoint.setAttribute('case_name', casename)
                     vsts_id = 'VSTS' + re.sub(r'\D', "", case_id)
