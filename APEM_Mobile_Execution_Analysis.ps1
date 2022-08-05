@@ -70,8 +70,8 @@ Function Run-MSTestResultAnalysis($sResult,$node)
     if($resultsFile -ne "" -and $resultsFile -ne $null)
     {
         $lsRecord = Import-Csv -Path $resultsFile
-        $passed=([array]($lsRecord|where{$_.result -match "passed"})).length
-        $failed=([array]($lsRecord|where{$_.result -notmatch "passed"})).length
+        $passed=([array]($lsRecord|where{$_.result -match "PASS"})).length
+        $failed=([array]($lsRecord|where{$_.result -notmatch "PASS"})).length
         $lsRecord|select id,headline,result |ConvertTo-Html -Fragment -As Table|Out-String|Out-File .\test.html
 
     }
@@ -373,14 +373,14 @@ Function Run-MSTestResultAnalysis($sResult,$node)
         {
             foreach ($rowEntry in $lsRecord){
                 #write-host $rowEntry.id
-                if($rowEntry.result.tolower() -match "passed"){                
+                if($rowEntry.result.tolower() -match "pass"){                
                 
-                    $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`">"+$rowEntry.id+"</td><td>"+$rowEntry.casename+"</td><td class=`"pass`">"+$rowEntry.result+"</td></tr>"
+                    $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`">"+$rowEntry.id+"</td><td>"+$rowEntry.Description+"</td><td class=`"pass`">"+$rowEntry.result+"</td></tr>"
                 
                 } 
                 elseif($rowEntry.result -eq "failed")
                 {
-                 $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`" style=`"background-color: #FF5050; color: #FFFFFF`">"+$rowEntry.id+"</td><td style=`"background-color: #FF5050`; color: #FFFFFF`">"+$rowEntry.casename+"</td><td class=`"fail`">"+"Analysis required"+"</td></tr>"
+                 $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`" style=`"background-color: #FF5050; color: #FFFFFF`">"+$rowEntry.id+"</td><td style=`"background-color: #FF5050`; color: #FFFFFF`">"+$rowEntry.Description+"</td><td class=`"fail`">"+"Analysis required"+"</td></tr>"
 
                 }
                 else 
