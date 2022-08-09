@@ -373,14 +373,14 @@ Function Run-MSTestResultAnalysis($sResult,$node)
         {
             foreach ($rowEntry in $lsRecord){
                 #write-host $rowEntry.id
-                if($rowEntry.result.tolower() -match "pass"){                
+                if($rowEntry.result.tolower() -match "PASS"){                
                 
-                    $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`">"+$rowEntry.id+"</td><td>"+$rowEntry.Description+"</td><td class=`"pass`">"+$rowEntry.result+"</td></tr>"
+                    $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`">"+$rowEntry.id+"</td><td>"+$rowEntry.casename+"</td><td class=`"pass`">"+$rowEntry.result+"</td></tr>"
                 
                 } 
                 elseif($rowEntry.result -eq "failed")
                 {
-                 $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`" style=`"background-color: #FF5050; color: #FFFFFF`">"+$rowEntry.id+"</td><td style=`"background-color: #FF5050`; color: #FFFFFF`">"+$rowEntry.Description+"</td><td class=`"fail`">"+"Analysis required"+"</td></tr>"
+                 $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`" style=`"background-color: #FF5050; color: #FFFFFF`">"+$rowEntry.id+"</td><td style=`"background-color: #FF5050`; color: #FFFFFF`">"+$rowEntry.casename+"</td><td class=`"fail`">"+"Analysis required"+"</td></tr>"
 
                 }
                 else 
