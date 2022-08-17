@@ -375,17 +375,17 @@ Function Run-MSTestResultAnalysis($sResult,$node)
                 #write-host $rowEntry.id
                 if($rowEntry.result.tolower() -match "PASS"){                
                 
-                    $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`">"+$rowEntry.id+"</td><td>"+$rowEntry.casename+"</td><td class=`"pass`">"+$rowEntry.result+"</td></tr>"
+                    $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`">"+$rowEntry.id+"</td><td>"+$rowEntry.Description+"</td><td class=`"pass`">"+$rowEntry.result+"</td></tr>"
                 
                 } 
                 elseif($rowEntry.result -eq "failed")
                 {
-                 $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`" style=`"background-color: #FF5050; color: #FFFFFF`">"+$rowEntry.id+"</td><td style=`"background-color: #FF5050`; color: #FFFFFF`">"+$rowEntry.casename+"</td><td class=`"fail`">"+"Analysis required"+"</td></tr>"
+                 $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`" style=`"background-color: #FF5050; color: #FFFFFF`">"+$rowEntry.id+"</td><td style=`"background-color: #FF5050`; color: #FFFFFF`">"+$rowEntry.Description+"</td><td class=`"fail`">"+"Analysis required"+"</td></tr>"
 
                 }
                 else 
                 {
-               $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`" style=`"background-color: Gray; color: #FFFFFF`">"+$rowEntry.id+"</td><td style=`"background-color: Gray`; color: #FFFFFF`">"+$rowEntry.casename+"</td><td class=`"NA`">"+"Not in Media Kit"+"</td></tr>"
+               $testCaseDesc = $testCaseDesc + "<tr><td class=`"left`" style=`"background-color: Gray; color: #FFFFFF`">"+$rowEntry.id+"</td><td style=`"background-color: Gray`; color: #FFFFFF`">"+$rowEntry.Description+"</td><td class=`"NA`">"+"Not in Media Kit"+"</td></tr>"
                 }
         
 
@@ -431,4 +431,4 @@ $medias = @(Get-ChildItem -Path "C:\p4" -Filter "*.zip")
 $html=[string](generateHTMLfromCSV -media $medias[0] -startTime $startTime -endTime (Get-Date)  -resultsFile (Join-Path -Path "C:\mvt2\mvt" -ChildPath "APEMExecutionResult.csv")-clientConfig $((Get-WmiObject -Class Win32_OperatingSystem).Name) -clientName $env:COMPUTERNAME)
  $attachmentPath=Join-Path -Path "C:\mvt2\mvt" -ChildPath "APEMExecutionResult.csv" 
  Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com" -Subject $EmailSubject -Body $html -SmtpServer hqsmtp01.corp.aspentech.com -BodyAsHtml
- Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "will.you@aspentech.com","ziru.huang@aspentech.com"  -Subject $EmailSubject -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml
+ Send-MailMessage -Attachments @($attachmentPath) -From "MVT@aspentech.com" -To "ziru.huang@aspentech.com","zijuan.wang@aspentech.com","Nolan.Liu@aspentech.com","Robert.Russell@aspentech.com","yuanyuan.zhao@aspentech.com","Li.Zhang@aspentech.com","Wendy.Wang@aspentech.com","siyi.gu@aspentech.com","ziwei.cao@aspentech.com","Xiaoyu.Tang@aspentech.com","Mengjiao.Wu@aspentech.com","Chenxiao.Jia@aspentech.com"  -Subject $EmailSubject -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml
