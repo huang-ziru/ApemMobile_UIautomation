@@ -86,7 +86,7 @@ class Test_filter():
                             assert num_p >= '1' and num_p <= '2'
                 finally:
                     func_for_table(browser).clear_input(table_head_list[l], "//input[@formindex='1']", "//input[@formindex='2']")
-# #test the filter which it's type is text
+#test the filter which it's type is text
 class Testtextfilter():
     def test_selectall(self, browser):
         prepare(browser).login_after()
@@ -170,8 +170,9 @@ class Testtextfilter():
                 td_path = "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
+                print(head_name)
                 if len(mat_list) == 1 and mat_text == '(Blank)':
-                    # 7 is the total number of table data
+                    # 5 is the total number of table data
                     assert len(td_data) == 5
                 else:
                     for data in td_data:

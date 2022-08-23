@@ -29,21 +29,22 @@ def test_change_excute():
     browser.close()
     new_driver = login()
     time.sleep(2)
-    order_ele = browser.find_element(By.XPATH, "//div[contains(text(),'X_ORDER')]/../..")
+    order_ele = new_driver.find_element(By.XPATH, "//div[contains(text(),'X_ORDER')]/../..")
     order_ele.find_elements(By.TAG_NAME, "td")[-1].click()
     time.sleep(2)
-    phase_list = browser.find_elements(By.XPATH, "//div/a")
+    phase_list = new_driver.find_elements(By.XPATH, "//div/a")
     phase_path = "//div[@class='phase-name-text' and text()=\'" + phase_name + "\']/../../.."
-    phase_ele = browser.find_element(By.XPATH, phase_path).find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-STATUS']")
+    phase_ele = new_driver.find_element(By.XPATH, phase_path).find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-STATUS']")
     phase_state = phase_ele.get_attribute('textContent')
-    Common(browser).eleclick(phase_list[1].find_element(By.TAG_NAME, "mat-icon"))
+    Common(new_driver).eleclick(phase_list[1].find_element(By.TAG_NAME, "mat-icon"))
     time.sleep(5)
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\test_changAfter.png")
-    current_value = browser.find_element(By.XPATH, "//*[@id='MAIN.Table10_2']").get_attribute('value')
+    new_driver.get_screenshot_as_file(r"..\\report\\result_picture\\test_changAfter.png")
+    current_value = new_driver.find_element(By.XPATH, "//*[@id='MAIN.Table10_2']").get_attribute('value')
     # Check the changes are shown up.
     assert current_value != before_value
     assert current_value == after_value
     # the phase state is "Executing".
     assert 'Executing' == phase_state
+    new_driver.close()
 if __name__ == '__main__':
     pytest.main(["-s", "test_VS629860.py"])

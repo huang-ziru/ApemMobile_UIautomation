@@ -16,7 +16,7 @@ class Testvisiblecols():
         assert "Workcenter" == browser.find_element(By.XPATH, "//*[@id='headerWorkcenter']").get_attribute('textContent')
     # selecting all columns and are showed
     def test_visiblecols(self, browser):
-        visiblecols = ['checkProcess Area', 'checkRep.', 'checkArticle', 'checkPO ', 'checkPO Step', 'checkEnd Date', 'checkProcess Type', 'checkOrigin', 'checkUser Status', 'checkBatch Area', 'checkCR Modified', 'checkRUDO (edit planned)', 'checkRUDO (edit active)', 'checkVer.', 'checkFrom', 'checkSite']
+        visiblecols = ['checkProcess Area', 'checkRep.', 'checkArticle', 'checkPO ', 'checkPO Step', 'checkEnd Date', 'checkProcess Type', 'checkOrigin', 'checkBatch Area', 'checkCR Modified', 'checkRUDO (edit planned)', 'checkRUDO (edit active)', 'checkVer.', 'checkFrom', 'checkSite']
         Func(browser).visiblecols(visiblecols)
         for id in visiblecols:
             headerid = "header" + id[5::]
