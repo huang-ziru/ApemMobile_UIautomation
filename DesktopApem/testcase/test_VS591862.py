@@ -47,7 +47,7 @@ def test_columns(browser):
     Func(browser).cancelecols(columns_list)
     # it displays default setting(No., Phase, Status ,icon)
     default_head = browser.find_elements(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/thead/tr/th")
-    assert len(default_head) == 5
+    assert len(default_head) == 4
     for i in range(len(default_head)):
         if MainPage(default_head[i]).is_element_showed("div") is False:
             assert "".join(default_head[i].get_attribute('textContent').split()) == ""

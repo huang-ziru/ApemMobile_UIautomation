@@ -9,7 +9,7 @@ def test_changeorder(browser):
     browser.execute_script("arguments[0].click();", target)
     time.sleep(2)
     # click selectAll
-    browser.find_element(By.ID, "mat-checkbox-1").click()
+    browser.find_element(By.XPATH, "//*[@id='mat-checkbox-1']").click()
     t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
     browser.execute_script("arguments[0].click();", t_element)
     time.sleep(3)

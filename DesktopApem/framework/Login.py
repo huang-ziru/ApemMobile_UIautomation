@@ -16,7 +16,7 @@ class prepare(BasePage):
         target = self.driver.find_element(By.XPATH, "//app-filter-box[@id='filterLOGIC_STATUS']/mat-icon")
         self.driver.execute_script("arguments[0].click();", target)
         time.sleep(2)
-        self.driver.find_element(By.ID, "mat-checkbox-1").click()
+        self.driver.find_element(By.XPATH, "//*[@id='mat-checkbox-1']").click()
         element = self.driver.find_element(By.XPATH, "/html/body/div[2]/div[1]")
         self.driver.execute_script("arguments[0].click();", element)
         time.sleep(2)

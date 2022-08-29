@@ -26,7 +26,7 @@ from selenium.webdriver.common.by import By
 #     browser.execute_script("arguments[0].click();", target)
 #     time.sleep(2)
 #     #click selectAll
-#     browser.find_element(By.ID, "mat-checkbox-1").click()
+#     browser.find_element(By.XPATH, "//*[@id='mat-checkbox-1']").click()
 #     element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
 #     browser.execute_script("arguments[0].click();", element)
 #     browser.get_screenshot_as_file(r"..\\report\\result_picture\\selectall_status.png")
