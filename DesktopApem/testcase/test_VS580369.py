@@ -37,4 +37,3 @@ def test_fullscreen(browser):
 
 if __name__ == '__main__':
     pytest.main(["-s", "test_VS580369.py"])
-    pytest.main(["--lf", "test_VS580369.py"])
