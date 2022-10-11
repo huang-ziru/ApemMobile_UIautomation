@@ -70,7 +70,7 @@ class Common(BasePage):
         table_head_list = self.driver.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/thead/tr/th")[1:-1:]
         return table_head_list
     def navigate(self, ele_path):
-        elementObj = self.driver.find_element(By.XPATH, "/html/body/app-root/div/app-sidenav")
+        elementObj = self.driver.find_element(By.XPATH, "/html/body/app-root/div/app-atleft-bar")
         mouse = elementObj.find_element(By.XPATH, ele_path)
         ActionChains(self.driver).move_to_element(mouse).perform()
         nav_text = self.driver.find_element(By.CSS_SELECTOR, value="div.cdk-overlay-container>div>div>mat-tooltip-component>div").text

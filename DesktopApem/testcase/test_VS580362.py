@@ -11,9 +11,12 @@ def test_help(browser):
         # current windows handle
         mainWindow = browser.current_window_handle
         browser.find_element(By.CSS_SELECTOR, value="mat-icon[svgicon='help']").click()
+        time.sleep(2)
+        browser.find_element(By.XPATH, "//button[text()='Help ']").click()
+        time.sleep(2)
         # all windows handles
         handles = browser.window_handles
-        help_handle = None
+        # help_handle = None
         # get the handle of the help page
         for handle in handles:
             if handle != mainWindow:

@@ -12,96 +12,96 @@ from selenium.webdriver.common.by import By
 
 # default status
 # select "Planned", "Active", "Initiated", "Executing", "Cancelled by phase"
-# def test_defstatus(browser):
-#     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
-#     for tr in table_tr_list:
-#         # table_td_list = tr.find_elements(By.TAG_NAME, "td")[1::]
-#         status = tr.find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
-#         browser.get_screenshot_as_file(r"..\\report\\result_picture\\default_status.png")
-#         assert status in ("Planned", "Active", "Initiated", "Executing", "Cancelled by phase")
-#
-# # select all status "Planned", "Active / Initiated", "Executing", "Cancelled by phase", "Cancelled", "Finished", "Archived", "Archived cancel", "Ext.Archived", "Ext.Archived cancel"
-# def test_Allstatus(browser):
-#     target = browser.find_element(By.XPATH, "//app-filter-box[@id='filterLOGIC_STATUS']/mat-icon")
-#     browser.execute_script("arguments[0].click();", target)
-#     time.sleep(2)
-#     #click selectAll
-#     browser.find_element(By.XPATH, "//*[@id='mat-checkbox-1']").click()
-#     element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
-#     browser.execute_script("arguments[0].click();", element)
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\selectall_status.png")
-#     time.sleep(2)
-#     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
-#     for tr in table_tr_list:
-#         status = tr.find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
-#         # print(table_td_list[4])
-#         assert status in ("Planned", "Active", "Initiated", "Executing", "Cancelled by phase", "Cancelled", "Finished", "Archived", "Archived cancel", "Ext.Archived", "Ext.Archived cancel")
-# # Odd lines white, even lines gray
-# def test_color(browser):
-#     Func(browser).clear_Status()
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\color.png")
-#     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
-#     for i in range(len(table_tr_list)):
-#         backcolor = table_tr_list[i].value_of_css_property('background-color')
-#         # if the line is even lines
-#         if (i + 1) % 2 != 0:
-#             assert Color.from_string(backcolor) == Color.from_string('#ffffff')
-#         else:
-#             assert Color.from_string(backcolor) == Color.from_string('#f3f3f3')
-# # 行展开
-# def test_tr_height(browser):
-#     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
-#     for i in range(len(table_tr_list)):
-#         count = i + 1
-#         td = table_tr_list[i]
-#         div_list = td.find_element(By.CSS_SELECTOR, value="td[class ~= 'order-column']").find_elements(By.TAG_NAME, "div")
-#         tr_path = "//tbody/tr[" + str(count) + "]"
-#         height_before = []
-#         for divv1 in div_list:
-#             height_before.append(divv1.value_of_css_property('max-height'))
-#         height_after = []
-#         browser.find_element(By.XPATH, tr_path).click()
-#         time.sleep(3)
-#         for divv2 in div_list:
-#             height_after.append(divv2.value_of_css_property('max-height'))
-#         # print("after", height_after)
-#         if 'none' not in height_after:
-#             assert height_after[0] == '500px'
-#             assert height_after[1] == '500px'
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\tr_height.png")
-#
-# # Circle function
-# def test_Circle(browser):
-#     Func(browser).clear_Status()
-#     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
-#     for i in range(len(table_tr_list)):
-#         td = table_tr_list[i]
-#         circle_ele = td.find_element(By.CSS_SELECTOR, value="circle[class='ng-star-inserted']")
-#         p_text = td.find_element(By.CSS_SELECTOR, value="div[class='back-circle']>p").text
-#         #Percentage of the display on the circle
-#         offset = float(circle_ele.value_of_css_property('stroke-dashoffset')[:-2])
-#         array = float(circle_ele.value_of_css_property('stroke-dasharray')[:-2])
-#         exe_progress = re.findall(r'\d+', p_text)
-#         if offset == array:
-#             assert exe_progress[0] == '0'
-#         elif offset == 0.0:
-#             assert exe_progress[0] == exe_progress[1]
-#         else:
-#             progress_circle = round((offset / array), 3)
-#             progress = round((float(exe_progress[0]) / float(exe_progress[1])), 3)
-#             #The absolute difference is less than 0.005
-#             assert abs(progress_circle - progress) <= 1
-# # hover on 》
-# def test_hovertrack(browser):
-#     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
-#     for i in range(len(table_tr_list)):
-#         td = table_tr_list[i]
-#         mouse = td.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='double_arrow']")
-#         ActionChains(browser).move_to_element(mouse).perform()
-#         element = browser.find_element(By.XPATH, "//*[@class='cdk-overlay-container']/div/div/mat-tooltip-component/div")
-#         hover_text = element.text
-#         browser.get_screenshot_as_file(r"..\\report\\result_picture\\hovertrack.png")
-#         assert 'Go to tracking' == hover_text
+def test_defstatus(browser):
+    table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
+    for tr in table_tr_list:
+        # table_td_list = tr.find_elements(By.TAG_NAME, "td")[1::]
+        status = tr.find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\default_status.png")
+        assert status in ("Planned", "Active", "Initiated", "Executing", "Cancelled by phase")
+
+# select all status "Planned", "Active / Initiated", "Executing", "Cancelled by phase", "Cancelled", "Finished", "Archived", "Archived cancel", "Ext.Archived", "Ext.Archived cancel"
+def test_Allstatus(browser):
+    target = browser.find_element(By.XPATH, "//app-filter-box[@id='filterLOGIC_STATUS']/mat-icon")
+    browser.execute_script("arguments[0].click();", target)
+    time.sleep(2)
+    #click selectAll
+    browser.find_element(By.XPATH, "//*[@id='mat-checkbox-1']").click()
+    element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
+    browser.execute_script("arguments[0].click();", element)
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\selectall_status.png")
+    time.sleep(2)
+    table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
+    for tr in table_tr_list:
+        status = tr.find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
+        # print(table_td_list[4])
+        assert status in ("Planned", "Active", "Initiated", "Executing", "Cancelled by phase", "Cancelled", "Finished", "Archived", "Archived cancel", "Ext.Archived", "Ext.Archived cancel")
+# Odd lines white, even lines gray
+def test_color(browser):
+    Func(browser).clear_Status()
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\color.png")
+    table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
+    for i in range(len(table_tr_list)):
+        backcolor = table_tr_list[i].value_of_css_property('background-color')
+        # if the line is even lines
+        if (i + 1) % 2 != 0:
+            assert Color.from_string(backcolor) == Color.from_string('#ffffff')
+        else:
+            assert Color.from_string(backcolor) == Color.from_string('#f3f3f3')
+# 行展开
+def test_tr_height(browser):
+    table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
+    for i in range(len(table_tr_list)):
+        count = i + 1
+        td = table_tr_list[i]
+        div_list = td.find_element(By.CSS_SELECTOR, value="td[class ~= 'order-column']").find_elements(By.TAG_NAME, "div")
+        tr_path = "//tbody/tr[" + str(count) + "]"
+        height_before = []
+        for divv1 in div_list:
+            height_before.append(divv1.value_of_css_property('max-height'))
+        height_after = []
+        browser.find_element(By.XPATH, tr_path).click()
+        time.sleep(3)
+        for divv2 in div_list:
+            height_after.append(divv2.value_of_css_property('max-height'))
+        # print("after", height_after)
+        if 'none' not in height_after:
+            assert height_after[0] == '500px'
+            assert height_after[1] == '500px'
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\tr_height.png")
+
+# Circle function
+def test_Circle(browser):
+    Func(browser).clear_Status()
+    table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
+    for i in range(len(table_tr_list)):
+        td = table_tr_list[i]
+        circle_ele = td.find_element(By.CSS_SELECTOR, value="circle[class='ng-star-inserted']")
+        p_text = td.find_element(By.CSS_SELECTOR, value="div[class='back-circle']>p").text
+        #Percentage of the display on the circle
+        offset = float(circle_ele.value_of_css_property('stroke-dashoffset')[:-2])
+        array = float(circle_ele.value_of_css_property('stroke-dasharray')[:-2])
+        exe_progress = re.findall(r'\d+', p_text)
+        if offset == array:
+            assert exe_progress[0] == '0'
+        elif offset == 0.0:
+            assert exe_progress[0] == exe_progress[1]
+        else:
+            progress_circle = round((offset / array), 3)
+            progress = round((float(exe_progress[0]) / float(exe_progress[1])), 3)
+            #The absolute difference is less than 0.005
+            assert abs(progress_circle - progress) <= 1
+# hover on 》
+def test_hovertrack(browser):
+    table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
+    for i in range(len(table_tr_list)):
+        td = table_tr_list[i]
+        mouse = td.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='double_arrow']")
+        ActionChains(browser).move_to_element(mouse).perform()
+        element = browser.find_element(By.XPATH, "//*[@class='cdk-overlay-container']/div/div/mat-tooltip-component/div")
+        hover_text = element.text
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\hovertrack.png")
+        assert 'Go to tracking' == hover_text
 
 #filter show all orders name
 def test_All(browser):

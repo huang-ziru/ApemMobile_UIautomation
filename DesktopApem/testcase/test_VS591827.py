@@ -14,7 +14,7 @@ class Testtitle_bar():
         assert MainPage(browser).is_element_showed("mat-icon[data-mat-icon-name='process_order']") is False
         assert MainPage(browser).is_element_showed("mat-icon[data-mat-icon-name='tracking']") is False
         assert MainPage(browser).is_element_showed("mat-icon[data-mat-icon-name='consolidated']") is True
-        assert len(browser.find_elements(by=By.CSS_SELECTOR, value="body > app-root > div > app-sidenav > nav >a")) == 2
+        assert len(browser.find_elements(by=By.CSS_SELECTOR, value="body > app-root > div > app-atleft-bar > nav >a")) == 2
         browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='consolidated']").click()
         time.sleep(2)
         td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-consolidated-view/div/div[2]/table/tbody/tr/td[1]")
@@ -26,7 +26,7 @@ class Testtitle_bar():
         browser.find_element(By.CSS_SELECTOR, value="mat-icon[svgicon='fullscreen']").click()
         time.sleep(1)
         assert MainPage(browser).is_element_showed("mat-icon[data-mat-icon-name='consolidated']") is True
-        assert len(browser.find_elements(by=By.CSS_SELECTOR, value="body > app-root > div > app-sidenav > nav >a")) == 2
+        assert len(browser.find_elements(By.XPATH, "/html/body/app-root/div/app-atleft-bar//a")) == 2
         for order_name in ['2BPLS', 'START', 'X_ORDER', 'FOR_BING']:
             assert order_name in order_list_name
         browser.get_screenshot_as_file(r"..\\report\\result_picture\\titlebar_con.png")
