@@ -5,7 +5,9 @@ $pip = Join-Path -Path $root -ChildPath "Scripts\pip.exe"
 $Package = Join-Path -Path $root -ChildPath "Lib\site-packages"
 $pytestPath = Join-Path -Path $Package -ChildPath "pytest"
 $seleniumPath = Join-Path -Path $Package -ChildPath "selenium"
-$Plugins = @("pytest","selenium")
+$psutilPath = Join-Path -Path $Package -ChildPath "psutil"
+$pywin32Path = Join-Path -Path $Package -ChildPath "pywin32"
+$Plugins = @("pytest","selenium","psutil","pywin32")
 
 function Generate-Html([array]$results)
 {
@@ -65,8 +67,10 @@ foreach($Plugin in $Plugins)
 $global:results=[array]@()
 TestComponent -packPath $pytestPath -Component "pytest"
 TestComponent -packPath $seleniumPath -Component "selenium"
+TestComponent -packPath $seleniumPath -Component "psutil"
+TestComponent -packPath $seleniumPath -Component "pywin32"
 Write-Host $results
 $html=Generate-Html -results $results
-Send-MailMessage -From "MVT@aspentech.com" -To "ziru.huang@aspentech.com", "will.you@aspentech.com" -Subject "Python Component Report for $vision " -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml
+Send-MailMessage -From "MVT@aspentech.com" -To "ziru.huang@aspentech.com" -Subject "Python Component Report for $vision " -Body $html -SmtpServer smtp.aspentech.local -BodyAsHtml
 
 

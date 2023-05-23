@@ -23,7 +23,7 @@ def test_Breadcrumb(browser):
     ordername = browser.find_element(By.XPATH, "//*[@id='order']").text
     assert order_name == ordername[7::]
     #  check shows the phase name.
-    phasename = browser.find_element(By.XPATH, "//*[@id='divfloat']").text
+    phasename = browser.find_element(By.XPATH, "//*[@id='divfloat1']").text
     assert select_phase == phasename
     #  go back to tracking list page.
     browser.find_element(By.ID, 'order').click()
