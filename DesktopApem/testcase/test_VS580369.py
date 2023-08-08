@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import configparser
 import time, pytest
 from framework.basefunc import MainPage
@@ -12,7 +13,7 @@ def test_fullscreen(browser):
     else:
         browser.find_element(By.CSS_SELECTOR, value="mat-icon[svgicon='fullscreen']").click()
         time.sleep(1)
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\fullscreen.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"fullscreen.png")
         time.sleep(2)
         #get the windows size
         size = browser.get_window_size()
@@ -31,7 +32,7 @@ def test_fullscreen(browser):
         browser.execute_script("arguments[0].className='show-header'", elementObj)
         time.sleep(3)
         browser.find_element(By.XPATH, "/html/body/app-root/app-header/mat-toolbar/div/div[3]/mat-icon[2]").click()
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\exit_fullscreen.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"exit_fullscreen.png")
         assert browser.get_window_size()["width"] != width
         assert browser.get_window_size()["height"] != height
 

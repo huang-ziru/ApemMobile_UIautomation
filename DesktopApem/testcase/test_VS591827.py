@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 from selenium.webdriver.common.by import By
 import time
 import pytest
@@ -29,7 +30,7 @@ class Testtitle_bar():
         assert len(browser.find_elements(By.XPATH, "/html/body/app-root/div/app-atleft-bar//a")) == 2
         for order_name in ['2BPLS', 'START', 'X_ORDER', 'FOR_BING']:
             assert order_name in order_list_name
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\titlebar_con.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"titlebar_con.png")
         # restore data
         browser.find_element(By.XPATH, "//mat-icon[@data-mat-icon-name='settings']").click()
         switch = browser.find_element(By.XPATH, "//div[@class='show-navigation'][5]/div/div[2]/mat-slide-toggle")
@@ -42,7 +43,7 @@ class Testtitle_bar():
         if switch.find_element(By.TAG_NAME, 'input').get_attribute('aria-checked') == 'true':
             Common(browser).eleclick(switch)
         time.sleep(5)
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\titlebar.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"titlebar.png")
         assert MainPage(browser).is_element_showed("mat-icon[data-mat-icon-name='process_order']") is True
         assert MainPage(browser).is_element_showed("mat-icon[data-mat-icon-name='tracking']") is True
 

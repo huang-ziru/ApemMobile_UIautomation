@@ -1,5 +1,5 @@
 import configparser
-import os
+import os,sys
 local_path = os.path.split(os.path.realpath(__file__))[0]
 configfile = local_path+r'\config.ini'
 def ReadConfig(section, name):
@@ -7,7 +7,10 @@ def ReadConfig(section, name):
     cf.read(configfile)
     readresult=cf.get(section, name)
     return readresult
-
+def get_caseID():
+    filename = os.path.basename(sys.argv[0])
+    caseID = filename[7:13]
+    return caseID
 SupportBrowser = {
     'Browser': ReadConfig('Browser', 'browser')
 }

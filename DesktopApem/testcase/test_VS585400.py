@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import pytest
 import time
 import random
@@ -17,7 +18,7 @@ def test_defstatus(browser):
     for tr in table_tr_list:
         # table_td_list = tr.find_elements(By.TAG_NAME, "td")[1::]
         status = tr.find_element(By.CSS_SELECTOR, value="td[class ~= 'cdk-column-LOGIC_STATUS']").get_attribute("textContent")
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\default_status.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"default_status.png")
         assert status in ("Planned", "Active", "Initiated", "Executing", "Cancelled by phase")
 
 # select all status "Planned", "Active / Initiated", "Executing", "Cancelled by phase", "Cancelled", "Finished", "Archived", "Archived cancel", "Ext.Archived", "Ext.Archived cancel"
@@ -29,7 +30,7 @@ def test_Allstatus(browser):
     browser.find_element(By.XPATH, "//*[@id='mat-checkbox-1']").click()
     element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
     browser.execute_script("arguments[0].click();", element)
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\selectall_status.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"selectall_status.png")
     time.sleep(2)
     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for tr in table_tr_list:
@@ -39,7 +40,7 @@ def test_Allstatus(browser):
 # Odd lines white, even lines gray
 def test_color(browser):
     Func(browser).clear_Status()
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\color.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"color.png")
     table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
     for i in range(len(table_tr_list)):
         backcolor = table_tr_list[i].value_of_css_property('background-color')
@@ -68,7 +69,7 @@ def test_tr_height(browser):
         if 'none' not in height_after:
             assert height_after[0] == '500px'
             assert height_after[1] == '500px'
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\tr_height.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"tr_height.png")
 
 # Circle function
 def test_Circle(browser):
@@ -100,7 +101,7 @@ def test_hovertrack(browser):
         ActionChains(browser).move_to_element(mouse).perform()
         element = browser.find_element(By.XPATH, "//*[@class='cdk-overlay-container']/div/div/mat-tooltip-component/div")
         hover_text = element.text
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\hovertrack.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"hovertrack.png")
         assert 'Go to tracking' == hover_text
 
 #filter show all orders name
@@ -109,7 +110,7 @@ def test_All(browser):
     target = browser.find_element(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[2]")
     mat_option = func_for_table(browser).test_selectAll(target)
     table_data = Common(browser).get_table(1)
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_selectall.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_selectall.png")
     assert len(mat_option) == len(table_data)
 
 
@@ -118,7 +119,7 @@ def test_All(browser):
 #     Func(browser).clear_Status()
 #     target = browser.find_element(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[2]")
 #     mat_option = func_for_table(browser).test_selectclear(target)
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_clear.png")
+#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_clear.png")
 #     back = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
 #     browser.execute_script("arguments[0].click();", back)
 #     table_data = Common(browser).get_table(1)
@@ -141,7 +142,7 @@ def test_All(browser):
 #     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
 #     order_td = Common(browser).td_data(td)
 #     order_list_name = Common(browser).table_ordername(order_td)
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_selectone.png")
+#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_selectone.png")
 #     assert len(order_td) == 1
 #     #assert the table shows the selected data
 #     assert order_name == order_list_name[0]
@@ -172,7 +173,7 @@ def test_All(browser):
 #     time.sleep(3)
 #     t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
 #     browser.execute_script("arguments[0].click();", t_element)
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_add.png")
+#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_add.png")
 #     time.sleep(2)
 #     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
 #     order_td = Common(browser).td_data(td)
@@ -197,7 +198,7 @@ def test_All(browser):
 #     time.sleep(2)
 #     t_element = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
 #     browser.execute_script("arguments[0].click();", t_element)
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_cancel.png")
+#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_cancel.png")
 #     time.sleep(3)
 #     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
 #     order_td = Common(browser).td_data(td)
@@ -209,7 +210,7 @@ def test_All(browser):
 #     target = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']")
 #     #search with key word 'order'
 #     select_dic = func_for_table(browser).test_filtersearch(target, 'order')
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_searchdata.png")
+#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_searchdata.png")
 #     #There is matching data and case insensitive
 #     for selectorder in select_dic['search_list']:
 #         searchresult = re.findall(r'order', selectorder, re.I)
@@ -227,7 +228,7 @@ def test_All(browser):
 #    # target1 = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']")
 #     target = browser.find_element(By.XPATH, "//app-filter-box[@id='filterCODE']")
 #     select_dic = func_for_table(browser).test_filtersearch(target, '456')
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_searchnone.png")
+#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_searchnone.png")
 #     for selectorder in select_dic['search_list']:
 #         searchresult = re.findall(r'456', selectorder, re.I)
 #         assert len(searchresult) == 0
@@ -262,7 +263,7 @@ def test_All(browser):
 #     time.sleep(3)
 #     t_element2 = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
 #     browser.execute_script("arguments[0].click();", t_element2)
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_checkadd.png")
+#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_checkadd.png")
 #     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
 #     order_td = Common(browser).td_data(td)
 #     order_list_name = Common(browser).table_ordername(order_td)
@@ -293,7 +294,7 @@ def test_All(browser):
 #     time.sleep(3)
 #     t_element2 = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
 #     browser.execute_script("arguments[0].click();", t_element2)
-#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\order_checknull.png")
+#     browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"order_checknull.png")
 #     td = browser.find_elements(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/tbody/tr/td[2]")
 #     order_td = Common(browser).td_data(td)
 #     order_list_name = Common(browser).table_ordername(order_td)

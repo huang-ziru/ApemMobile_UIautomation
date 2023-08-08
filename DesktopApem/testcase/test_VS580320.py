@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import pytest
 from testcase.test_VS580300 import login
 

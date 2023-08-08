@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 from selenium.webdriver.support.color import Color
 from framework.common import Common

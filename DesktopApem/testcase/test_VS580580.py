@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time, pytest
 from framework.basefunc import MainPage
 from framework.columsfunc import Func
@@ -23,7 +24,7 @@ def test_scroll(browser):
         element = browser.find_element(By.XPATH, "/html/body/app-root/div/app-process-order/div/div[2]/table/thead/tr/th[21]")
         browser.execute_script("arguments[0].scrollIntoView();", element)
         time.sleep(3)
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\scoll.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"scoll.png")
         time.sleep(5)
 
 

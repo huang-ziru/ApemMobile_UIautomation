@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 import re, pytest
 from selenium.webdriver.common.by import By
@@ -8,7 +9,7 @@ class Testsearch():
         #search with key_words 'er'
         browser.find_element(By.ID, "ordersearch").send_keys('order')
         time.sleep(2)
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\search.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"search.png")
         table_list = []
         table_tr_list = browser.find_elements(By.XPATH, "//div[@class='full show-navigation']/div[2]/table/tbody/tr")
         # match 'er' and case insensitive

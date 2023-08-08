@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 from framework.common import Common
 from framework.basefunc import MainPage
@@ -24,14 +25,14 @@ def test_ParaPage(browser):
     # click 'OK' and Uncheck the check box,then click 'ok'
     browser.find_element(By.XPATH, "//span[text()=' OK ']/..").click()
     assert MainPage(browser).is_element_showed("#audit-dialog") is True
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\changePara1.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"changePara1.png")
     browser.find_element(By.XPATH, "//*[@id='audit-dialog']/div/div[2]/mat-form-field/div/div/div/textarea").clear()
     browser.find_element(By.XPATH, "//*[@id='audit-dialog']/div/div[2]/mat-form-field/div/div/div/textarea").send_keys('for test')
     browser.find_element(By.XPATH, "//span[text()='OK']/..").click()
     time.sleep(2)
     param_input2 = open_paramPage(browser)
     after_change = param_input2.get_attribute("value")
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\changePara2.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"changePara2.png")
     assert after_change != before_change
     assert after_change == '999'
     param_input2.clear()
@@ -71,7 +72,7 @@ def test_ParaPage(browser):
     browser.find_element(By.XPATH, "//a[@class='order-link']").click()
     # A dialog pops up to indicate whether stay this page or not
     assert MainPage(browser).is_element_showed("#error-message-dialog") is True
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\changePara3.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"changePara3.png")
     # click 'Stay'
     browser.find_element(By.XPATH, "//*[@id='error-message-dialog']/div/div[3]/button[1]").click()
     assert 'parameters' in browser.current_url

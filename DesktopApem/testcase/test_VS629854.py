@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 from framework.common import Common
 from framework.basefunc import MainPage
@@ -9,11 +10,11 @@ def test_Phase_excute(browser):
     order_ele = browser.find_element(By.XPATH, "//div[contains(text(),'START')]/../..")
     order_ele.find_elements(By.TAG_NAME, "td")[-1].click()
     time.sleep(6)
-    # phase_list = browser.find_elements(By.XPATH, "//div/a")
-    # phase_name = phase_list[1].find_element(By.XPATH, "./../../../../../td[2]/div/div").get_attribute('textContent')
-    phase_list = browser.find_element(By.XPATH, "//div/a")
-    phase_name = phase_list.find_element(By.XPATH, "./../../../../../td[2]/div/div").get_attribute('textContent')
-    Common(browser).eleclick(phase_list.find_element(By.TAG_NAME, "mat-icon"))
+    phase_list = browser.find_elements(By.XPATH, "//div/a")
+    phase_name = phase_list[1].find_element(By.XPATH, "./../../../../../td[2]/div/div").get_attribute('textContent')
+    # phase_list = browser.find_element(By.XPATH, "//div/a")
+    # phase_name = phase_list.find_element(By.XPATH, "./../../../../../td[2]/div/div").get_attribute('textContent')
+    Common(browser).eleclick(phase_list[1].find_element(By.TAG_NAME, "mat-icon"))
     time.sleep(75)
     # cancel = browser.find_element(By.XPATH, "//*[@id='screen']/app-aebrs-button[2]/button")
     cancel = browser.find_element(By.XPATH, "// *[ @ id = 'Main.CancelButton0']")
@@ -54,6 +55,6 @@ def test_Phase_excute(browser):
             phase_ele = browser.find_element(By.XPATH, phase_path)
             phase_state = phase_ele.get_attribute('textContent')
             assert 'Finished' == phase_state
-            browser.get_screenshot_as_file(r"..\\report\\result_picture\\executeOk_629854.png")
+            browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"executeOk_629854.png")
 if __name__ == '__main__':
     pytest.main(["-s", "test_VS629854.py"])

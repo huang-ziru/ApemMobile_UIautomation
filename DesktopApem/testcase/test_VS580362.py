@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 from framework.basefunc import MainPage
 import time, pytest
 from selenium.webdriver.common.by import By
@@ -23,7 +24,8 @@ def test_help(browser):
                 help_handle = handle
         # switch to help page
         browser.switch_to.window(help_handle)
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\help.png")
+        print(get_caseID())
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"help.png")
         time.sleep(2)
         try:
             assert 'Help/mobile.htm' in browser.current_url

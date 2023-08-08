@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 from framework.common import Common
 from framework.columsfunc import Func
@@ -22,11 +23,11 @@ def test_sorttrack(browser):
             table_data_asc = sorted(table_data_sort, key=lambda x: x[l], reverse=False)
             # assert the datas showed in table equal the datas which the script sorted
             if revers_data == 'ascending':
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_asc.png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + head_name + "_asc.png")
                 time.sleep(3)
                 assert table_data_sort == table_data_asc
             elif revers_data == 'descending':
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_desc.png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + head_name + "_desc.png")
                 time.sleep(3)
                 assert table_data_sort == table_data_desc
     time.sleep(5)

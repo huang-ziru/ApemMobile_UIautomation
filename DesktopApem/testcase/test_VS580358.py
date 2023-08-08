@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import pytest
 from framework.basefunc import MainPage
 class Testtitle_bar():

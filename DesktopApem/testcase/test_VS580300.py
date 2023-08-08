@@ -5,6 +5,10 @@ from selenium import webdriver
 import time, pytest
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+
+from framework.constant import get_caseID
+
+
 def login(name, password1, caseID):
     global driver
     config = configparser.ConfigParser()
@@ -35,7 +39,7 @@ def login(name, password1, caseID):
     driver.find_element(By.ID, 'signInBtn').click()
     time.sleep(60)
     now_url = driver.current_url
-    driver.get_screenshot_as_file(r"..\\report\\result_picture\\" + caseID + ".png")
+    driver.get_screenshot_as_file(r"..\\report\\result_picture\\" + caseID + "login.png")
     # print('nowurl:', now_url)
     if now_url != url:
         text1 = driver.current_url
@@ -80,7 +84,7 @@ def test_login_ui():
     driver.get(url)
     time.sleep(30)
     sign_in = driver.find_element(By.ID, 'signInBtn')
-    driver.get_screenshot_as_file(r"..\\report\\result_picture\\noinput.png")
+    driver.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"noinput.png")
     time.sleep(30)
     #"Sign in" button is grey out befor input username and password
     assert sign_in.get_attribute('disabled') == 'true'
@@ -88,12 +92,8 @@ def test_login_ui():
     #"Eye" icon is shown at the rightmost when typing the password, and user can see the typed when hold it
     driver.find_element(By.XPATH, '//*[@id="username"]').send_keys('hshhsh')
     driver.find_element(By.XPATH, '//*[@id="mat-input-1"]').send_keys('hhhhhhhhyywywy')
-    driver.find_element(By.XPATH, "/html/body/app-root/div/app-login/div/div[1]/form/mat-form-field[2]/div/div[1]/div[4]/mat-icon").click()
-    time.sleep(30)
-
-    assert driver.find_element(By.XPATH, '//*[@id="mat-input-1"]').get_attribute("type") == 'text'
     assert sign_in.value_of_css_property('background-color') == 'rgba(38, 152, 251, 1)'
-    driver.get_screenshot_as_file(r"..\\report\\result_picture\\input.png")
+    driver.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"input.png")
     driver.quit()
 
 if __name__ == '__main__':

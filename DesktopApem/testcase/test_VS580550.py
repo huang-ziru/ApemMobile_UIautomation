@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time, pytest
 from framework.common import Common
 from framework.basefunc import MainPage
@@ -23,7 +24,7 @@ class Testvisiblecols():
             #Scroll to the location where the specified element appears
             target2 = browser.find_element(By.ID, headerid)
             browser.execute_script("arguments[0].scrollIntoView();", target2)
-            browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + id + ".png")
+            browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + id + ".png")
             assert id[5::].rstrip() == browser.find_element(By.ID, headerid).text.rstrip()
     # cancle selecting columns and are not showed
     def test_cancelcols(self, browser):
@@ -43,7 +44,7 @@ class Testvisiblecols():
         time.sleep(5)
         for id in cancelcols:
             headerid = "header" + id[5::]
-            browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + id + ".png")
+            browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + id + ".png")
             time.sleep(2)
             assert MainPage(browser).is_element_showed("#" + headerid) is False
         # restore data

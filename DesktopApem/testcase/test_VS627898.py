@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 from framework.common import Common
 import pytest
@@ -21,7 +22,7 @@ def test_Check_structure(browser):
     time.sleep(2)
     browser.find_element(By.XPATH, "/html/body/app-root/div").click()
     after_value = browser.find_element(By.XPATH, "//span[contains(text(),'TEMP')]/../mat-form-field/div/div/div/input").get_attribute("value")
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\change_value.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"change_value.png")
     assert before_value != after_value
     assert after_value == '66'
     # click "V" icon to collapse the following elements.
@@ -45,7 +46,7 @@ def test_Check_structure(browser):
     # click cancel add
     # browser.find_element(By.XPATH, "//*[@id='error-message-dialog']/div/div[3]/button[1]").click()
     # time.sleep(2)
-    # browser.get_screenshot_as_file(r"..\\report\\result_picture\\addelement.png")
+    # browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"addelement.png")
     # cancel_add = browser.find_elements(By.XPATH, "//div[@class='mat-slide-toggle-thumb']/../../../../../../span")
     # click add OK
     # browser.find_element(By.XPATH, "//span/mat-icon[text()='add']").click()
@@ -69,7 +70,7 @@ def test_Check_structure(browser):
     # time.sleep(3)
     # browser.find_element(By.XPATH, "//*[@id='error-message-dialog']/div/div[3]/button[2]").click()
     # time.sleep(5)
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\deleteelement.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"deleteelement.png")
     Valuelist_remove = browser.find_elements(By.XPATH, "//div[@class='mat-slide-toggle-thumb']/../../../../../../span")
     # assert len(Valuelist_add) == len(cancel_remove)
     assert len(Valuelist_remove) == len(Valuelist_add) - 1

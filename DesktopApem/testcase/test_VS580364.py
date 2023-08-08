@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 from selenium.webdriver import ActionChains
 import pytest
 from selenium.webdriver.common.by import By
@@ -16,12 +17,12 @@ def test_warning(browser):
         browser.find_element(By.CSS_SELECTOR, value="mat-icon[svgicon='warning']").click()
         #get the number of total text about warnings
         messages = browser.find_elements(By.XPATH, ("//div[@class='cdk-overlay-pane']/div/mat-list"))
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\warning.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"warning.png")
         assert num == str(len(messages))
     else:
         browser.find_element(By.CSS_SELECTOR, value="mat-icon[svgicon='warning']").click()
         message = browser.find_element(By.XPATH, "//*[@id='cdk-overlay-1']/div/div").text
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\warning.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"warning.png")
         assert "There is no message." in message
 
 if __name__ == '__main__':

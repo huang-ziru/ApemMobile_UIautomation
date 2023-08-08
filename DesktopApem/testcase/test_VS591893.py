@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 import random
 from framework.common import Common
@@ -29,22 +30,23 @@ def test_changeorder(browser):
     select_datalist = []
     for select in select_list:
         select_data = select.get_attribute('textContent')
-        select_datalist.append(select_data.replace(" ", ""))
-        assert select_data.replace(" ", "") in order_datalist
+        select_data1 = select_data.replace(" ", "")
+        select_datalist.append(select_data1)
+        assert select_data1.replace("-1", "") in order_datalist
     # Click the order in the dropdown list to change the chosen order
     num = random.choice(range(len(select_datalist)))
     Common(browser).eleclick(select_list[num])
     browser.find_element(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]").click()
     name = browser.find_element(By.XPATH, "//input[@aria-label='OrderName']").get_attribute('value')
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\test_VS591893.png")
-    assert name == select_datalist[num]
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"test_VS591893.png")
+    assert name.replace(" ", "") == select_datalist[num]
     # Scroll on the dropdown list
     browser.find_element(By.XPATH, "//input[@aria-label='OrderName']").click()
     time.sleep(3)
     targetElem = browser.find_element(By.XPATH, "//*[contains(text(),'FROM_RPL')]")
     browser.execute_script("arguments[0].scrollIntoView();", targetElem)
     time.sleep(3)
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\focus.png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"focus.png")
     Common(browser).eleclick(targetElem)
     time.sleep(3)
 

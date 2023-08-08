@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import pytest
 from framework.common import Common
 def test_navigate(browser):

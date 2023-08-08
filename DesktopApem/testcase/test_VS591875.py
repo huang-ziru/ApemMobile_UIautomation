@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 import random, re
 
@@ -34,7 +35,7 @@ class TesttrackFilter():
                 browser.execute_script("arguments[0].click();", target2)
                 browser.find_element(By.XPATH, "//input[@formindex='2']").send_keys('4')
                 browser.find_element(By.XPATH, "/html/body/div[2]").click()
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + ".png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + head_name + ".png")
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
@@ -61,7 +62,7 @@ class TesttrackFilter():
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_all.png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + head_name + "_all.png")
                 #the column's data is null
                 for data in td_data:
                     if data == '':
@@ -82,7 +83,7 @@ class TesttrackFilter():
                 time.sleep(3)
                 # print(head_name)
                 mat_list = func_for_table(browser).test_selectclear(table_head_list[l])
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_clear.png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + head_name + "_clear.png")
                 target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
                 browser.execute_script("arguments[0].click();", target)
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
@@ -114,7 +115,7 @@ class TesttrackFilter():
                 target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
                 browser.execute_script("arguments[0].click();", target)
                 time.sleep(2)
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_selectone.png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + head_name + "_selectone.png")
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
                 td_data = Common(browser).td_data(td_list)
@@ -157,7 +158,7 @@ class TesttrackFilter():
                 target = browser.find_element(By.XPATH, "/html/body/div[2]/div[1]")
                 browser.execute_script("arguments[0].click();", target)
                 time.sleep(2)
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_cancel.png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + head_name + "_cancel.png")
                 time.sleep(3)
                 td_path = "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/tbody/tr/td[" + str(l + 2) + "]"
                 td_list = browser.find_elements(By.XPATH, td_path)
@@ -184,7 +185,7 @@ class TesttrackFilter():
                 browser.execute_script("arguments[0].click();", target2)
                 time.sleep(3)
                 select_dic = func_for_table(browser).test_filtersearch(table_head_list[l], 'ac')
-                browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + head_name + "_search.png")
+                browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + head_name + "_search.png")
                 time.sleep(2)
                 for selectorder in select_dic['search_list']:
                     searchresult = re.findall(r'ac', selectorder, re.I)

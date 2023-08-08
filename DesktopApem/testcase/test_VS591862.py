@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time
 from selenium.webdriver import ActionChains
 from framework.common import Common
@@ -15,7 +16,7 @@ def test_columns(browser):
     mouse = browser.find_element(By.XPATH, "//*[@id='selectmenu']")
     ActionChains(browser).move_to_element(mouse).perform()
     hover_text = browser.find_element(By.XPATH, "/html/body/div[2]").text
-    browser.get_screenshot_as_file(r"..\\report\\result_picture\\visible_column(track).png")
+    browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"visible_column(track).png")
     assert 'Visible Columns' == hover_text
     # check the visible columns list
     browser.find_element(By.CSS_SELECTOR, value="mat-icon[data-mat-icon-name='visible_column']").click()
@@ -41,7 +42,7 @@ def test_columns(browser):
         # Scroll to the location where the specified element appears
         target2 = browser.find_element(By.ID, headerid)
         browser.execute_script("arguments[0].scrollIntoView();", target2)
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + id + ".png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + id + ".png")
         assert id[5::] == browser.find_element(By.ID, headerid).get_attribute('textContent')
     # restore data
     Func(browser).cancelecols(columns_list)
@@ -84,7 +85,7 @@ def test_colums_Con(browser):
         # Scroll to the location where the specified element appears
         target2 = browser.find_element(By.ID, headerid)
         browser.execute_script("arguments[0].scrollIntoView();", target2)
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\" + id + ".png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID() + id + ".png")
         assert id[5::] == browser.find_element(By.ID, headerid).get_attribute('textContent')
     # restore data
     # Func(browser).cancelecols(columns_list)

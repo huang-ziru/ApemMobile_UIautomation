@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import configparser, os
 import time
 from logging import Logger
@@ -36,15 +37,15 @@ class Testtitle_bar():
             self.driver = webdriver.Chrome(service=s)
             self.driver.maximize_window()
         elif browser_name == 'Edge':
-            self.driver = webdriver.Edge(r'C:\\p4\\UIautomation\\DesktopApem\\framework\\msedgedriver.exe')
+            self.driver = webdriver.Edge()
             self.driver.maximize_window()
         else:
             Logger.error('Do not support the Browser')
         servername = config.get('login', 'servername')
-        url = "http://qapart:QQQaaa000@" + servername + "/ApemMobile/#/login"
+        url = "http://qaone1:Aspen111@" + servername + "/ApemMobile/#/login"
         self.driver.get(url)
-        self.driver.find_element(By.XPATH, '//*[@id="username"]').send_keys("corp\\qapart")
-        self.driver.find_element(By.XPATH, '//*[@id="mat-input-1"]').send_keys("QQQaaa000")
+        self.driver.find_element(By.XPATH, '//*[@id="username"]').send_keys("qae\\qaone1")
+        self.driver.find_element(By.XPATH, '//*[@id="mat-input-1"]').send_keys("Aspen111")
         self.driver.find_element(By.ID, 'signInBtn').click()
         backcolor = self.driver.find_element(By.XPATH, "//body").value_of_css_property('background-color')
         try:

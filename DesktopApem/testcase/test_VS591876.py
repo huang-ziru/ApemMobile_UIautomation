@@ -1,4 +1,5 @@
 # coding = utf-8
+from framework.constant import get_caseID
 import time, pytest
 from framework.common import Common
 from framework.columsfunc import Func
@@ -25,7 +26,7 @@ def test_trackscroll(browser):
         element = browser.find_element(By.XPATH, "//*[@id='tracking-content']/app-tracking-list/div/div[2]/table/thead/tr/th[11]")
         browser.execute_script("arguments[0].scrollIntoView();", element)
         time.sleep(3)
-        browser.get_screenshot_as_file(r"..\\report\\result_picture\\trackscroll.png")
+        browser.get_screenshot_as_file(r"..\\report\\result_picture\\"+get_caseID()+"trackscroll.png")
         time.sleep(5)
 
 
